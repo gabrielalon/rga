@@ -1,0 +1,32 @@
+{
+  "name": "rga/rga",
+  "keywords": ["rga"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Piotr Smaruj",
+      "email": "p.smaruj@i-systems.pl"
+    },
+    {
+      "name": "rodeman",
+      "email": "m.rode@i-systems.pl"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "RGA\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "RGA\\Test\\": "test/"
+    }
+  },
+  "require": {
+    "ayeo/validator": "^1.2",
+    "psr/container": "^1.0",
+    "ramsey/uuid": "^3.7",
+    "phpunit/phpunit": "^7.0",
+    "php-di/php-di": "^6.0"
+  }
+}

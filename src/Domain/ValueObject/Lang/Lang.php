@@ -1,0 +1,48 @@
+<?php
+
+namespace RGA\Domain\ValueObject\Lang;
+
+class Lang
+{
+	/** @var array */
+	private $data;
+	
+	/** @var string[] */
+	private $supportedLanguageCodes = ['pl', 'en'];
+	
+	/**
+	 * @param array $data
+	 */
+	public function __construct($data = [])
+	{
+		$this->data = $data;
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function getData()
+	{
+		return $this->data;
+	}
+	
+	/**
+	 * @param string $field
+	 * @param string $lang
+	 * @return string
+	 */
+	public function getForLang($field, $lang)
+	{
+		$key = sprintf('%s__%s', $field, $lang);
+		
+		return isset($this->data[$key]) ? $this->data[$key] : '';
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function getSupportedLanguageCodes()
+	{
+		return $this->supportedLanguageCodes;
+	}
+}
