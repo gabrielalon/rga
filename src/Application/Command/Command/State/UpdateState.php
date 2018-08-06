@@ -2,7 +2,7 @@
 
 namespace RGA\Application\Command\Command\State;
 
-class UpdateState
+class UpdateState extends CreateState
 {
 	
 }

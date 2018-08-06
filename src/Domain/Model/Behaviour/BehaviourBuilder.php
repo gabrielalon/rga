@@ -23,7 +23,7 @@ class BehaviourBuilder
 	 * @param UuidInterface $uuid
 	 * @return BehaviourBuilder
 	 */
-	public static function create(UuidInterface $uuid)
+	public static function create(UuidInterface $uuid): BehaviourBuilder
 	{
 		/** @var Behaviour $model */
 		$model = Behaviour::init($uuid);
@@ -34,7 +34,7 @@ class BehaviourBuilder
 	/**
 	 * @param ValueObject\Behaviour\Behaviour $behaviour
 	 */
-	public function setBehaviour(ValueObject\Behaviour\Behaviour $behaviour)
+	public function setBehaviour(ValueObject\Behaviour\Behaviour $behaviour): void
 	{
 		$this->model->setIsActive($behaviour->isActive());
 		$this->model->setType($behaviour->getType());

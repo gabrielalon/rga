@@ -22,7 +22,7 @@ class Transport
 	/**
 	 * @return bool
 	 */
-	public function isActive()
+	public function isActive(): bool
 	{
 		return $this->isActive;
 	}
@@ -38,7 +38,7 @@ class Transport
 	/**
 	 * @return string
 	 */
-	public function getCourierSymbol()
+	public function getCourierSymbol(): string
 	{
 		return $this->courierSymbol;
 	}
@@ -54,7 +54,7 @@ class Transport
 	/**
 	 * @return TransportAliasCollector
 	 */
-	public function getAliases()
+	public function getAliases(): TransportAliasCollector
 	{
 		return $this->aliases;
 	}
