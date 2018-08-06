@@ -24,7 +24,7 @@ class BehaviourCommandHandler
 	/**
 	 * @param Command\Command\Behaviour\CreateBehaviour $command
 	 */
-	public function handleCreateBehaviour(Command\Command\Behaviour\CreateBehaviour $command)
+	public function handleCreateBehaviour(Command\Command\Behaviour\CreateBehaviour $command): void
 	{
 		$builder = Behaviour\BehaviourBuilder::create($command->getUuid());
 		$builder->setBehaviour($command->getBehaviour());
@@ -39,7 +39,7 @@ class BehaviourCommandHandler
 	/**
 	 * @param Command\Command\Behaviour\UpdateBehaviour $command
 	 */
-	public function handleUpdateBehaviour(Command\Command\Behaviour\UpdateBehaviour $command)
+	public function handleUpdateBehaviour(Command\Command\Behaviour\UpdateBehaviour $command): void
 	{
 		$model = $this->repository->find($command->getUuid());
 		

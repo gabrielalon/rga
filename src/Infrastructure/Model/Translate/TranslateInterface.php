@@ -7,10 +7,10 @@ interface TranslateInterface
 	/**
 	 * @param string $code
 	 */
-	public function setLanguageCode($code);
+	public function setLanguageCode(string $code): void;
 	
 	/**
 	 * @return string
 	 */
-	public function getLanguageCode();
+	public function getLanguageCode(): string;
 }

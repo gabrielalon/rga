@@ -10,7 +10,7 @@ trait Translated
 	/**
 	 * @return string
 	 */
-	public function getLanguageCode()
+	public function getLanguageCode(): string
 	{
 		return $this->languageCode;
 	}
@@ -18,7 +18,7 @@ trait Translated
 	/**
 	 * @param string $languageCode
 	 */
-	public function setLanguageCode(string $languageCode)
+	public function setLanguageCode(string $languageCode): void
 	{
 		$this->languageCode = $languageCode;
 	}

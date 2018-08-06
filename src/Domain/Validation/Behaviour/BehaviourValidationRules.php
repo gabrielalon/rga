@@ -19,8 +19,6 @@ class BehaviourValidationRules
 			['type', new Constraint\NonEmpty()],
 			['type', new ConstraintType()],
 			
-			['isActive', new Constraint\NotNull()],
-			
 			['lang', new ConstraintLang('name')]
 		];
 	}

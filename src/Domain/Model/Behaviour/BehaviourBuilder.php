@@ -43,7 +43,7 @@ class BehaviourBuilder
 	/**
 	 * @param ValueObject\Lang\Lang $lang
 	 */
-	public function setLang(ValueObject\Lang\Lang $lang)
+	public function setLang(ValueObject\Lang\Lang $lang): void
 	{
 		$collector = new Collector();
 		foreach ($lang->getSupportedLanguageCodes() as $languageCode)
@@ -60,7 +60,7 @@ class BehaviourBuilder
 	/**
 	 * @return Behaviour
 	 */
-	public function extract()
+	public function extract(): Behaviour
 	{
 		return $this->model;
 	}

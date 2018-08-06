@@ -10,17 +10,17 @@ use RGA\Infrastructure\Command\CommandHandling;
 abstract class AbstractCommandHandler
 	implements CommandHandling\CommandHandlerInterface
 {
-	public function handle(Command\CommandInterface $command)
+	public function handle(Command\CommandInterface $command): void
 	{
 		$handlerReflection = new \ReflectionClass($this);
 		$commandReflection = new \ReflectionClass($command);
-		
+
 		/** @var \ReflectionMethod $method */
 		foreach ($handlerReflection->getMethods(\ReflectionMethod::IS_PUBLIC) as $method)
 		{
 			$correctMethodName = 'handle' . $commandReflection->getShortName();
 			
-			if ($method->getName() === $correctMethodName)
+			if ($method->getName() !== $correctMethodName)
 			{
 				continue;
 			}

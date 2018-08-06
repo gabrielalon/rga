@@ -31,17 +31,17 @@ class Lang
 	 * @param string $lang
 	 * @return string
 	 */
-	public function getForLang($field, $lang)
+	public function getForLang($field, $lang): string
 	{
-		$key = sprintf('%s__%s', $field, $lang);
+//		$key = sprintf('%s__%s', $field, $lang);
 		
-		return isset($this->data[$key]) ? $this->data[$key] : '';
+		return $this->data[$lang][$field] ?? '';
 	}
 	
 	/**
 	 * @return array
 	 */
-	public function getSupportedLanguageCodes()
+	public function getSupportedLanguageCodes(): array
 	{
 		return $this->supportedLanguageCodes;
 	}

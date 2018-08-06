@@ -20,7 +20,6 @@ CREATE TABLE `rga_dictionary` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `rga_dictionary_lang` (
-  `id` CHAR(36) NOT NULL COMMENT '(DC2Type:guid)' PRIMARY KEY,
   `rga_dictionary_id` CHAR(36) NOT NULL COMMENT '(DC2Type:guid)',
   `country_code` varchar(2) NOT NULL,
   `entry` text NULL DEFAULT NULL,
@@ -36,7 +35,6 @@ CREATE TABLE `rga_behaviour` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `rga_behaviour_lang` (
-  `id` CHAR(36) NOT NULL COMMENT '(DC2Type:guid)' PRIMARY KEY,
   `rga_behaviour_id` CHAR(36) NOT NULL COMMENT '(DC2Type:guid)',
   `country_code` varchar(2) NOT NULL,
   `name` varchar(255) NULL DEFAULT NULL,
@@ -52,7 +50,6 @@ CREATE TABLE `rga_transport_method` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `rga_transport_method_lang` (
-  `id` CHAR(36) NOT NULL COMMENT '(DC2Type:guid)' PRIMARY KEY,
   `rga_transport_method_id` CHAR(36) NOT NULL COMMENT '(DC2Type:guid)',
   `country_code` varchar(2) NOT NULL,
   `name` varchar(255) NULL DEFAULT NULL,
@@ -88,6 +85,11 @@ CREATE TABLE `rga` (
 
   `created_at` datetime NOT NULL,
   `modified_at` datetime NOT NULL,
+  
+  `date_of_creation` datetime NOT NULL,
+  `object_item_id` int(10) unsigned NOT NULL,
+  `name` varchar(255) NULL DEFAULT '',
+  `product_variant_id` int(10) unsigned NULL DEFAULT NULL,
 
   `rga_state_id` CHAR(36) NOT NULL COMMENT '(DC2Type:guid)',
   `rga_behaviour_id` CHAR(36) NOT NULL COMMENT '(DC2Type:guid)',
@@ -143,17 +145,6 @@ CREATE TABLE `rga` (
   CONSTRAINT `fk_rga_to_rga_behaviour` FOREIGN KEY (`rga_behaviour_id`) REFERENCES `rga_behaviour` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_rga_to_country` FOREIGN KEY (`applicant_country_id`) REFERENCES `country` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_rga_to_rga_transport_method` FOREIGN KEY (`rga_transport_method_id`) REFERENCES `rga_transport_method` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE `rga_item` (
-  `id` CHAR(36) NOT NULL COMMENT '(DC2Type:guid)' PRIMARY KEY,
-  `rga_id` CHAR(36) NOT NULL COMMENT '(DC2Type:guid)',
-  `date_of_creation` datetime NOT NULL,
-  `object_item_id` int(10) unsigned NOT NULL,
-  `name` varchar(255) NULL DEFAULT '',
-  `product_variant_id` int(10) unsigned NULL DEFAULT NULL,
-  KEY `rga_id` (`rga_id`),
-  CONSTRAINT `fk_rga_order_integration_to_rga` FOREIGN KEY (`rga_id`) REFERENCES `rga` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `rga_applicant` (

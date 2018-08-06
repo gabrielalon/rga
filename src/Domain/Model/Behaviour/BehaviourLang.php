@@ -16,7 +16,7 @@ class BehaviourLang
 	/**
 	 * @return string
 	 */
-	public function getName()
+	public function getName(): string
 	{
 		return $this->name;
 	}
@@ -24,7 +24,7 @@ class BehaviourLang
 	/**
 	 * @param string $name
 	 */
-	public function setName($name)
+	public function setName($name): void
 	{
 		$this->name = $name;
 	}

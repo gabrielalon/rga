@@ -4,8 +4,9 @@ namespace RGA\Application\Command\Command\Behaviour;
 
 use Ramsey\Uuid\UuidInterface;
 use RGA\Domain\ValueObject;
+use RGA\Infrastructure\Command\Command\CommandInterface;
 
-class CreateBehaviour
+class CreateBehaviour implements CommandInterface
 {
 	/** @var UuidInterface */
 	private $uuid;
@@ -24,7 +25,8 @@ class CreateBehaviour
 	public function __construct(
 		UuidInterface $uuid,
 		ValueObject\Behaviour\Behaviour $behaviour,
-		ValueObject\Lang\Lang $name)
+		ValueObject\Lang\Lang $name
+	)
 	{
 		$this->uuid = $uuid;
 		$this->behaviour = $behaviour;

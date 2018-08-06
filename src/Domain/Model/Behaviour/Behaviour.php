@@ -22,7 +22,7 @@ class Behaviour
 	/**
 	 * @return string
 	 */
-	public function getType()
+	public function getType(): string
 	{
 		return $this->type;
 	}
@@ -38,7 +38,7 @@ class Behaviour
 	/**
 	 * @return bool
 	 */
-	public function isActive()
+	public function isActive(): bool
 	{
 		return $this->isActive;
 	}

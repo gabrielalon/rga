@@ -19,7 +19,7 @@ class BehaviourLangBuilder
 	 * @param string $name
 	 * @return BehaviourLang
 	 */
-	public function create($name)
+	public function create($name): BehaviourLang
 	{
 		$model = new BehaviourLang();
 		$model->setLanguageCode($this->languageCode);

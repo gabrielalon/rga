@@ -10,7 +10,7 @@ class Collector
 	/**
 	 * @param TranslateInterface $model
 	 */
-	public function add(TranslateInterface $model)
+	public function add(TranslateInterface $model): void
 	{
 		$this->offsetSet($model->getLanguageCode(), $model);
 	}
