@@ -1,0 +1,64 @@
+image: nexus.cloud.mns.pl/misc/compose-runner:latest
+
+stages:
+  - test
+
+phpunit:7.2:
+  image: nexus.cloud.mns.pl/misc/phpunit:7.2
+  stage: test
+  artifacts:
+    paths:
+    - coverage.txt
+  script:
+    - php composer.phar install --no-scripts --no-interaction
+    - phpunit --coverage-text --colors=never --configuration phpunit.xml.dist --testsuite PHPUnit
+  cache:
+      key: "vendor"
+      paths:
+        - vendor/
+  tags:
+    - atman
+
+lint:
+  image: nexus.cloud.mns.pl/misc/phplint:7.2
+  stage: test
+  script:
+    - phplint src
+  tags:
+    - atman
+
+lite-sniffer:
+  image: nexus.cloud.mns.pl/misc/phpcs:7.2
+  stage: test
+  script:
+    - phpcs --standard=PSR2 src
+  tags:
+    - atman
+
+hard-sniffer:
+  image: nexus.cloud.mns.pl/misc/phpunit:7.2
+  allow_failure: true
+  stage: test
+  cache:
+    key: "vendor"
+    paths:
+      - vendor/
+  script:
+    - php composer.phar install --no-scripts --no-interaction
+    - ./vendor/bin/phpcs --standard=ruleset.xml --extensions=php --encoding=utf-8 --tab-width=4 -sp src
+  tags:
+    - atman
+
+mess-detector:
+  image: nexus.cloud.mns.pl/misc/phpunit:7.2
+  allow_failure: true
+  stage: test
+  cache:
+    key: "vendor"
+    paths:
+      - vendor/
+  script:
+    - php composer.phar install --no-scripts --no-interaction
+    -  ./vendor/bin/phpmd src/Domain/ text cleancode,codesize,controversial,design,naming,unusedcode
+  tags:
+    - atman
