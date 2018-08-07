@@ -2,10 +2,10 @@
 
 namespace RGA\Domain\Model\Source;
 
-use RGA\Infrastructure\Source\Object\ObjectItemInterface;
+use RGA\Infrastructure\Source\RgaObject\RgaObjectItemInterface;
 
-class ObjectItem
-	implements ObjectItemInterface
+class RgaObjectItem
+	implements RgaObjectItemInterface
 {
 	/** @var integer */
 	private $id;

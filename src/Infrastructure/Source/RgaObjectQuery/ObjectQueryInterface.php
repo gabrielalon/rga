@@ -1,15 +1,15 @@
 <?php
 
-namespace RGA\Infrastructure\Source\ObjectQuery;
+namespace RGA\Infrastructure\Source\RgaObjectQuery;
 
-use RGA\Infrastructure\Source\Object;
+use RGA\Infrastructure\Source\RgaObject;
 
 interface ObjectQueryInterface
 {
 	/**
 	 * @param string $type
 	 * @param integer $id
-	 * @return Object\ObjectInterface
+	 * @return RgaObject\RgaObjectInterface
 	 * @throws \RuntimeException
 	 */
 	public function getByObjectInfo($type, $id);
@@ -17,7 +17,7 @@ interface ObjectQueryInterface
 	/**
 	 * @param string $type
 	 * @param integer $itemId
-	 * @return Object\ObjectItemInterface
+	 * @return RgaObject\RgaObjectItemInterface
 	 * @throws \RuntimeException
 	 */
 	public function getByObjectItemInfo($type, $itemId);

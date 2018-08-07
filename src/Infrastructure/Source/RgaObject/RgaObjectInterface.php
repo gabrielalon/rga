@@ -1,10 +1,10 @@
 <?php
 
-namespace RGA\Infrastructure\Source\Object;
+namespace RGA\Infrastructure\Source\RgaObject;
 
 use RGA\Domain\ValueObject\Applicant;
 
-interface ObjectInterface
+interface RgaObjectInterface
 {
 	/**
 	 * @return string

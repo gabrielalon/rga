@@ -2,7 +2,7 @@
 
 namespace RGA\Domain\Model\Source;
 
-class ObjectItemBuilder
+class RgaObjectItemBuilder
 {
 	
 	/** @var integer */
@@ -42,11 +42,11 @@ class ObjectItemBuilder
 	}
 	
 	/**
-	 * @return ObjectItem
+	 * @return RgaObjectItem
 	 */
 	public function build()
 	{
-		return new ObjectItem(
+		return new RgaObjectItem(
 			$this->id,
 			$this->variantId,
 			$this->objectName,

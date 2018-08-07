@@ -4,7 +4,7 @@ namespace RGA\Domain\Model\Source;
 
 use RGA\Domain\ValueObject\Applicant;
 
-class ObjectBuilder
+class RgaObjectBuilder
 {
 	/** @var integer */
 	private $objectId;
@@ -57,7 +57,7 @@ class ObjectBuilder
 	/** @var  integer */
 	private $objectCreatedAt;
 	
-	/** @var ObjectItemCollector */
+	/** @var RgaObjectItemCollector */
 	private $items;
 	
 	/**
@@ -81,7 +81,7 @@ class ObjectBuilder
 	
 	/**
 	 * @param string $firstName
-	 * @return ObjectBuilder
+	 * @return RgaObjectBuilder
 	 */
 	public function setFirstName($firstName)
 	{
@@ -92,7 +92,7 @@ class ObjectBuilder
 	
 	/**
 	 * @param string $lastName
-	 * @return ObjectBuilder
+	 * @return RgaObjectBuilder
 	 */
 	public function setLastName($lastName)
 	{
@@ -103,7 +103,7 @@ class ObjectBuilder
 	
 	/**
 	 * @param string $email
-	 * @return ObjectBuilder
+	 * @return RgaObjectBuilder
 	 */
 	public function setEmail($email)
 	{
@@ -114,7 +114,7 @@ class ObjectBuilder
 	
 	/**
 	 * @param string $telephone
-	 * @return ObjectBuilder
+	 * @return RgaObjectBuilder
 	 */
 	public function setTelephone($telephone)
 	{
@@ -125,7 +125,7 @@ class ObjectBuilder
 	
 	/**
 	 * @param string $streetName
-	 * @return ObjectBuilder
+	 * @return RgaObjectBuilder
 	 */
 	public function setStreetName($streetName)
 	{
@@ -136,7 +136,7 @@ class ObjectBuilder
 	
 	/**
 	 * @param string $houseNo
-	 * @return ObjectBuilder
+	 * @return RgaObjectBuilder
 	 */
 	public function setHouseNo($houseNo)
 	{
@@ -147,7 +147,7 @@ class ObjectBuilder
 	
 	/**
 	 * @param string $apartmentNo
-	 * @return ObjectBuilder
+	 * @return RgaObjectBuilder
 	 */
 	public function setApartmentNo($apartmentNo)
 	{
@@ -158,7 +158,7 @@ class ObjectBuilder
 	
 	/**
 	 * @param string $postCode
-	 * @return ObjectBuilder
+	 * @return RgaObjectBuilder
 	 */
 	public function setPostCode($postCode)
 	{
@@ -169,7 +169,7 @@ class ObjectBuilder
 	
 	/**
 	 * @param string $city
-	 * @return ObjectBuilder
+	 * @return RgaObjectBuilder
 	 */
 	public function setCity($city)
 	{
@@ -180,7 +180,7 @@ class ObjectBuilder
 	
 	/**
 	 * @param string $countryCode
-	 * @return ObjectBuilder
+	 * @return RgaObjectBuilder
 	 */
 	public function setCountryCode($countryCode)
 	{
@@ -248,9 +248,9 @@ class ObjectBuilder
 	}
 	
 	/**
-	 * @param ObjectItemCollector $items
+	 * @param RgaObjectItemCollector $items
 	 */
-	public function setItems(ObjectItemCollector $items)
+	public function setItems(RgaObjectItemCollector $items)
 	{
 		$this->items = $items;
 	}

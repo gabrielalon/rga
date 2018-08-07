@@ -7,10 +7,10 @@ class Config
 {
 	/** @var integer */
 	private $daysToReturns;
-	
+
 	/** @var integer */
 	private $monthsToComplaint;
-	
+
 	public function __construct()
 	{
 		$file = __DIR__ . '/../../../../config/warranty.php';
@@ -21,14 +21,14 @@ class Config
 			{
 				$this->daysToReturns = $warranty['days_to_returns'];
 				$this->monthsToComplaint = $warranty['months_to_complaints'];
-				
+
 				return;
 			}
 		}
-		
+
 		throw new \RuntimeException("Warranty not configured");
 	}
-	
+
 	/**
 	 * @return int
 	 */
@@ -36,7 +36,7 @@ class Config
 	{
 		return $this->daysToReturns;
 	}
-	
+
 	/**
 	 * @return int
 	 */

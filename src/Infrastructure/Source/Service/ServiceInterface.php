@@ -2,7 +2,7 @@
 
 namespace RGA\Infrastructure\Source\Service;
 
-use RGA\Infrastructure\Source\Object;
+use RGA\Infrastructure\Source\RgaObject;
 
 interface ServiceInterface
 {
@@ -10,17 +10,17 @@ interface ServiceInterface
 	 * @return string
 	 */
 	public function sourceType();
-	
+
 	/**
 	 * @param string $id
-	 * @return Object\ObjectInterface
+	 * @return RgaObject\RgaObjectInterface
 	 * @throws \InvalidArgumentException
 	 */
 	public function buildObject($id);
-	
+
 	/**
 	 * @param string $itemId
-	 * @return Object\ObjectItemInterface
+	 * @return RgaObject\RgaObjectItemInterface
 	 * @throws \InvalidArgumentException
 	 */
 	public function buildObjectItem($itemId);

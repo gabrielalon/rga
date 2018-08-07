@@ -8,7 +8,7 @@ interface ConfigInterface
 	 * @return int
 	 */
 	public function getDaysToReturns();
-	
+
 	/**
 	 * @return int
 	 */

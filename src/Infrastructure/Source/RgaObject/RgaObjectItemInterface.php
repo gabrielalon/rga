@@ -1,8 +1,8 @@
 <?php
 
-namespace RGA\Infrastructure\Source\Object;
+namespace RGA\Infrastructure\Source\RgaObject;
 
-interface ObjectItemInterface
+interface RgaObjectItemInterface
 {
 	/**
 	 * @return int

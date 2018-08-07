@@ -3,10 +3,10 @@
 namespace RGA\Domain\Model\Source;
 
 use RGA\Domain\ValueObject\Applicant;
-use RGA\Infrastructure\Source\Object\ObjectInterface;
+use RGA\Infrastructure\Source\RgaObject\RgaObjectInterface;
 
-class RGAObject
-	implements ObjectInterface
+class RgaObject
+	implements RgaObjectInterface
 {
 	/** @var integer */
 	private $id;
@@ -32,7 +32,7 @@ class RGAObject
 	/** @var  integer */
 	private $createdAt;
 	
-	/** @var ObjectItemCollector */
+	/** @var RgaObjectItemCollector */
 	private $items;
 	
 	/**
@@ -44,7 +44,7 @@ class RGAObject
 	 * @param bool $hasCompletedState
 	 * @param bool $isPaid
 	 * @param int $createdAt
-	 * @param ObjectItemCollector $items
+	 * @param RgaObjectItemCollector $items
 	 */
 	public function __construct(
 		$id = null,
@@ -55,7 +55,7 @@ class RGAObject
 		$hasCompletedState = null,
 		$isPaid = null,
 		$createdAt = null,
-		ObjectItemCollector $items
+		RgaObjectItemCollector $items
 	) {
 		$this->id = $id;
 		$this->type = $type;

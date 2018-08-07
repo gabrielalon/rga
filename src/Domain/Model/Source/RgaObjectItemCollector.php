@@ -2,13 +2,13 @@
 
 namespace RGA\Domain\Model\Source;
 
-class ObjectItemCollector
+class RgaObjectItemCollector
 	extends \ArrayIterator
 {
 	/**
-	 * @param ObjectItem $item
+	 * @param RgaObjectItem $item
 	 */
-	public function add(ObjectItem $item)
+	public function add(RgaObjectItem $item)
 	{
 		$this->offsetSet($item->getId(), $item);
 	}
