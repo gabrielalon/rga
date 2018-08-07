@@ -5,7 +5,7 @@ namespace RGA\Domain\Model\Source;
 use RGA\Domain\ValueObject\Applicant;
 use RGA\Infrastructure\Source\Object\ObjectInterface;
 
-class Object
+class RGAObject
 	implements ObjectInterface
 {
 	/** @var integer */
