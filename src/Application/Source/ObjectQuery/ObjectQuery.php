@@ -2,8 +2,8 @@
 
 namespace RGA\Application\Source\ObjectQuery;
 
-use RGA\Infrastructure\Source\Object;
-use RGA\Infrastructure\Source\ObjectQuery\ObjectQueryInterface;
+use RGA\Infrastructure\Source\RgaObject;
+use RGA\Infrastructure\Source\RgaObjectQuery\ObjectQueryInterface;
 use RGA\Infrastructure\Source\Registry;
 use RGA\Infrastructure\Source\Service;
 
@@ -24,7 +24,7 @@ class ObjectQuery
 	/**
 	 * @param string $type
 	 * @param integer $id
-	 * @return Object\ObjectInterface
+	 * @return RgaObject\RgaObjectInterface
 	 * @throws \RuntimeException
 	 */
 	public function getByObjectInfo($type, $id)
@@ -38,7 +38,7 @@ class ObjectQuery
 	/**
 	 * @param $objectType
 	 * @param $objectId
-	 * @return Object\ObjectItemInterface
+	 * @return RgaObject\RgaObjectItemInterface
 	 * @throws \Exception
 	 */
 	public function getByObjectItemInfo($type, $itemId)

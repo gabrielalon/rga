@@ -4,7 +4,7 @@ namespace RGA\Application\Source\Service;
 
 use RGA\Domain\Model\Source;
 use RGA\Domain\ValueObject\Applicant\Applicant;
-use RGA\Infrastructure\Source\Object;
+use RGA\Infrastructure\Source\RgaObject;
 use RGA\Infrastructure\Source\Service;
 
 class StandardService
@@ -20,12 +20,12 @@ class StandardService
 	
 	/**
 	 * @param string $id
-	 * @return Object\ObjectInterface
+	 * @return RgaObject\RgaObjectInterface
 	 * @throws \InvalidArgumentException
 	 */
 	public function buildObject($id)
 	{
-		$builder = new Source\ObjectBuilder(
+		$builder = new Source\RgaObjectBuilder(
 			$id,
 			$this->sourceType(),
 			new Applicant(0, 'guest'),
@@ -39,12 +39,12 @@ class StandardService
 	
 	/**
 	 * @param string $itemId
-	 * @return Object\ObjectItemInterface
+	 * @return RgaObject\RgaObjectItemInterface
 	 * @throws \InvalidArgumentException
 	 */
 	public function buildObjectItem($itemId)
 	{
-		$rmaObjectItemBuilder = new Source\ObjectItemBuilder(
+		$rmaObjectItemBuilder = new Source\RgaObjectItemBuilder(
 			$itemId,
 			0,
 			'',
