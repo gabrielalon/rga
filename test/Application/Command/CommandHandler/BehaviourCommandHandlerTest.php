@@ -30,9 +30,7 @@ class BehaviourCommandHandlerTest extends TestCase
 		//given
 		$valueObject = new Behaviour('return', true);
 		$lang = new Lang([
-			'pl' => [
-				'name' => 'zwrot testowy'
-			]
+			'name__pl' => 'zwrot testowy',
 		]);
 
 		//when
@@ -41,7 +39,8 @@ class BehaviourCommandHandlerTest extends TestCase
 
 		//then
 		$behaviour = $this->behaviourRepository->load($guid);
-		$this->assertEquals($guid, $behaviour->getId());
+
+		$this->assertEquals($guid, $behaviour->getUuid());
 	}
 
 	public function setUp()
@@ -51,4 +50,5 @@ class BehaviourCommandHandlerTest extends TestCase
 			$this->behaviourRepository
 		);
 	}
+
 }

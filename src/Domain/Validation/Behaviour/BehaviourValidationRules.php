@@ -14,11 +14,11 @@ class BehaviourValidationRules
 	public function getRules()
 	{
 		return [
-			['id', new ConstraintUuid()],
-			
+			['uuid', new ConstraintUuid()],
+
 			['type', new Constraint\NonEmpty()],
 			['type', new ConstraintType()],
-			
+
 			['lang', new ConstraintLang('name')]
 		];
 	}

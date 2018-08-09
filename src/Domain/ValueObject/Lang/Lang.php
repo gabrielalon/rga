@@ -6,10 +6,10 @@ class Lang
 {
 	/** @var array */
 	private $data;
-	
+
 	/** @var string[] */
 	private $supportedLanguageCodes = ['pl', 'en'];
-	
+
 	/**
 	 * @param array $data
 	 */
@@ -17,7 +17,7 @@ class Lang
 	{
 		$this->data = $data;
 	}
-	
+
 	/**
 	 * @return array
 	 */
@@ -25,7 +25,7 @@ class Lang
 	{
 		return $this->data;
 	}
-	
+
 	/**
 	 * @param string $field
 	 * @param string $lang
@@ -33,11 +33,11 @@ class Lang
 	 */
 	public function getForLang($field, $lang): string
 	{
-//		$key = sprintf('%s__%s', $field, $lang);
-		
-		return $this->data[$lang][$field] ?? '';
+		$key = sprintf('%s__%s', $field, $lang);
+
+		return isset($this->data[$key]) ? $this->data[$key] : '';
 	}
-	
+
 	/**
 	 * @return array
 	 */

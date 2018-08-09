@@ -4,6 +4,8 @@ namespace RGA\Application\Command\Command\Behaviour;
 
 use Ramsey\Uuid\UuidInterface;
 use RGA\Domain\ValueObject;
+use RGA\Domain\ValueObject\Behaviour\Behaviour;
+use RGA\Domain\ValueObject\Lang\Lang;
 use RGA\Infrastructure\Command\Command\CommandInterface;
 
 class CreateBehaviour implements CommandInterface
@@ -11,16 +13,18 @@ class CreateBehaviour implements CommandInterface
 	/** @var UuidInterface */
 	private $uuid;
 	
-	/** @var ValueObject\Behaviour\Behaviour */
+	/** @var Behaviour */
 	private $behaviour;
 	
-	/** @var ValueObject\Lang\Lang */
+	/** @var Lang */
 	private $name;
-	
+
 	/**
+	 * CreateBehaviour constructor.
+	 *
 	 * @param UuidInterface $uuid
-	 * @param ValueObject\Behaviour\Behaviour $behaviour
-	 * @param ValueObject\Lang\Lang $name
+	 * @param Behaviour $behaviour
+	 * @param Lang $name
 	 */
 	public function __construct(
 		UuidInterface $uuid,
@@ -36,23 +40,23 @@ class CreateBehaviour implements CommandInterface
 	/**
 	 * @return UuidInterface
 	 */
-	public function getUuid()
+	public function getUuid(): UuidInterface
 	{
 		return $this->uuid;
 	}
 	
 	/**
-	 * @return ValueObject\Behaviour\Behaviour
+	 * @return Behaviour
 	 */
-	public function getBehaviour()
+	public function getBehaviour(): Behaviour
 	{
 		return $this->behaviour;
 	}
 	
 	/**
-	 * @return ValueObject\Lang\Lang
+	 * @return Lang
 	 */
-	public function getName()
+	public function getName(): Lang
 	{
 		return $this->name;
 	}

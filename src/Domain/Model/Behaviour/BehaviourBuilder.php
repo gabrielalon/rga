@@ -10,7 +10,7 @@ class BehaviourBuilder
 {
 	/** @var Behaviour */
 	private $model;
-	
+
 	/**
 	 * @param Behaviour $model
 	 */
@@ -18,7 +18,7 @@ class BehaviourBuilder
 	{
 		$this->model = $model;
 	}
-	
+
 	/**
 	 * @param UuidInterface $uuid
 	 * @return BehaviourBuilder
@@ -26,11 +26,10 @@ class BehaviourBuilder
 	public static function create(UuidInterface $uuid): BehaviourBuilder
 	{
 		/** @var Behaviour $model */
-		$model = Behaviour::init($uuid);
-		
+		$model = new Behaviour($uuid);
 		return new BehaviourBuilder($model);
 	}
-	
+
 	/**
 	 * @param ValueObject\Behaviour\Behaviour $behaviour
 	 */
@@ -39,7 +38,7 @@ class BehaviourBuilder
 		$this->model->setIsActive($behaviour->isActive());
 		$this->model->setType($behaviour->getType());
 	}
-	
+
 	/**
 	 * @param ValueObject\Lang\Lang $lang
 	 */
@@ -50,13 +49,13 @@ class BehaviourBuilder
 		{
 			$builder = new BehaviourLangBuilder($languageCode);
 			$name = $lang->getForLang('name', $languageCode);
-			
+
 			$collector->add($builder->create($name));
 		}
-		
+
 		$this->model->setLang($collector);
 	}
-	
+
 	/**
 	 * @return Behaviour
 	 */

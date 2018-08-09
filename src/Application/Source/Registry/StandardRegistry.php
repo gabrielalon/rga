@@ -11,7 +11,7 @@ class StandardRegistry
 {
 	/** @var Service\ServiceInterface[] */
 	private $items;
-	
+
 	/**
 	 * @param string $objectType
 	 * @return Service\ServiceInterface
@@ -23,13 +23,13 @@ class StandardRegistry
 		{
 			return $this->items[$objectType];
 		}
-		
+
 		throw new \InvalidArgumentException(sprintf(
 			'RGA Source Service not found for object type: %s',
 			$objectType
 		));
 	}
-	
+
 	/**
 	 * @param Service\ServiceInterface $service
 	 */
@@ -37,7 +37,7 @@ class StandardRegistry
 	{
 		$this->items[$service->sourceType()] = $service;
 	}
-	
+
 	/**
 	 * @return Service\ServiceInterface[]
 	 */

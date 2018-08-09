@@ -7,10 +7,10 @@ interface ConfigInterface
 	/**
 	 * @return int
 	 */
-	public function getDaysToReturns();
+	public function getDaysToReturns(): int;
 
 	/**
 	 * @return int
 	 */
-	public function getMonthsToComplaint();
+	public function getMonthsToComplaint(): int;
 }

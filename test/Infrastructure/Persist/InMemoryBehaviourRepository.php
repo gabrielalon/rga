@@ -16,7 +16,7 @@ class InMemoryBehaviourRepository implements BehaviourRepositoryInterface
 	 */
 	public function save(Behaviour $behaviour): void
 	{
-		$this->behaviours[(string)$behaviour->getId()] = $behaviour;
+		$this->behaviours[(string)$behaviour->getUuid()] = $behaviour;
 	}
 
 	/**

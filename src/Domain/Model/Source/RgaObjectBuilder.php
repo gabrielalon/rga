@@ -8,58 +8,58 @@ class RgaObjectBuilder
 {
 	/** @var integer */
 	private $objectId;
-	
+
 	/** @var string */
 	private $objectType;
-	
+
 	/** @var bool */
 	private $objectIsPaid;
-	
+
 	/** @var bool */
 	private $objectHasCompletedState;
-	
+
 	/** @var string */
 	private $firstName;
-	
+
 	/** @var string */
 	private $lastName;
-	
+
 	/** @var string */
 	private $email;
-	
+
 	/** @var string */
 	private $telephone;
-	
+
 	/** @var string */
 	private $streetName;
-	
+
 	/** @var string */
 	private $houseNo;
-	
+
 	/** @var string */
 	private $apartmentNo;
-	
+
 	/** @var string */
 	private $postCode;
-	
+
 	/** @var string */
 	private $city;
-	
+
 	/** @var string */
 	private $countryCode;
-	
+
 	/** @var Applicant\Applicant */
 	private $applicant;
-	
+
 	/** @var int */
 	private $statusId = 0;
-	
+
 	/** @var  integer */
 	private $objectCreatedAt;
-	
+
 	/** @var RgaObjectItemCollector */
 	private $items;
-	
+
 	/**
 	 * @param integer $objectId
 	 * @param string $objectType
@@ -70,15 +70,15 @@ class RgaObjectBuilder
 	 */
 	public function __construct($objectId, $objectType, Applicant\Applicant $applicant, $objectIsPaid, $objectCreatedAt, $objectHasCompletedState)
 	{
-		$this->objectId   = $objectId;
+		$this->objectId = $objectId;
 		$this->objectType = $objectType;
-		$this->applicant      = $applicant;
+		$this->applicant = $applicant;
 		$this->objectIsPaid = $objectIsPaid;
 		$this->objectCreatedAt = $objectCreatedAt;
 		$this->objectHasCompletedState = $objectHasCompletedState;
-		
+
 	}
-	
+
 	/**
 	 * @param string $firstName
 	 * @return RgaObjectBuilder
@@ -86,10 +86,10 @@ class RgaObjectBuilder
 	public function setFirstName($firstName)
 	{
 		$this->firstName = $firstName;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @param string $lastName
 	 * @return RgaObjectBuilder
@@ -97,10 +97,10 @@ class RgaObjectBuilder
 	public function setLastName($lastName)
 	{
 		$this->lastName = $lastName;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @param string $email
 	 * @return RgaObjectBuilder
@@ -108,10 +108,10 @@ class RgaObjectBuilder
 	public function setEmail($email)
 	{
 		$this->email = $email;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @param string $telephone
 	 * @return RgaObjectBuilder
@@ -119,10 +119,10 @@ class RgaObjectBuilder
 	public function setTelephone($telephone)
 	{
 		$this->telephone = $telephone;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @param string $streetName
 	 * @return RgaObjectBuilder
@@ -130,10 +130,10 @@ class RgaObjectBuilder
 	public function setStreetName($streetName)
 	{
 		$this->streetName = $streetName;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @param string $houseNo
 	 * @return RgaObjectBuilder
@@ -141,10 +141,10 @@ class RgaObjectBuilder
 	public function setHouseNo($houseNo)
 	{
 		$this->houseNo = $houseNo;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @param string $apartmentNo
 	 * @return RgaObjectBuilder
@@ -152,10 +152,10 @@ class RgaObjectBuilder
 	public function setApartmentNo($apartmentNo)
 	{
 		$this->apartmentNo = $apartmentNo;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @param string $postCode
 	 * @return RgaObjectBuilder
@@ -163,10 +163,10 @@ class RgaObjectBuilder
 	public function setPostCode($postCode)
 	{
 		$this->postCode = $postCode;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @param string $city
 	 * @return RgaObjectBuilder
@@ -174,10 +174,10 @@ class RgaObjectBuilder
 	public function setCity($city)
 	{
 		$this->city = $city;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @param string $countryCode
 	 * @return RgaObjectBuilder
@@ -185,10 +185,10 @@ class RgaObjectBuilder
 	public function setCountryCode($countryCode)
 	{
 		$this->countryCode = $countryCode;
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * @param int $statusId
 	 */
@@ -196,16 +196,16 @@ class RgaObjectBuilder
 	{
 		$this->statusId = $statusId;
 	}
-	
+
 	/**
-	 * @return Object
+	 * @return RgaObject
 	 */
 	public function build()
 	{
 		$address = $this->buildAddress();
 		$contact = $this->buildContact();
-		
-		return new Object(
+
+		return new RgaObject(
 			$this->objectId,
 			$this->objectType,
 			$this->applicant,
@@ -217,7 +217,7 @@ class RgaObjectBuilder
 			$this->items
 		);
 	}
-	
+
 	/**
 	 * @return Applicant\Address
 	 */
@@ -233,7 +233,7 @@ class RgaObjectBuilder
 			$this->countryCode
 		);
 	}
-	
+
 	/**
 	 * @return Applicant\Contact
 	 */
@@ -246,7 +246,7 @@ class RgaObjectBuilder
 			$this->telephone
 		);
 	}
-	
+
 	/**
 	 * @param RgaObjectItemCollector $items
 	 */

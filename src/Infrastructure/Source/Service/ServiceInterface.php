@@ -9,7 +9,7 @@ interface ServiceInterface
 	/**
 	 * @return string
 	 */
-	public function sourceType();
+	public function sourceType(): string;
 
 	/**
 	 * @param string $id

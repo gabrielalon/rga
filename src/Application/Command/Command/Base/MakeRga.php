@@ -4,5 +4,5 @@ namespace RGA\Application\Command\Command\Base;
 
 class MakeRga
 {
-	
+
 }

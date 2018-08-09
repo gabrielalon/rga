@@ -13,11 +13,11 @@ class StandardService
 	/**
 	 * @return string
 	 */
-	public function sourceType()
+	public function sourceType(): string
 	{
 		return 'unknown';
 	}
-	
+
 	/**
 	 * @param string $id
 	 * @return RgaObject\RgaObjectInterface
@@ -33,10 +33,10 @@ class StandardService
 			time(),
 			true
 		);
-		
+
 		return $builder->build();
 	}
-	
+
 	/**
 	 * @param string $itemId
 	 * @return RgaObject\RgaObjectItemInterface
@@ -52,7 +52,7 @@ class StandardService
 			0,
 			null
 		);
-		
+
 		return $rmaObjectItemBuilder->build();
 	}
 }

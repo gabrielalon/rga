@@ -12,7 +12,7 @@ interface BehaviourRepositoryInterface
 	 * @return Behaviour
 	 */
 	public function find($id): Behaviour;
-	
+
 	/**
 	 * @param Behaviour $model
 	 */

@@ -2,23 +2,57 @@
 
 namespace RGA\Domain\Model\Behaviour;
 
-use RGA\Infrastructure\Model\Identify\GuidInterface;
-use RGA\Infrastructure\Model\Identify\Guided;
-use RGA\Infrastructure\Model\Translate\Lang\CollectionInterface;
+use Ramsey\Uuid\UuidInterface;
 use RGA\Infrastructure\Model\Translate\Lang\Collected;
+use RGA\Infrastructure\Model\Translate\Lang\CollectionInterface;
 
-class Behaviour
-	implements GuidInterface, CollectionInterface
+class Behaviour implements CollectionInterface
 {
-	use Guided;
 	use Collected;
-	
+
+	/** @var UuidInterface */
+	private $uuid;
+
 	/** @var string */
 	private $type;
-	
+
 	/** @var boolean */
 	private $isActive;
-	
+
+	/**
+	 * Behaviour constructor.
+	 *
+	 * @param UuidInterface $uuid
+	 */
+	public function __construct(UuidInterface $uuid)
+	{
+		$this->uuid = $uuid;
+	}
+
+	/**
+	 * @param string $type
+	 */
+	public function setType(string $type): void
+	{
+		$this->type = $type;
+	}
+
+	/**
+	 * @param bool $isActive
+	 */
+	public function setIsActive(bool $isActive): void
+	{
+		$this->isActive = $isActive;
+	}
+
+	/**
+	 * @return UuidInterface
+	 */
+	public function getUuid(): UuidInterface
+	{
+		return $this->uuid;
+	}
+
 	/**
 	 * @return string
 	 */
@@ -26,28 +60,5 @@ class Behaviour
 	{
 		return $this->type;
 	}
-	
-	/**
-	 * @param string $type
-	 */
-	public function setType($type)
-	{
-		$this->type = $type;
-	}
-	
-	/**
-	 * @return bool
-	 */
-	public function isActive(): bool
-	{
-		return $this->isActive;
-	}
-	
-	/**
-	 * @param bool $isActive
-	 */
-	public function setIsActive($isActive)
-	{
-		$this->isActive = $isActive;
-	}
+
 }

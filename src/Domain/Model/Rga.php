@@ -4,5 +4,5 @@ namespace RGA\Domain\Model;
 
 class Rga
 {
-	
+
 }

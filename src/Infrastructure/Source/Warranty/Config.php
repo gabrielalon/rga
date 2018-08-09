@@ -17,7 +17,7 @@ class Config
 		if (true === file_exists($file))
 		{
 			$warranty = include($file);
-			if (true === is_array($warranty))
+			if (true === \is_array($warranty))
 			{
 				$this->daysToReturns = $warranty['days_to_returns'];
 				$this->monthsToComplaint = $warranty['months_to_complaints'];
@@ -26,13 +26,13 @@ class Config
 			}
 		}
 
-		throw new \RuntimeException("Warranty not configured");
+		throw new \RuntimeException('Warranty not configured');
 	}
 
 	/**
 	 * @return int
 	 */
-	public function getDaysToReturns()
+	public function getDaysToReturns(): int
 	{
 		return $this->daysToReturns;
 	}
@@ -40,7 +40,7 @@ class Config
 	/**
 	 * @return int
 	 */
-	public function getMonthsToComplaint()
+	public function getMonthsToComplaint(): int
 	{
 		return $this->monthsToComplaint;
 	}
