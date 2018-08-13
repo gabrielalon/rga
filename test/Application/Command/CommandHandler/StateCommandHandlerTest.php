@@ -50,7 +50,7 @@ class StateCommandHandlerTest extends TestCase
 		$this->handler->handle($command);
 
 		$state = $this->stateRepository->load($uuid);
-		$this->assertEquals($uuid, $state->getId());
+		$this->assertEquals($uuid, $state->getUuid());
 	}
 
 	/**

@@ -4,15 +4,15 @@ namespace RGA\Domain\Model\State;
 
 use Ramsey\Uuid\UuidInterface;
 use RGA\Domain\ValueObject\Lang\Lang;
-use RGA\Infrastructure\Model\Identify\Guided;
-use RGA\Infrastructure\Model\Identify\GuidInterface;
 use RGA\Infrastructure\Model\Translate\Lang\Collected;
 use RGA\Infrastructure\Model\Translate\Lang\CollectionInterface;
 
-class State implements GuidInterface, CollectionInterface
+class State implements CollectionInterface
 {
-	use Guided;
 	use Collected;
+
+	/** @var UuidInterface */
+	private $uuid;
 
 	/** @var bool */
 	private $isEditable;
@@ -56,17 +56,20 @@ class State implements GuidInterface, CollectionInterface
 	 */
 	public function __construct(UuidInterface $uuid, bool $isSendingEmail, string $colorCode, Lang $name, Lang $emailSubject, Lang $emailBody)
 	{
-		$this->id = $uuid;
-//		$this->isEditable = $isEditable;
-//		$this->isDeletable = $isDeletable;
-//		$this->isRejectable = $isRejectable;
-//		$this->isFinishable = $isFinishable;
-//		$this->isCloseable = $isCloseable;
+		$this->uuid = $uuid;
 		$this->isSendingEmail = $isSendingEmail;
 		$this->colorCode = $colorCode;
 		$this->name = $name;
 		$this->emailSubject = $emailSubject;
 		$this->emailBody = $emailBody;
+	}
+
+	/**
+	 * @return UuidInterface
+	 */
+	public function getUuid(): UuidInterface
+	{
+		return $this->uuid;
 	}
 
 	/**

@@ -16,7 +16,7 @@ class InMemoryStateRepository implements StateRepositoryInterface
 	 */
 	public function save(State $state): void
 	{
-		$this->states[(string)$state->getId()] = $state;
+		$this->states[(string)$state->getUuid()] = $state;
 	}
 
 	/**
