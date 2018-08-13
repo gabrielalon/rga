@@ -1,6 +1,6 @@
 <?php
 
-namespace RGA\Application\Warranty;
+namespace RGA\Application\Source\Warranty;
 
 use RGA\Infrastructure\Source\Warranty\ConfigInterface;
 
@@ -20,7 +20,7 @@ class Calculator
 	/**
 	 * @param ConfigInterface $config
 	 */
-	public function setConfig($config)
+	public function setConfig($config): void
 	{
 		$this->config = $config;
 	}
@@ -33,13 +33,13 @@ class Calculator
 	{
 		return strtotime('+' . $this->config->getDaysToReturns() . 'day', $creationDate);
 	}
-	
+
 	/**
 	 * @param int $creationDate
 	 * @param int|null $warranty
 	 * @return false|int
 	 */
-	public function getFinalDateOfComplaint($creationDate, $warranty = null)
+	public function getFinalDateOfComplaint(int $creationDate, ?int $warranty = null)
 	{
 		if (null !== $warranty && $this->config->getMonthsToComplaint() < $warranty)
 		{
