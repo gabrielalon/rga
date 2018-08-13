@@ -33,8 +33,8 @@ return [
 	Application\Source\Service\StandardService::class => Application\Source\Service\StandardService::class,
 	Source\Warranty\ConfigInterface::class            => Source\Warranty\Config::class,
 
-	Application\Warranty\Calculator::class => function (ContainerInterface $container) {
-		$calculator = new Application\Warranty\Calculator(
+	Application\Source\Warranty\Calculator::class => function (ContainerInterface $container) {
+		$calculator = new Application\Source\Warranty\Calculator(
 			$container->get(Source\Warranty\ConfigInterface::class)
 		);
 
