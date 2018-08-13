@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use RGA\Application\Command\Command\Dictionary\CreateDictionary;
 use RGA\Application\Command\Command\Dictionary\DeleteDictionary;
+use RGA\Application\Command\Command\Dictionary\UpdateDictionary;
 use RGA\Application\Command\CommandHandler\DictionaryCommandHandler;
 use RGA\Domain\Model\Dictionary\Dictionary;
 use RGA\Domain\ValueObject\Lang\Lang;
@@ -37,8 +38,33 @@ class DictionaryCommandHandlerTest extends TestCase
 		$guid = \Ramsey\Uuid\Uuid::uuid4();
 		$this->handler->handle(new CreateDictionary($guid, true, 'reason', $lang));
 
-		$ictionary = $this->dictionaryRepository->load($guid);
-		$this->assertEquals($guid, $ictionary->getUuid());
+		$dictionary = $this->dictionaryRepository->load($guid);
+		$this->assertEquals($guid, $dictionary->getUuid());
+	}
+
+	/**
+	 * @test
+	 * @throws \Exception
+	 */
+	public function canUpdateDictionary()
+	{
+		$lang = new Lang([
+			'entry__pl' => 'powód testowy',
+		]);
+
+		$guid = \Ramsey\Uuid\Uuid::uuid4();
+		$this->handler->handle(new CreateDictionary($guid, true, 'reason', $lang));
+
+		$langNew = new Lang([
+			'entry__pl' => 'nowy powód testowy',
+		]);
+		$this->handler->handle(new UpdateDictionary($guid, false, $langNew));
+		$dictionary = $this->dictionaryRepository->load($guid);
+
+		$plEntry = $dictionary->getLang()->offsetGet('pl')->getEntry();
+
+		$this->assertEquals('nowy powód testowy', $plEntry);
+		$this->assertFalse($dictionary->isDeletable());
 	}
 
 	/**

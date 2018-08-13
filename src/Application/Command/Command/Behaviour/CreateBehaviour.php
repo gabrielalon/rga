@@ -12,10 +12,10 @@ class CreateBehaviour implements CommandInterface
 {
 	/** @var UuidInterface */
 	private $uuid;
-	
+
 	/** @var Behaviour */
 	private $behaviour;
-	
+
 	/** @var Lang */
 	private $name;
 
@@ -30,13 +30,12 @@ class CreateBehaviour implements CommandInterface
 		UuidInterface $uuid,
 		ValueObject\Behaviour\Behaviour $behaviour,
 		ValueObject\Lang\Lang $name
-	)
-	{
+	) {
 		$this->uuid = $uuid;
 		$this->behaviour = $behaviour;
 		$this->name = $name;
 	}
-	
+
 	/**
 	 * @return UuidInterface
 	 */
@@ -44,7 +43,7 @@ class CreateBehaviour implements CommandInterface
 	{
 		return $this->uuid;
 	}
-	
+
 	/**
 	 * @return Behaviour
 	 */
@@ -52,7 +51,7 @@ class CreateBehaviour implements CommandInterface
 	{
 		return $this->behaviour;
 	}
-	
+
 	/**
 	 * @return Lang
 	 */

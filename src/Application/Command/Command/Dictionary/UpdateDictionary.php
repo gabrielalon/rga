@@ -4,8 +4,9 @@ namespace RGA\Application\Command\Command\Dictionary;
 
 use Ramsey\Uuid\UuidInterface;
 use RGA\Domain\ValueObject\Lang\Lang;
+use RGA\Infrastructure\Command\Command\CommandInterface;
 
-class UpdateDictionary
+class UpdateDictionary implements CommandInterface
 {
 	/** @var UuidInterface */
 	private $uuid;

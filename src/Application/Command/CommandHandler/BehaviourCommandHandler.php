@@ -12,7 +12,7 @@ class BehaviourCommandHandler
 {
 	/** @var BehaviourRepositoryInterface */
 	private $repository;
-	
+
 	/**
 	 * @param BehaviourRepositoryInterface $repository
 	 */
@@ -20,7 +20,7 @@ class BehaviourCommandHandler
 	{
 		$this->repository = $repository;
 	}
-	
+
 	/**
 	 * @param Command\Command\Behaviour\CreateBehaviour $command
 	 */
@@ -30,26 +30,26 @@ class BehaviourCommandHandler
 		$builder->setBehaviour($command->getBehaviour());
 		$builder->setLang($command->getName());
 		$model = $builder->extract();
-		
+
 		$this->validate(new Validation\Behaviour\BehaviourValidationRules(), $model);
-		
+
 		$this->repository->save($model);
 	}
-	
+
 	/**
 	 * @param Command\Command\Behaviour\UpdateBehaviour $command
 	 */
 	public function handleUpdateBehaviour(Command\Command\Behaviour\UpdateBehaviour $command): void
 	{
 		$model = $this->repository->find($command->getUuid());
-		
+
 		$builder = new Behaviour\BehaviourBuilder($model);
 		$builder->setBehaviour($command->getBehaviour());
 		$builder->setLang($command->getName());
 		$model = $builder->extract();
-		
+
 		$this->validate(new Validation\Behaviour\BehaviourValidationRules(), $model);
-		
+
 		$this->repository->save($model);
 	}
 }

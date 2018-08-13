@@ -47,30 +47,25 @@ class DictionaryCommandHandler extends AbstractCommandHandler
 	 */
 	public function handleUpdateDictionary(UpdateDictionary $command): void
 	{
-//		$dictionary = $this->repository->find($command->getUuid());
-//		$dictionary->setIsDeletable($command->isDelete());
-//		$dictionary->setLang()
-//
-//
-//		$builder = new DictionaryBuilder($dictionary);
-//		$builder->setLang($command->getEntries());
-//
-//		$builder = new Behaviour\BehaviourBuilder($model);
-//		$builder->setBehaviour($command->getBehaviour());
-//		$builder->setLang($command->getName());
-//		$model = $builder->extract();
-//
-//
-//		$this->repository->save($model);
+		$dictionary = $this->repository->find($command->getUuid());
+		$collector = $this->getCollector($command->getEntries());
+		$dictionary->setIsDeletable($command->isDelete());
+		$dictionary->setLang($collector);
+
+		$this->repository->save($dictionary);
 	}
 
-	private function getCollector(Lang $lang)
+	/**
+	 * @param Lang $lang
+	 * @return Collector
+	 */
+	private function getCollector(Lang $lang): Collector
 	{
 		$collector = new Collector();
 		foreach ($lang->getSupportedLanguageCodes() as $languageCode)
 		{
 			$builder = new DictionaryLangBuilder($languageCode);
-			$name = $lang->getForLang('name', $languageCode);
+			$name = $lang->getForLang('entry', $languageCode);
 
 			$collector->add($builder->create($name));
 		}
