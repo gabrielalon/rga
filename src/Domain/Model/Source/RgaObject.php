@@ -26,10 +26,10 @@ class RgaObject
 	/** @var boolean */
 	private $hasCompletedState;
 	
-	/** @var  boolean */
+	/** @var boolean */
 	private $isPaid;
 	
-	/** @var  integer */
+	/** @var integer */
 	private $createdAt;
 	
 	/** @var RgaObjectItemCollector */
@@ -69,50 +69,74 @@ class RgaObject
 	}
 	
 	/**
-	 * @return string
+	 * @return int
 	 */
-	public function getType()
-	{
-		return $this->type;
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getId()
+	public function getId(): int
 	{
 		return $this->id;
 	}
 	
 	/**
+	 * @return string
+	 */
+	public function getType(): string
+	{
+		return $this->type;
+	}
+	
+	/**
 	 * @return Applicant\Applicant
 	 */
-	public function getApplicant()
+	public function getApplicant(): Applicant\Applicant
 	{
-		// TODO: Implement getBuyer() method.
+		return $this->applicant;
 	}
 	
 	/**
 	 * @return Applicant\Address
 	 */
-	public function getAddress()
+	public function getAddress(): Applicant\Address
 	{
-		// TODO: Implement getAddress() method.
+		return $this->address;
 	}
 	
 	/**
 	 * @return Applicant\Contact
 	 */
-	public function getContact()
+	public function getContact(): Applicant\Contact
 	{
-		// TODO: Implement getContact() method.
+		return $this->contact;
+	}
+	
+	/**
+	 * @return bool
+	 */
+	public function hasCompletedState(): bool
+	{
+		return $this->hasCompletedState;
+	}
+	
+	/**
+	 * @return bool
+	 */
+	public function isPaid(): bool
+	{
+		return $this->isPaid;
 	}
 	
 	/**
 	 * @return int
 	 */
-	public function getCreatedAt()
+	public function getCreatedAt(): int
 	{
-		// TODO: Implement getCreatedAt() method.
+		return $this->createdAt;
+	}
+	
+	/**
+	 * @return RgaObjectItemCollector
+	 */
+	public function getItems(): RgaObjectItemCollector
+	{
+		return $this->items;
 	}
 }

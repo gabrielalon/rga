@@ -48,7 +48,7 @@ class Address
 	/**
 	 * @return string
 	 */
-	public function getFullName()
+	public function getFullName(): string
 	{
 		return $this->fullName;
 	}
@@ -56,7 +56,7 @@ class Address
 	/**
 	 * @return string
 	 */
-	public function getStreetName()
+	public function getStreetName(): string
 	{
 		return $this->streetName;
 	}
@@ -64,7 +64,7 @@ class Address
 	/**
 	 * @return string
 	 */
-	public function getBuildingNumber()
+	public function getBuildingNumber(): string
 	{
 		return $this->buildingNumber;
 	}
@@ -72,7 +72,7 @@ class Address
 	/**
 	 * @return string
 	 */
-	public function getApartmentNumber()
+	public function getApartmentNumber(): string
 	{
 		return $this->apartmentNumber;
 	}
@@ -80,7 +80,7 @@ class Address
 	/**
 	 * @return string
 	 */
-	public function getPostalCode()
+	public function getPostalCode(): string
 	{
 		return $this->postalCode;
 	}
@@ -88,7 +88,7 @@ class Address
 	/**
 	 * @return string
 	 */
-	public function getCity()
+	public function getCity(): string
 	{
 		return $this->city;
 	}
@@ -96,7 +96,7 @@ class Address
 	/**
 	 * @return string
 	 */
-	public function getCountryCode()
+	public function getCountryCode(): string
 	{
 		return $this->countryCode;
 	}

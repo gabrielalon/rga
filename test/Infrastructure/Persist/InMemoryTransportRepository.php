@@ -6,7 +6,8 @@ use RGA\Domain\Model\Transport\Transport;
 use RGA\Infrastructure\Persist\Exception\NotFound;
 use RGA\Infrastructure\Persist\Transport\TransportRepositoryInterface;
 
-class InMemoryTransportRepository implements TransportRepositoryInterface
+class InMemoryTransportRepository
+	implements TransportRepositoryInterface
 {
 	/** @var Transport[] */
 	private $transports = [];
@@ -16,7 +17,7 @@ class InMemoryTransportRepository implements TransportRepositoryInterface
 	 */
 	public function save(Transport $transport): void
 	{
-		$this->transports[(string)$transport->getId()] = $transport;
+		$this->transports[(string)$transport->getUuid()] = $transport;
 	}
 
 	/**
@@ -24,7 +25,7 @@ class InMemoryTransportRepository implements TransportRepositoryInterface
 	 * @return Transport
 	 * @throws NotFound
 	 */
-	public function load(string $guid): Transport
+	public function find($guid): Transport
 	{
 		if (isset($this->transports[$guid]))
 		{
@@ -35,12 +36,11 @@ class InMemoryTransportRepository implements TransportRepositoryInterface
 	}
 
 	/**
-	 * @param string $id
-	 * @return Transport
+	 * @param string $guid
 	 */
-	public function find($id): Transport
+	public function delete($guid): void
 	{
-		// TODO: Implement find() method.
+		unset($this->transports[$guid]);
 	}
 }
 

@@ -23,6 +23,12 @@ class RgaObjectItem
 	private $type;
 	
 	/** @var integer */
+	private $finalDateOfComplaint;
+	
+	/** @var integer */
+	private $finalDateOfReturn;
+	
+	/** @var integer */
 	private $warranty;
 	
 	/**
@@ -33,60 +39,78 @@ class RgaObjectItem
 	 * @param int $objectId
 	 * @param int $warranty
 	 */
-	public function __construct($id, $variantId, $name, $type, $objectId, $warranty = null)
+	public function __construct($id, $variantId, $name, $type, $objectId, $finalDateOfComplaint = null, $finalDateOfReturn = null, $warranty = null)
 	{
 		$this->id = $id;
 		$this->variantId = $variantId;
 		$this->name = $name;
 		$this->type = $type;
 		$this->objectId = $objectId;
+		$this->finalDateOfComplaint = $finalDateOfComplaint;
+		$this->finalDateOfReturn = $finalDateOfReturn;
 		$this->warranty = $warranty;
 	}
 	
 	/**
 	 * @return string
 	 */
-	public function getName()
+	public function getName(): string
 	{
 		return $this->name;
 	}
 	
 	/**
-	 * @return int
+	 * @return integer
 	 */
-	public function getId()
+	public function getId(): int
 	{
 		return $this->id;
 	}
 	
 	/**
-	 * @return int
+	 * @return integer
 	 */
-	public function getVariantId()
+	public function getVariantId(): int
 	{
 		return $this->variantId;
 	}
 	
 	/**
-	 * @inheritDoc
+	 * @return boolean
 	 */
-	public function isTransport()
+	public function isTransport(): bool
 	{
 		return $this->type === 'transport';
 	}
 	
 	/**
-	 * @return int
+	 * @return integer
 	 */
-	public function getObjectId()
+	public function getObjectId(): int
 	{
 		return $this->objectId;
 	}
 	
 	/**
+	 * @return int
+	 */
+	public function getFinalDateOfComplaint(): ?int
+	{
+		return $this->finalDateOfComplaint;
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getFinalDateOfReturn(): ?int
+	{
+		return $this->finalDateOfReturn;
+	}
+	
+	/**
 	 * @return int|null
 	 */
-	public function getWarranty()
+	public function getWarranty(): ?int
 	{
 		return $this->warranty;
 	}

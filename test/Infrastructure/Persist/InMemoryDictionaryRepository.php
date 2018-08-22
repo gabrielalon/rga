@@ -22,21 +22,6 @@ class InMemoryDictionaryRepository implements DictionaryRepositoryInterface
 	/**
 	 * @param string $guid
 	 * @return Dictionary
-	 * @throws NotFound
-	 */
-	public function load(string $guid): Dictionary
-	{
-		if (isset($this->dictionaries[$guid]))
-		{
-			return clone $this->dictionaries[$guid];
-		}
-
-		throw new NotFound('Dictionary', $guid);
-	}
-
-	/**
-	 * @param string $guid
-	 * @return Dictionary
 	 */
 	public function find(string $guid): Dictionary
 	{

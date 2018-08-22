@@ -23,16 +23,16 @@ class Applicant
 	/**
 	 * @return int
 	 */
-	public function getId()
+	public function getId(): int
 	{
-		return $this->id;
+		return (int)$this->id;
 	}
 	
 	/**
 	 * @return string
 	 */
-	public function getType()
+	public function getType(): string
 	{
-		return $this->type;
+		return (string)$this->type;
 	}
 }

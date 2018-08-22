@@ -5,51 +5,30 @@ namespace RGA\Domain\ValueObject\Applicant;
 class Contact
 {
 	/** @var string */
-	private $firstName;
-	
-	/** @var string */
-	private $lastName;
-	
-	/** @var string */
 	private $email;
 	
 	/** @var string */
 	private $telephone;
 	
+	/** @var string */
+	private $preferredForm;
+	
 	/**
-	 * @param string $firstName
-	 * @param string $lastName
 	 * @param string $email
 	 * @param string $telephone
+	 * @param string $preferredForm
 	 */
-	public function __construct($firstName, $lastName, $email, $telephone)
+	public function __construct($email, $telephone, $preferredForm)
 	{
-		$this->firstName = $firstName;
-		$this->lastName = $lastName;
 		$this->email = $email;
 		$this->telephone = $telephone;
+		$this->preferredForm = $preferredForm;
 	}
 	
 	/**
 	 * @return string
 	 */
-	public function getFirstName()
-	{
-		return $this->firstName;
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getLastName()
-	{
-		return $this->lastName;
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getEmail()
+	public function getEmail(): string
 	{
 		return $this->email;
 	}
@@ -57,8 +36,16 @@ class Contact
 	/**
 	 * @return string
 	 */
-	public function getTelephone()
+	public function getTelephone(): string
 	{
 		return $this->telephone;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getPreferredForm(): string
+	{
+		return $this->preferredForm;
 	}
 }

@@ -2,6 +2,8 @@
 
 namespace RGA\Domain\Model\Transport;
 
+use RGA\Domain\ValueObject;
+
 class TransportAlias
 {
 	/** @var string */
@@ -10,16 +12,16 @@ class TransportAlias
 	/**
 	 * @return string
 	 */
-	public function getName()
+	public function getName(): string
 	{
 		return $this->name;
 	}
 	
 	/**
-	 * @param string $name
+	 * @param ValueObject\Transport\Alias $name
 	 */
-	public function setName(string $name)
+	public function setName(ValueObject\Transport\Alias $name): void
 	{
-		$this->name = $name;
+		$this->name = $name->getValue();
 	}
 }

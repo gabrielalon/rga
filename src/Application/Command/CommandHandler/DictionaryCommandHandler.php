@@ -2,18 +2,13 @@
 
 namespace RGA\Application\Command\CommandHandler;
 
-use RGA\Application\Command\Command\Dictionary\CreateDictionary;
-use RGA\Application\Command\Command\Dictionary\DeleteDictionary;
-use RGA\Application\Command\Command\Dictionary\UpdateDictionary;
-use RGA\Application\Command\CommandHandling\AbstractCommandHandler;
-use RGA\Domain\Model\Dictionary\DictionaryBuilder;
-use RGA\Domain\Model\Dictionary\DictionaryLangBuilder;
-use RGA\Domain\Validation\AssertionConcern;
-use RGA\Domain\ValueObject\Lang\Lang;
-use RGA\Infrastructure\Model\Translate\Lang\Collector;
+use RGA\Application\Command;
+use RGA\Domain\Model\Dictionary;
+use RGA\Domain\Validation;
 use RGA\Infrastructure\Persist\Dictionary\DictionaryRepositoryInterface;
 
-class DictionaryCommandHandler extends AbstractCommandHandler
+class DictionaryCommandHandler
+	extends Command\CommandHandling\AbstractCommandHandler
 {
 	/** @var DictionaryRepositoryInterface */
 	private $repository;
@@ -25,61 +20,51 @@ class DictionaryCommandHandler extends AbstractCommandHandler
 	{
 		$this->repository = $repository;
 	}
-
+	
 	/**
-	 * @param CreateDictionary $command
+	 * @param Command\Command\Dictionary\CreateDictionary $command
 	 */
-	public function handleCreateDictionary(CreateDictionary $command): void
+	public function handleCreateDictionary(Command\Command\Dictionary\CreateDictionary $command): void
 	{
-		$builder = DictionaryBuilder::create(
-			$command->getUuid(),
-			$command->getType(),
-			$command->isDelete()
-		);
-		$builder->setLang($command->getEntries());
-		$model = $builder->extract();
+		$builder = Dictionary\Builder\Dictionary::init($command->getUuid());
+		$builder->setType($command->getType());
+		$builder->setIsDeletable($command->isDelete());
+		$builder->setEntries($command->getEntries());
+		
+		$this->save($builder->build());
+	}
+	
+	/**
+	 * @param Command\Command\Dictionary\UpdateDictionary $command
+	 */
+	public function handleUpdateDictionary(Command\Command\Dictionary\UpdateDictionary $command): void
+	{
+		$dictionary = $this->repository->find($command->getUuid());
+		
+		$builder = new Dictionary\Builder\Dictionary($dictionary);
+		$builder->setIsDeletable($command->isDelete());
+		$builder->setEntries($command->getEntries());
 
+		$this->save($builder->build());
+	}
+	
+	/**
+	 * @param Dictionary\Dictionary $model
+	 */
+	private function save(Dictionary\Dictionary $model)
+	{
+		$this->validate(new Validation\Dictionary\DictionaryValidationRules(), $model);
+		
 		$this->repository->save($model);
 	}
-
+	
 	/**
-	 * @param UpdateDictionary $command
+	 * @param Command\Command\Dictionary\DeleteDictionary $command
 	 */
-	public function handleUpdateDictionary(UpdateDictionary $command): void
+	public function handleDeleteDictionary(Command\Command\Dictionary\DeleteDictionary $command): void
 	{
 		$dictionary = $this->repository->find($command->getUuid());
-		$collector = $this->getCollector($command->getEntries());
-		$dictionary->setIsDeletable($command->isDelete());
-		$dictionary->setLang($collector);
-
-		$this->repository->save($dictionary);
-	}
-
-	/**
-	 * @param Lang $lang
-	 * @return Collector
-	 */
-	private function getCollector(Lang $lang): Collector
-	{
-		$collector = new Collector();
-		foreach ($lang->getSupportedLanguageCodes() as $languageCode)
-		{
-			$builder = new DictionaryLangBuilder($languageCode);
-			$name = $lang->getForLang('entry', $languageCode);
-
-			$collector->add($builder->create($name));
-		}
-
-		return $collector;
-	}
-
-	/**
-	 * @param DeleteDictionary $command
-	 */
-	public function handleDeleteDictionary(DeleteDictionary $command): void
-	{
-		$dictionary = $this->repository->find($command->getUuid());
-		AssertionConcern::assertArgumentIsDeletableDictionary($dictionary, 'cannot_remove_irremovable_dictionary');
+		Validation\AssertionConcern::assertArgumentIsDeletableDictionary($dictionary, 'cannot_remove_irremovable_dictionary');
 
 		$this->repository->delete($command->getUuid());
 	}

@@ -2,13 +2,15 @@
 
 namespace RGA\Domain\Model\Transport;
 
-use RGA\Infrastructure\Model;
+use RGA\Domain\ValueObject;
+use RGA\Infrastructure\Model\Identify;
+use RGA\Infrastructure\Model\Translate;
 
 class Transport
-	implements Model\Identify\GuidInterface, Model\Translate\Lang\CollectionInterface
+	implements Identify\Guidable, Translate\Localable
 {
-	use Model\Identify\Guided;
-	use Model\Translate\Lang\Collected;
+	use Identify\Guided;
+	use Translate\Localed;
 	
 	/** @var boolean */
 	protected $isActive;
@@ -28,11 +30,11 @@ class Transport
 	}
 	
 	/**
-	 * @param bool $isActive
+	 * @param ValueObject\Transport\IsActive $isActive
 	 */
-	public function setIsActive(bool $isActive)
+	public function setIsActive(ValueObject\Transport\IsActive $isActive)
 	{
-		$this->isActive = $isActive;
+		$this->isActive = $isActive->getValue();
 	}
 	
 	/**
@@ -44,11 +46,11 @@ class Transport
 	}
 	
 	/**
-	 * @param string $courierSymbol
+	 * @param ValueObject\Transport\CourierSymbol $courierSymbol
 	 */
-	public function setCourierSymbol(string $courierSymbol)
+	public function setCourierSymbol(ValueObject\Transport\CourierSymbol $courierSymbol)
 	{
-		$this->courierSymbol = $courierSymbol;
+		$this->courierSymbol = $courierSymbol->getValue();
 	}
 	
 	/**

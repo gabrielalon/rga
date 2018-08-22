@@ -10,6 +10,7 @@ interface BehaviourRepositoryInterface
 	/**
 	 * @param string $id
 	 * @return Behaviour
+	 * @throws NotFound
 	 */
 	public function find($id): Behaviour;
 
@@ -17,11 +18,4 @@ interface BehaviourRepositoryInterface
 	 * @param Behaviour $model
 	 */
 	public function save(Behaviour $model);
-
-	/**
-	 * @param string $guid
-	 * @return Behaviour
-	 * @throws NotFound
-	 */
-	public function load(string $guid): Behaviour;
 }

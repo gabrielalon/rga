@@ -29,6 +29,9 @@ class RgaObjectBuilder
 
 	/** @var string */
 	private $telephone;
+	
+	/** @var string */
+	private $contactPreference;
 
 	/** @var string */
 	private $streetName;
@@ -188,6 +191,17 @@ class RgaObjectBuilder
 
 		return $this;
 	}
+	
+	/**
+	 * @param string $contactPreference
+	 * @return RgaObjectBuilder
+	 */
+	public function setContactPreference($contactPreference)
+	{
+		$this->contactPreference = $contactPreference;
+		
+		return $this;
+	}
 
 	/**
 	 * @param int $statusId
@@ -240,10 +254,9 @@ class RgaObjectBuilder
 	private function buildContact()
 	{
 		return new Applicant\Contact(
-			$this->firstName,
-			$this->lastName,
 			$this->email,
-			$this->telephone
+			$this->telephone,
+			$this->contactPreference
 		);
 	}
 

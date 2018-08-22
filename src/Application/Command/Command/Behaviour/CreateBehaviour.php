@@ -2,61 +2,66 @@
 
 namespace RGA\Application\Command\Command\Behaviour;
 
-use Ramsey\Uuid\UuidInterface;
-use RGA\Domain\ValueObject;
-use RGA\Domain\ValueObject\Behaviour\Behaviour;
-use RGA\Domain\ValueObject\Lang\Lang;
 use RGA\Infrastructure\Command\Command\CommandInterface;
 
-class CreateBehaviour implements CommandInterface
+class CreateBehaviour
+	implements CommandInterface
 {
-	/** @var UuidInterface */
+	/** @var string */
 	private $uuid;
+	
+	/** @var string */
+	private $type;
+	
+	/** @var boolean */
+	private $isActive;
 
-	/** @var Behaviour */
-	private $behaviour;
-
-	/** @var Lang */
-	private $name;
-
+	/** @var array */
+	private $names;
+	
 	/**
-	 * CreateBehaviour constructor.
-	 *
-	 * @param UuidInterface $uuid
-	 * @param Behaviour $behaviour
-	 * @param Lang $name
+	 * @param string $uuid
+	 * @param string $type
+	 * @param bool $isActive
+	 * @param array $names
 	 */
-	public function __construct(
-		UuidInterface $uuid,
-		ValueObject\Behaviour\Behaviour $behaviour,
-		ValueObject\Lang\Lang $name
-	) {
+	public function __construct($uuid, $type, $isActive, $names = [])
+	{
 		$this->uuid = $uuid;
-		$this->behaviour = $behaviour;
-		$this->name = $name;
+		$this->type = $type;
+		$this->isActive = $isActive;
+		$this->names = $names;
 	}
-
+	
 	/**
-	 * @return UuidInterface
+	 * @return string
 	 */
-	public function getUuid(): UuidInterface
+	public function getUuid(): string
 	{
 		return $this->uuid;
 	}
-
+	
 	/**
-	 * @return Behaviour
+	 * @return string
 	 */
-	public function getBehaviour(): Behaviour
+	public function getType(): string
 	{
-		return $this->behaviour;
+		return $this->type;
 	}
-
+	
 	/**
-	 * @return Lang
+	 * @return bool
 	 */
-	public function getName(): Lang
+	public function isActive(): bool
 	{
-		return $this->name;
+		return $this->isActive;
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function getNames(): array
+	{
+		return $this->names;
 	}
 }

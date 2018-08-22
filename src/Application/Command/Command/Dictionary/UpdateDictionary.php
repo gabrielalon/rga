@@ -3,42 +3,40 @@
 namespace RGA\Application\Command\Command\Dictionary;
 
 use Ramsey\Uuid\UuidInterface;
-use RGA\Domain\ValueObject\Lang\Lang;
+use RGA\Domain\ValueObject\Translate\DataLocale;
 use RGA\Infrastructure\Command\Command\CommandInterface;
 
 class UpdateDictionary implements CommandInterface
 {
-	/** @var UuidInterface */
+	/** @var string */
 	private $uuid;
-
+	
 	/** @var boolean */
 	private $delete;
-
-	/** @var Lang */
+	
+	/** @var array */
 	private $entries;
-
+	
 	/**
-	 * UpdateDictionary constructor.
-	 *
-	 * @param UuidInterface $uuid
+	 * @param string $uuid
 	 * @param bool $delete
-	 * @param Lang $entries
+	 * @param array $entries
 	 */
-	public function __construct(UuidInterface $uuid, bool $delete, Lang $entries)
+	public function __construct(string $uuid, bool $delete, $entries = [])
 	{
 		$this->uuid = $uuid;
 		$this->delete = $delete;
 		$this->entries = $entries;
 	}
-
+	
 	/**
-	 * @return UuidInterface
+	 * @return string
 	 */
-	public function getUuid(): UuidInterface
+	public function getUuid(): string
 	{
 		return $this->uuid;
 	}
-
+	
 	/**
 	 * @return bool
 	 */
@@ -46,11 +44,11 @@ class UpdateDictionary implements CommandInterface
 	{
 		return $this->delete;
 	}
-
+	
 	/**
-	 * @return Lang
+	 * @return array
 	 */
-	public function getEntries(): Lang
+	public function getEntries(): array
 	{
 		return $this->entries;
 	}

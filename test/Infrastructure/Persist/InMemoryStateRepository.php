@@ -20,21 +20,6 @@ class InMemoryStateRepository implements StateRepositoryInterface
 	}
 
 	/**
-	 * @param string $guid
-	 * @return State
-	 * @throws NotFound
-	 */
-	public function load(string $guid): State
-	{
-		if (isset($this->states[$guid]))
-		{
-			return clone $this->states[$guid];
-		}
-
-		throw new NotFound('State', $guid);
-	}
-
-	/**
 	 * @param string $id
 	 * @return State
 	 */

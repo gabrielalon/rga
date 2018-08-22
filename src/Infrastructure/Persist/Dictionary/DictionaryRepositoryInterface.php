@@ -20,13 +20,6 @@ interface DictionaryRepositoryInterface
 
 	/**
 	 * @param string $guid
-	 * @return Dictionary
-	 * @throws NotFound
-	 */
-	public function load(string $guid): Dictionary;
-
-	/**
-	 * @param string $guid
 	 */
 	public function delete(string $guid): void;
 }

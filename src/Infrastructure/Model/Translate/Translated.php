@@ -5,21 +5,21 @@ namespace RGA\Infrastructure\Model\Translate;
 trait Translated
 {
 	/** @var string */
-	protected $languageCode;
+	protected $locale;
 	
 	/**
 	 * @return string
 	 */
-	public function getLanguageCode(): string
+	public function getLocale(): string
 	{
-		return $this->languageCode;
+		return $this->locale;
 	}
 	
 	/**
-	 * @param string $languageCode
+	 * @param string $locale
 	 */
-	public function setLanguageCode(string $languageCode): void
+	public function setLocale(string $locale): void
 	{
-		$this->languageCode = $languageCode;
+		$this->locale = $locale;
 	}
 }

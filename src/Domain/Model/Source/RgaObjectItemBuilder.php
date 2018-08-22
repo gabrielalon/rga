@@ -4,7 +4,6 @@ namespace RGA\Domain\Model\Source;
 
 class RgaObjectItemBuilder
 {
-	
 	/** @var integer */
 	private $id;
 	

@@ -8,10 +8,10 @@ use RGA\Infrastructure\Persist\Exception\NotFound;
 interface TransportRepositoryInterface
 {
 	/**
-	 * @param string $id
+	 * @param string $guid
 	 * @return Transport
 	 */
-	public function find($id): Transport;
+	public function find($guid): Transport;
 
 	/**
 	 * @param Transport $model
@@ -20,8 +20,7 @@ interface TransportRepositoryInterface
 
 	/**
 	 * @param string $guid
-	 * @return Transport
 	 * @throws NotFound
 	 */
-	public function load(string $guid): Transport;
+	public function delete($guid): void;
 }

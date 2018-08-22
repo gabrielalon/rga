@@ -87,8 +87,8 @@ CREATE TABLE `rga` (
   `modified_at` datetime NOT NULL,
   
   `date_of_creation` datetime NOT NULL,
-  `object_item_id` int(10) unsigned NOT NULL,
-  `name` varchar(255) NULL DEFAULT '',
+  `source_object_item_id` int(10) unsigned NOT NULL,
+  `product_name` varchar(255) NULL DEFAULT '',
   `product_variant_id` int(10) unsigned NULL DEFAULT NULL,
 
   `rga_state_id` CHAR(36) NOT NULL COMMENT '(DC2Type:guid)',
@@ -105,6 +105,7 @@ CREATE TABLE `rga` (
   `applicant_reasons` text NULL,
   `applicant_expectations` text NULL,
   `applicant_descriptions_of_incident` text NULL,
+  applicant_contact_preference text NUll,
 
   `applicant_email` varchar(255) NOT NULL DEFAULT '',
   `applicant_telephone` varchar(32) NOT NULL DEFAULT '',

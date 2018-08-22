@@ -20,27 +20,17 @@ class InMemoryBehaviourRepository implements BehaviourRepositoryInterface
 	}
 
 	/**
-	 * @param string $guid
-	 * @return Behaviour
-	 * @throws NotFound
-	 */
-	public function load(string $guid): Behaviour
-	{
-		if (isset($this->behaviours[$guid]))
-		{
-			return clone $this->behaviours[$guid];
-		}
-
-		throw new NotFound('Behaviour', $guid);
-	}
-
-	/**
 	 * @param string $id
 	 * @return Behaviour
 	 */
 	public function find($id): Behaviour
 	{
-		// TODO: Implement find() method.
+		if (isset($this->behaviours[$id]))
+		{
+			return clone $this->behaviours[$id];
+		}
+		
+		throw new NotFound('Behaviour', $id);
 	}
 }
 

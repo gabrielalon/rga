@@ -1,6 +1,7 @@
 <?php
 
 use RGA\Application;
+use RGA\Infrastructure\Log\Service;
 use RGA\Infrastructure\Query\QueryHandling;
 use RGA\Infrastructure\Command\CommandHandling;
 use Psr\Container\ContainerInterface;
@@ -32,6 +33,7 @@ return [
 
 	Application\Source\Service\StandardService::class => Application\Source\Service\StandardService::class,
 	Source\Warranty\ConfigInterface::class            => Source\Warranty\Config::class,
+	Service\LoggerInterface::class					  => Application\Log\Service\Logger::class,
 
 	Application\Source\Warranty\Calculator::class => function (ContainerInterface $container) {
 		$calculator = new Application\Source\Warranty\Calculator(

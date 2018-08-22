@@ -2,17 +2,15 @@
 
 namespace RGA\Domain\Model\State;
 
-use Ramsey\Uuid\UuidInterface;
-use RGA\Domain\ValueObject\Lang\Lang;
-use RGA\Infrastructure\Model\Translate\Lang\Collected;
-use RGA\Infrastructure\Model\Translate\Lang\CollectionInterface;
+use RGA\Domain\ValueObject;
+use RGA\Infrastructure\Model\Identify;
+use RGA\Infrastructure\Model\Translate;
 
-class State implements CollectionInterface
+class State
+	implements Identify\Guidable, Translate\Localable
 {
-	use Collected;
-
-	/** @var UuidInterface */
-	private $uuid;
+	use Identify\Guided;
+	use Translate\Localed;
 
 	/** @var bool */
 	private $isEditable;
@@ -34,44 +32,7 @@ class State implements CollectionInterface
 
 	/** @var string */
 	private $colorCode;
-
-	/** @var Lang */
-	private $name;
-
-	/** @var Lang */
-	private $emailSubject;
-
-	/** @var Lang */
-	private $emailBody;
-
-	/**
-	 * State constructor.
-	 *
-	 * @param UuidInterface $uuid
-	 * @param bool $isSendingEmail
-	 * @param string $colorCode
-	 * @param Lang $name
-	 * @param Lang $emailSubject
-	 * @param Lang $emailBody
-	 */
-	public function __construct(UuidInterface $uuid, bool $isSendingEmail, string $colorCode, Lang $name, Lang $emailSubject, Lang $emailBody)
-	{
-		$this->uuid = $uuid;
-		$this->isSendingEmail = $isSendingEmail;
-		$this->colorCode = $colorCode;
-		$this->name = $name;
-		$this->emailSubject = $emailSubject;
-		$this->emailBody = $emailBody;
-	}
-
-	/**
-	 * @return UuidInterface
-	 */
-	public function getUuid(): UuidInterface
-	{
-		return $this->uuid;
-	}
-
+	
 	/**
 	 * @return bool
 	 */
@@ -79,15 +40,15 @@ class State implements CollectionInterface
 	{
 		return $this->isEditable;
 	}
-
+	
 	/**
-	 * @param bool $isEditable
+	 * @param ValueObject\State\IsEditable $isEditable
 	 */
-	public function setIsEditable(bool $isEditable): void
+	public function setIsEditable(ValueObject\State\IsEditable $isEditable): void
 	{
-		$this->isEditable = $isEditable;
+		$this->isEditable = $isEditable->getValue();
 	}
-
+	
 	/**
 	 * @return bool
 	 */
@@ -95,15 +56,15 @@ class State implements CollectionInterface
 	{
 		return $this->isDeletable;
 	}
-
+	
 	/**
-	 * @param bool $isDeletable
+	 * @param ValueObject\State\IsDeletable $isDeletable
 	 */
-	public function setIsDeletable(bool $isDeletable): void
+	public function setIsDeletable(ValueObject\State\IsDeletable $isDeletable): void
 	{
-		$this->isDeletable = $isDeletable;
+		$this->isDeletable = $isDeletable->getValue();
 	}
-
+	
 	/**
 	 * @return bool
 	 */
@@ -111,15 +72,15 @@ class State implements CollectionInterface
 	{
 		return $this->isRejectable;
 	}
-
+	
 	/**
-	 * @param bool $isRejectable
+	 * @param ValueObject\State\IsRejectable $isRejectable
 	 */
-	public function setIsRejectable(bool $isRejectable): void
+	public function setIsRejectable(ValueObject\State\IsRejectable $isRejectable): void
 	{
-		$this->isRejectable = $isRejectable;
+		$this->isRejectable = $isRejectable->getValue();
 	}
-
+	
 	/**
 	 * @return bool
 	 */
@@ -127,15 +88,15 @@ class State implements CollectionInterface
 	{
 		return $this->isFinishable;
 	}
-
+	
 	/**
-	 * @param bool $isFinishable
+	 * @param ValueObject\State\IsFinishable $isFinishable
 	 */
-	public function setIsFinishable(bool $isFinishable): void
+	public function setIsFinishable(ValueObject\State\IsFinishable $isFinishable): void
 	{
-		$this->isFinishable = $isFinishable;
+		$this->isFinishable = $isFinishable->getValue();
 	}
-
+	
 	/**
 	 * @return bool
 	 */
@@ -143,15 +104,15 @@ class State implements CollectionInterface
 	{
 		return $this->isCloseable;
 	}
-
+	
 	/**
-	 * @param bool $isCloseable
+	 * @param ValueObject\State\IsCloseable $isCloseable
 	 */
-	public function setIsCloseable(bool $isCloseable): void
+	public function setIsCloseable(ValueObject\State\IsCloseable $isCloseable): void
 	{
-		$this->isCloseable = $isCloseable;
+		$this->isCloseable = $isCloseable->getValue();
 	}
-
+	
 	/**
 	 * @return bool
 	 */
@@ -159,15 +120,15 @@ class State implements CollectionInterface
 	{
 		return $this->isSendingEmail;
 	}
-
+	
 	/**
-	 * @param bool $isSendingEmail
+	 * @param ValueObject\State\IsSendingEmail $isSendingEmail
 	 */
-	public function setIsSendingEmail(bool $isSendingEmail): void
+	public function setIsSendingEmail(ValueObject\State\IsSendingEmail $isSendingEmail): void
 	{
-		$this->isSendingEmail = $isSendingEmail;
+		$this->isSendingEmail = $isSendingEmail->getValue();
 	}
-
+	
 	/**
 	 * @return string
 	 */
@@ -175,61 +136,12 @@ class State implements CollectionInterface
 	{
 		return $this->colorCode;
 	}
-
+	
 	/**
-	 * @param string $colorCode
+	 * @param ValueObject\State\ColorCode $colorCode
 	 */
-	public function setColorCode(string $colorCode): void
+	public function setColorCode(ValueObject\State\ColorCode $colorCode): void
 	{
-		$this->colorCode = $colorCode;
+		$this->colorCode = $colorCode->getValue();
 	}
-
-	/**
-	 * @return Lang
-	 */
-	public function getName(): Lang
-	{
-		return $this->name;
-	}
-
-	/**
-	 * @param Lang $name
-	 */
-	public function setName(Lang $name): void
-	{
-		$this->name = $name;
-	}
-
-	/**
-	 * @return Lang
-	 */
-	public function getEmailSubject(): Lang
-	{
-		return $this->emailSubject;
-	}
-
-	/**
-	 * @param Lang $emailSubject
-	 */
-	public function setEmailSubject(Lang $emailSubject): void
-	{
-		$this->emailSubject = $emailSubject;
-	}
-
-	/**
-	 * @return Lang
-	 */
-	public function getEmailBody(): Lang
-	{
-		return $this->emailBody;
-	}
-
-	/**
-	 * @param Lang $emailBody
-	 */
-	public function setEmailBody(Lang $emailBody): void
-	{
-		$this->emailBody = $emailBody;
-	}
-
 }

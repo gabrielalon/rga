@@ -7,32 +7,42 @@ use RGA\Domain\ValueObject\Applicant;
 interface RgaObjectInterface
 {
 	/**
-	 * @return string
+	 * @return integer
 	 */
-	public function getId();
+	public function getId(): int;
 	
 	/**
 	 * @return string
 	 */
-	public function getType();
+	public function getType(): string;
 	
 	/**
 	 * @return Applicant\Applicant
 	 */
-	public function getApplicant();
+	public function getApplicant(): Applicant\Applicant;
 	
 	/**
 	 * @return Applicant\Address
 	 */
-	public function getAddress();
+	public function getAddress(): Applicant\Address;
 	
 	/**
 	 * @return Applicant\Contact
 	 */
-	public function getContact();
+	public function getContact(): Applicant\Contact;
+	
+	/**
+	 * @return bool
+	 */
+	public function hasCompletedState(): bool;
+	
+	/**
+	 * @return bool
+	 */
+	public function isPaid(): bool;
 	
 	/**
 	 * @return int
 	 */
-	public function getCreatedAt();
+	public function getCreatedAt(): int;
 }

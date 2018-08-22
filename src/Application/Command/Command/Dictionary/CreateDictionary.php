@@ -3,12 +3,12 @@
 namespace RGA\Application\Command\Command\Dictionary;
 
 use Ramsey\Uuid\UuidInterface;
-use RGA\Domain\ValueObject\Lang\Lang;
+use RGA\Domain\ValueObject\Translate\DataLocale;
 use RGA\Infrastructure\Command\Command\CommandInterface;
 
 class CreateDictionary implements CommandInterface
 {
-	/** @var UuidInterface */
+	/** @var string */
 	private $uuid;
 
 	/** @var boolean */
@@ -17,33 +17,31 @@ class CreateDictionary implements CommandInterface
 	/** @var string */
 	private $type;
 
-	/** @var Lang */
+	/** @var array */
 	private $entries;
-
+	
 	/**
-	 * CreateDictionary constructor.
-	 *
-	 * @param UuidInterface $uuid
-	 * @param $delete
-	 * @param $type
-	 * @param Lang $entries
+	 * @param string $uuid
+	 * @param bool $delete
+	 * @param string $type
+	 * @param array $entries
 	 */
-	public function __construct(UuidInterface $uuid, bool $delete, string $type, Lang $entries)
+	public function __construct(string $uuid, bool $delete, string $type, $entries = [])
 	{
 		$this->uuid = $uuid;
 		$this->delete = $delete;
 		$this->type = $type;
 		$this->entries = $entries;
 	}
-
+	
 	/**
-	 * @return UuidInterface
+	 * @return string
 	 */
-	public function getUuid(): UuidInterface
+	public function getUuid(): string
 	{
 		return $this->uuid;
 	}
-
+	
 	/**
 	 * @return bool
 	 */
@@ -51,7 +49,7 @@ class CreateDictionary implements CommandInterface
 	{
 		return $this->delete;
 	}
-
+	
 	/**
 	 * @return string
 	 */
@@ -59,11 +57,11 @@ class CreateDictionary implements CommandInterface
 	{
 		return $this->type;
 	}
-
+	
 	/**
-	 * @return Lang
+	 * @return array
 	 */
-	public function getEntries(): Lang
+	public function getEntries(): array
 	{
 		return $this->entries;
 	}

@@ -2,41 +2,24 @@
 
 namespace RGA\Infrastructure\Model\Identify;
 
-use function get_called_class;
-
 trait Guided
 {
 	/** @var string */
-	protected $id;
+	protected $uuid;
 
 	/**
 	 * @return string
 	 */
-	public function getId(): string
+	public function getUuid(): string
 	{
-		return $this->id;
-	}
-
-	/**
-	 * @param string $id
-	 */
-	public function setId($id): void
-	{
-		$this->id = $id;
+		return $this->uuid;
 	}
 
 	/**
 	 * @param string $uuid
-	 * @return GuidInterface
 	 */
-	public static function init($uuid): GuidInterface
+	public function setUuid($uuid): void
 	{
-		$class = get_called_class();
-
-		/** @var GuidInterface $model */
-		$model = new $class();
-		$model->setId($uuid);
-
-		return $model;
+		$this->uuid = $uuid;
 	}
 }

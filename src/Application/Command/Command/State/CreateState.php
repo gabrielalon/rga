@@ -2,95 +2,115 @@
 
 namespace RGA\Application\Command\Command\State;
 
-use Ramsey\Uuid\UuidInterface;
-use RGA\Domain\ValueObject\Lang\Lang;
 use RGA\Infrastructure\Command\Command\CommandInterface;
 
-class CreateState implements CommandInterface
+class CreateState
+	implements CommandInterface
 {
-	/** @var UuidInterface */
+	/** @var string */
 	private $uuid;
-
-	/** @var Lang */
+	
+	/** @var array */
 	private $names;
-
-	/** @var Lang */
+	
+	/** @var array */
 	private $emailSubjects;
-
-	/** @var Lang */
+	
+	/** @var array */
 	private $emailBodies;
-
+	
 	/** @var boolean */
 	private $isEditable;
-
+	
 	/** @var boolean */
 	private $isDeletable;
-
+	
 	/** @var boolean */
 	private $isRejectable;
-
+	
 	/** @var boolean */
 	private $isFinishable;
-
+	
 	/** @var boolean */
 	private $isCloseable;
-
+	
 	/** @var boolean */
 	private $isSendingEmail;
-
+	
 	/** @var string */
 	private $colorCode;
-
+	
 	/**
-	 * CreateState constructor.
-	 *
-	 * @param UuidInterface $uuid
-	 * @param Lang $names
-	 * @param Lang $emailSubjects
-	 * @param Lang $emailBodies
+	 * @param string $uuid
+	 * @param array $names
+	 * @param array $emailSubjects
+	 * @param array $emailBodies
+	 * @param bool $isEditable
+	 * @param bool $isDeletable
+	 * @param bool $isRejectable
+	 * @param bool $isFinishable
+	 * @param bool $isCloseable
+	 * @param bool $isSendingEmail
 	 * @param string $colorCode
 	 */
-	public function __construct(UuidInterface $uuid, Lang $names, Lang $emailSubjects, Lang $emailBodies, string $colorCode)
-	{
+	public function __construct(
+		string $uuid,
+		array $names,
+		array $emailSubjects,
+		array $emailBodies,
+		bool $isEditable,
+		bool $isDeletable,
+		bool $isRejectable,
+		bool $isFinishable,
+		bool $isCloseable,
+		bool $isSendingEmail,
+		string $colorCode
+	) {
 		$this->uuid = $uuid;
 		$this->names = $names;
 		$this->emailSubjects = $emailSubjects;
 		$this->emailBodies = $emailBodies;
+		$this->isEditable = $isEditable;
+		$this->isDeletable = $isDeletable;
+		$this->isRejectable = $isRejectable;
+		$this->isFinishable = $isFinishable;
+		$this->isCloseable = $isCloseable;
+		$this->isSendingEmail = $isSendingEmail;
 		$this->colorCode = $colorCode;
 	}
-
+	
 	/**
-	 * @return UuidInterface
+	 * @return string
 	 */
-	public function getUuid(): UuidInterface
+	public function getUuid(): string
 	{
 		return $this->uuid;
 	}
-
+	
 	/**
-	 * @return Lang
+	 * @return array
 	 */
-	public function getNames(): Lang
+	public function getNames(): array
 	{
 		return $this->names;
 	}
-
+	
 	/**
-	 * @return Lang
+	 * @return array
 	 */
-	public function getEmailSubjects(): Lang
+	public function getEmailSubjects(): array
 	{
 		return $this->emailSubjects;
 	}
-
+	
 	/**
-	 * @return Lang
+	 * @return array
 	 */
-	public function getEmailBodies(): Lang
+	public function getEmailBodies(): array
 	{
 		return $this->emailBodies;
 	}
-
+	
 	/**
 	 * @return bool
 	 */
@@ -98,15 +118,7 @@ class CreateState implements CommandInterface
 	{
 		return $this->isEditable;
 	}
-
-	/**
-	 * @param bool $isEditable
-	 */
-	public function setIsEditable($isEditable): void
-	{
-		$this->isEditable = $isEditable;
-	}
-
+	
 	/**
 	 * @return bool
 	 */
@@ -114,15 +126,7 @@ class CreateState implements CommandInterface
 	{
 		return $this->isDeletable;
 	}
-
-	/**
-	 * @param bool $isDeletable
-	 */
-	public function setIsDeletable($isDeletable): void
-	{
-		$this->isDeletable = $isDeletable;
-	}
-
+	
 	/**
 	 * @return bool
 	 */
@@ -130,15 +134,7 @@ class CreateState implements CommandInterface
 	{
 		return $this->isRejectable;
 	}
-
-	/**
-	 * @param bool $isRejectable
-	 */
-	public function setIsRejectable($isRejectable): void
-	{
-		$this->isRejectable = $isRejectable;
-	}
-
+	
 	/**
 	 * @return bool
 	 */
@@ -146,15 +142,7 @@ class CreateState implements CommandInterface
 	{
 		return $this->isFinishable;
 	}
-
-	/**
-	 * @param bool $isFinishable
-	 */
-	public function setIsFinishable($isFinishable): void
-	{
-		$this->isFinishable = $isFinishable;
-	}
-
+	
 	/**
 	 * @return bool
 	 */
@@ -162,15 +150,7 @@ class CreateState implements CommandInterface
 	{
 		return $this->isCloseable;
 	}
-
-	/**
-	 * @param bool $isCloseable
-	 */
-	public function setIsCloseable($isCloseable): void
-	{
-		$this->isCloseable = $isCloseable;
-	}
-
+	
 	/**
 	 * @return bool
 	 */
@@ -178,15 +158,7 @@ class CreateState implements CommandInterface
 	{
 		return $this->isSendingEmail;
 	}
-
-	/**
-	 * @param bool $isSendingEmail
-	 */
-	public function setIsSendingEmail(bool $isSendingEmail): void
-	{
-		$this->isSendingEmail = $isSendingEmail;
-	}
-
+	
 	/**
 	 * @return string
 	 */

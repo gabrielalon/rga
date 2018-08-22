@@ -2,55 +2,81 @@
 
 namespace RGA\Application\Command\CommandHandler;
 
-use RGA\Application\Command\Command\State\CreateState;
-use RGA\Application\Command\Command\State\DeleteState;
-use RGA\Application\Command\CommandHandling\AbstractCommandHandler;
-use RGA\Domain\Model\State\State;
-use RGA\Domain\Validation\AssertionConcern;
+use RGA\Application\Command;
+use RGA\Domain\Model\State;
+use RGA\Domain\Validation;
 use RGA\Infrastructure\Persist\State\StateRepositoryInterface;
 
 class StateCommandHandler
-	extends AbstractCommandHandler
+	extends Command\CommandHandling\AbstractCommandHandler
 {
 	/** @var StateRepositoryInterface */
-	private $stateRepository;
-
+	private $repository;
+	
 	/**
 	 * @param StateRepositoryInterface $stateRepository
 	 */
 	public function __construct(StateRepositoryInterface $stateRepository)
 	{
-		$this->stateRepository = $stateRepository;
+		$this->repository = $stateRepository;
 	}
-
+	
 	/**
-	 * @param CreateState $command
+	 * @param Command\Command\State\CreateState $command
 	 */
-	public function handleCreateState(CreateState $command): void
+	public function handleCreateState(Command\Command\State\CreateState $command): void
 	{
-		$state = new State(
-			$command->getUuid(),
-			$command->isSendingEmail(),
-			$command->getColorCode(),
-			$command->getNames(),
-			$command->getEmailSubjects(),
-			$command->getEmailBodies()
-		);
-
-		$state->setIsEditable(true);
-		$state->setIsDeletable(true);
-		$state->setIsRejectable(false);
-		$state->setIsCloseable(false);
-		$state->setIsFinishable(false);
-
-		$this->stateRepository->save($state);
+		$builder = State\Builder\State::init($command->getUuid());
+		$builder->setIsEditable($command->isEditable());
+		$builder->setIsDeletable($command->isDeletable());
+		$builder->setIsRejectable($command->isRejectable());
+		$builder->setIsCloseable($command->isCloseable());
+		$builder->setIsFinishable($command->isFinishable());
+		$builder->setIsSendingEmail($command->isSendingEmail());
+		$builder->setColorCode($command->getColorCode());
+		$builder->setLocale($command->getNames(), $command->getEmailSubjects(), $command->getEmailBodies());
+		
+		$this->save($builder->build());
 	}
-
-	public function handleDeleteState(DeleteState $command): void
+	
+	/**
+	 * @param Command\Command\State\UpdateState $command
+	 */
+	public function handleUpdateState(Command\Command\State\UpdateState $command): void
 	{
-		$state = $this->stateRepository->find($command->getId());
-		AssertionConcern::assertArgumentIsDeletableState($state, 'cannot_remove_irremovable_state');
-
-		$this->stateRepository->delete($command->getId());
+		$entity = $this->repository->find($command->getUuid());
+		
+		$builder = new State\Builder\State($entity);
+		$builder->setIsEditable($command->isEditable());
+		$builder->setIsDeletable($command->isDeletable());
+		$builder->setIsRejectable($command->isRejectable());
+		$builder->setIsCloseable($command->isCloseable());
+		$builder->setIsFinishable($command->isFinishable());
+		$builder->setIsSendingEmail($command->isSendingEmail());
+		$builder->setColorCode($command->getColorCode());
+		$builder->setLocale($command->getNames(), $command->getEmailSubjects(), $command->getEmailBodies());
+		
+		$this->save($builder->build());
+	}
+	
+	/**
+	 * @param State\State $model
+	 */
+	private function save(State\State $model): void
+	{
+		$this->validate(new Validation\State\StateValidationRules(), $model);
+		
+		$this->repository->save($model);
+	}
+	
+	/**
+	 * @param Command\Command\State\DeleteState $command
+	 */
+	public function handleDeleteState(Command\Command\State\DeleteState $command): void
+	{
+		$state = $this->repository->find($command->getId());
+		Validation\AssertionConcern::assertArgumentIsDeletableState($state, 'cannot_remove_irremovable_state');
+		
+		$this->repository->delete($command->getId());
 	}
 }

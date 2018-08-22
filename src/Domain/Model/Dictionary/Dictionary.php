@@ -2,16 +2,15 @@
 
 namespace RGA\Domain\Model\Dictionary;
 
-use Ramsey\Uuid\UuidInterface;
-use RGA\Infrastructure\Model\Translate\Lang\Collected;
-use RGA\Infrastructure\Model\Translate\Lang\CollectionInterface;
+use RGA\Domain\ValueObject;
+use RGA\Infrastructure\Model\Identify;
+use RGA\Infrastructure\Model\Translate;
 
-class Dictionary implements CollectionInterface
+class Dictionary
+	implements Identify\Guidable, Translate\Localable
 {
-	use Collected;
-
-	/** @var UuidInterface */
-	private $uuid;
+	use Identify\Guided;
+	use Translate\Localed;
 
 	/**
 	 * @var string
@@ -22,32 +21,21 @@ class Dictionary implements CollectionInterface
 	 * @var boolean
 	 */
 	private $isDeletable;
-
+	
 	/**
-	 * @var DictionaryLang[]
+	 * @return string
 	 */
-	private $dictionaryLangs;
-
-	/**
-	 * Dictionary constructor.
-	 *
-	 * @param UuidInterface $uuid
-	 * @param string $type
-	 * @param bool $isDeletable
-	 */
-	public function __construct(UuidInterface $uuid, string $type, bool $isDeletable)
+	public function getType(): string
 	{
-		$this->uuid = $uuid;
-		$this->type = $type;
-		$this->isDeletable = $isDeletable;
+		return $this->type;
 	}
-
+	
 	/**
-	 * @return UuidInterface
+	 * @param ValueObject\Dictionary\Type $type
 	 */
-	public function getUuid(): UuidInterface
+	public function setType(ValueObject\Dictionary\Type $type): void
 	{
-		return $this->uuid;
+		$this->type = $type->getValue();
 	}
 
 	/**
@@ -59,11 +47,10 @@ class Dictionary implements CollectionInterface
 	}
 
 	/**
-	 * @param bool $isDeletable
+	 * @param ValueObject\Dictionary\IsDeletable $isDeletable
 	 */
-	public function setIsDeletable(bool $isDeletable): void
+	public function setIsDeletable(ValueObject\Dictionary\IsDeletable $isDeletable): void
 	{
-		$this->isDeletable = $isDeletable;
+		$this->isDeletable = $isDeletable->getValue();
 	}
-
 }

@@ -2,30 +2,27 @@
 
 namespace RGA\Application\Command\Command\Dictionary;
 
-use Ramsey\Uuid\UuidInterface;
 use RGA\Infrastructure\Command\Command\CommandInterface;
 
-class DeleteDictionary implements CommandInterface
+class DeleteDictionary
+	implements CommandInterface
 {
-	/** @var UuidInterface */
+	/** @var string */
 	private $uuid;
-
+	
 	/**
-	 * DeleteDictionary constructor.
-	 *
-	 * @param UuidInterface $uuid
+	 * @param string $uuid
 	 */
-	public function __construct(UuidInterface $uuid)
+	public function __construct(string $uuid)
 	{
 		$this->uuid = $uuid;
 	}
-
+	
 	/**
-	 * @return UuidInterface
+	 * @return string
 	 */
-	public function getUuid(): UuidInterface
+	public function getUuid(): string
 	{
 		return $this->uuid;
 	}
-
 }

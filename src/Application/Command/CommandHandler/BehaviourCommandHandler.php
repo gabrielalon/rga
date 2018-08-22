@@ -26,14 +26,12 @@ class BehaviourCommandHandler
 	 */
 	public function handleCreateBehaviour(Command\Command\Behaviour\CreateBehaviour $command): void
 	{
-		$builder = Behaviour\BehaviourBuilder::create($command->getUuid());
-		$builder->setBehaviour($command->getBehaviour());
-		$builder->setLang($command->getName());
-		$model = $builder->extract();
-
-		$this->validate(new Validation\Behaviour\BehaviourValidationRules(), $model);
-
-		$this->repository->save($model);
+		$builder = Behaviour\Builder\Behaviour::init($command->getUuid());
+		$builder->setType($command->getType());
+		$builder->setIsActive($command->isActive());
+		$builder->setNames($command->getNames());
+		
+		$this->save($builder->build());
 	}
 
 	/**
@@ -42,14 +40,22 @@ class BehaviourCommandHandler
 	public function handleUpdateBehaviour(Command\Command\Behaviour\UpdateBehaviour $command): void
 	{
 		$model = $this->repository->find($command->getUuid());
-
-		$builder = new Behaviour\BehaviourBuilder($model);
-		$builder->setBehaviour($command->getBehaviour());
-		$builder->setLang($command->getName());
-		$model = $builder->extract();
-
+		
+		$builder = new Behaviour\Builder\Behaviour($model);
+		$builder->setType($command->getType());
+		$builder->setIsActive($command->isActive());
+		$builder->setNames($command->getNames());
+		
+		$this->save($builder->build());
+	}
+	
+	/**
+	 * @param Behaviour\Behaviour $model
+	 */
+	private function save(Behaviour\Behaviour $model)
+	{
 		$this->validate(new Validation\Behaviour\BehaviourValidationRules(), $model);
-
+		
 		$this->repository->save($model);
 	}
 }

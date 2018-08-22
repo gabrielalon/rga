@@ -19,13 +19,6 @@ interface StateRepositoryInterface
 	public function save(State $model);
 
 	/**
-	 * @param string $guid
-	 * @return State
-	 * @throws NotFound
-	 */
-	public function load(string $guid): State;
-
-	/**
 	 * @param string $id
 	 */
 	public function delete($id);

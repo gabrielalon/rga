@@ -23,7 +23,7 @@ class Bank
 	/**
 	 * @return string
 	 */
-	public function getName()
+	public function getName(): string
 	{
 		return $this->name;
 	}
@@ -31,7 +31,7 @@ class Bank
 	/**
 	 * @return string
 	 */
-	public function getAccountNumber()
+	public function getAccountNumber(): string
 	{
 		return $this->accountNumber;
 	}

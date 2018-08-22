@@ -5,31 +5,42 @@ namespace RGA\Infrastructure\Source\RgaObject;
 interface RgaObjectItemInterface
 {
 	/**
-	 * @return int
+	 * @return integer
 	 */
-	public function getId();
+	public function getId(): int;
 	
 	/**
-	 * @return int
+	 * @return integer
 	 */
-	public function getVariantId();
+	public function getVariantId(): int;
+	
 	/**
-	 * @return bool
+	 * @return boolean
 	 */
-	public function isTransport();
+	public function isTransport(): bool;
 	
 	/**
 	 * @return string
 	 */
-	public function getName();
+	public function getName(): string;
 	
 	/**
-	 * @return int
+	 * @return integer
 	 */
-	public function getObjectId();
+	public function getObjectId(): int;
 	
 	/**
-	 * @return int
+	 * @return integer|null
 	 */
-	public function getWarranty();
+	public function getFinalDateOfComplaint(): ?int;
+	
+	/**
+	 * @return integer|null
+	 */
+	public function getFinalDateOfReturn(): ?int;
+	
+	/**
+	 * @return integer|null
+	 */
+	public function getWarranty(): ?int;
 }
