@@ -1,6 +1,8 @@
 {
   "name": "rga/rga",
-  "keywords": ["rga"],
+  "keywords": [
+    "rga"
+  ],
   "license": "MIT",
   "authors": [
     {
@@ -19,7 +21,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "RGA\\Test\\": "test/"
+      "RGA\\Test\\": "tests/"
     }
   },
   "require": {

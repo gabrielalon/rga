@@ -17,17 +17,12 @@ interface RgaObjectItemInterface
 	/**
 	 * @return boolean
 	 */
-	public function isTransport(): bool;
+	public function isRgaAble(): bool;
 	
 	/**
 	 * @return string
 	 */
 	public function getName(): string;
-	
-	/**
-	 * @return integer
-	 */
-	public function getObjectId(): int;
 	
 	/**
 	 * @return integer|null

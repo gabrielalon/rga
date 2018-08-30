@@ -13,43 +13,49 @@ class RgaObjectItem
 	/** @var integer */
 	private $variantId;
 	
-	/** @var integer */
-	private $objectId;
-	
 	/** @var string */
 	private $name;
 	
-	/** @var string */
-	private $type;
+	/** @var boolean */
+	private $isRgaAble;
 	
-	/** @var integer */
+	/** @var integer|null */
 	private $finalDateOfComplaint;
 	
-	/** @var integer */
+	/** @var integer|null */
 	private $finalDateOfReturn;
 	
-	/** @var integer */
+	/** @var integer|null */
 	private $warranty;
 	
 	/**
 	 * @param int $id
 	 * @param int $variantId
 	 * @param string $name
-	 * @param string $type
-	 * @param int $objectId
-	 * @param int $warranty
+	 * @param boolean $isRgaAble
+	 * @param int|null $finalDateOfComplaint
+	 * @param int|null $finalDateOfReturn
+	 * @param int|null $warranty
 	 */
-	public function __construct($id, $variantId, $name, $type, $objectId, $finalDateOfComplaint = null, $finalDateOfReturn = null, $warranty = null)
+	public function __construct(
+		$id,
+		$variantId,
+		$name,
+		$isRgaAble = true,
+		$finalDateOfComplaint = null,
+		$finalDateOfReturn = null,
+		$warranty = null
+	)
 	{
 		$this->id = $id;
 		$this->variantId = $variantId;
 		$this->name = $name;
-		$this->type = $type;
-		$this->objectId = $objectId;
+		$this->isRgaAble = $isRgaAble;
 		$this->finalDateOfComplaint = $finalDateOfComplaint;
 		$this->finalDateOfReturn = $finalDateOfReturn;
 		$this->warranty = $warranty;
 	}
+	
 	
 	/**
 	 * @return string
@@ -78,17 +84,9 @@ class RgaObjectItem
 	/**
 	 * @return boolean
 	 */
-	public function isTransport(): bool
+	public function isRgaAble(): bool
 	{
-		return $this->type === 'transport';
-	}
-	
-	/**
-	 * @return integer
-	 */
-	public function getObjectId(): int
-	{
-		return $this->objectId;
+		return $this->isRgaAble;
 	}
 	
 	/**

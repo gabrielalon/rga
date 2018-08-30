@@ -2,7 +2,7 @@
 
 namespace RGA\Domain\Model\Source;
 
-use RGA\Domain\ValueObject\Applicant;
+use RGA\Domain\Model\Rga\Rga\Applicant;
 
 class RgaObjectBuilder
 {
@@ -71,7 +71,14 @@ class RgaObjectBuilder
 	 * @param int $objectCreatedAt
 	 * @param bool $objectHasCompletedState
 	 */
-	public function __construct($objectId, $objectType, Applicant\Applicant $applicant, $objectIsPaid, $objectCreatedAt, $objectHasCompletedState)
+	public function __construct(
+		$objectId,
+		$objectType,
+		Applicant\Applicant $applicant,
+		$objectIsPaid,
+		$objectCreatedAt,
+		$objectHasCompletedState
+	)
 	{
 		$this->objectId = $objectId;
 		$this->objectType = $objectType;
@@ -86,7 +93,7 @@ class RgaObjectBuilder
 	 * @param string $firstName
 	 * @return RgaObjectBuilder
 	 */
-	public function setFirstName($firstName)
+	public function setFirstName($firstName): RgaObjectBuilder
 	{
 		$this->firstName = $firstName;
 
@@ -97,7 +104,7 @@ class RgaObjectBuilder
 	 * @param string $lastName
 	 * @return RgaObjectBuilder
 	 */
-	public function setLastName($lastName)
+	public function setLastName($lastName): RgaObjectBuilder
 	{
 		$this->lastName = $lastName;
 
@@ -108,7 +115,7 @@ class RgaObjectBuilder
 	 * @param string $email
 	 * @return RgaObjectBuilder
 	 */
-	public function setEmail($email)
+	public function setEmail($email): RgaObjectBuilder
 	{
 		$this->email = $email;
 
@@ -119,7 +126,7 @@ class RgaObjectBuilder
 	 * @param string $telephone
 	 * @return RgaObjectBuilder
 	 */
-	public function setTelephone($telephone)
+	public function setTelephone($telephone): RgaObjectBuilder
 	{
 		$this->telephone = $telephone;
 
@@ -130,7 +137,7 @@ class RgaObjectBuilder
 	 * @param string $streetName
 	 * @return RgaObjectBuilder
 	 */
-	public function setStreetName($streetName)
+	public function setStreetName($streetName): RgaObjectBuilder
 	{
 		$this->streetName = $streetName;
 
@@ -141,7 +148,7 @@ class RgaObjectBuilder
 	 * @param string $houseNo
 	 * @return RgaObjectBuilder
 	 */
-	public function setHouseNo($houseNo)
+	public function setHouseNo($houseNo): RgaObjectBuilder
 	{
 		$this->houseNo = $houseNo;
 
@@ -152,7 +159,7 @@ class RgaObjectBuilder
 	 * @param string $apartmentNo
 	 * @return RgaObjectBuilder
 	 */
-	public function setApartmentNo($apartmentNo)
+	public function setApartmentNo($apartmentNo): RgaObjectBuilder
 	{
 		$this->apartmentNo = $apartmentNo;
 
@@ -163,7 +170,7 @@ class RgaObjectBuilder
 	 * @param string $postCode
 	 * @return RgaObjectBuilder
 	 */
-	public function setPostCode($postCode)
+	public function setPostCode($postCode): RgaObjectBuilder
 	{
 		$this->postCode = $postCode;
 
@@ -174,7 +181,7 @@ class RgaObjectBuilder
 	 * @param string $city
 	 * @return RgaObjectBuilder
 	 */
-	public function setCity($city)
+	public function setCity($city): RgaObjectBuilder
 	{
 		$this->city = $city;
 
@@ -185,7 +192,7 @@ class RgaObjectBuilder
 	 * @param string $countryCode
 	 * @return RgaObjectBuilder
 	 */
-	public function setCountryCode($countryCode)
+	public function setCountryCode($countryCode): RgaObjectBuilder
 	{
 		$this->countryCode = $countryCode;
 
@@ -196,7 +203,7 @@ class RgaObjectBuilder
 	 * @param string $contactPreference
 	 * @return RgaObjectBuilder
 	 */
-	public function setContactPreference($contactPreference)
+	public function setContactPreference($contactPreference): RgaObjectBuilder
 	{
 		$this->contactPreference = $contactPreference;
 		
@@ -204,9 +211,9 @@ class RgaObjectBuilder
 	}
 
 	/**
-	 * @param int $statusId
+	 * @param integer $statusId
 	 */
-	public function setStatusId($statusId)
+	public function setStatusId($statusId): void
 	{
 		$this->statusId = $statusId;
 	}
@@ -214,7 +221,7 @@ class RgaObjectBuilder
 	/**
 	 * @return RgaObject
 	 */
-	public function build()
+	public function build(): RgaObject
 	{
 		$address = $this->buildAddress();
 		$contact = $this->buildContact();
@@ -235,7 +242,7 @@ class RgaObjectBuilder
 	/**
 	 * @return Applicant\Address
 	 */
-	private function buildAddress()
+	private function buildAddress(): Applicant\Address
 	{
 		return new Applicant\Address(
 			$this->firstName . ' ' . $this->lastName,
@@ -251,7 +258,7 @@ class RgaObjectBuilder
 	/**
 	 * @return Applicant\Contact
 	 */
-	private function buildContact()
+	private function buildContact(): Applicant\Contact
 	{
 		return new Applicant\Contact(
 			$this->email,

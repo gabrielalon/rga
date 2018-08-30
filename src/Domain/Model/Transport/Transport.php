@@ -2,70 +2,127 @@
 
 namespace RGA\Domain\Model\Transport;
 
-use RGA\Domain\ValueObject;
-use RGA\Infrastructure\Model\Identify;
-use RGA\Infrastructure\Model\Translate;
+use RGA\Domain\Model\Transport\Transport as ValueObject;
+use RGA\Domain\Model\Transport\Event;
+use RGA\Infrastructure\SegregationSourcing\Aggregate;
 
 class Transport
-	implements Identify\Guidable, Translate\Localable
+	extends Aggregate\AggregateRoot
 {
-	use Identify\Guided;
-	use Translate\Localed;
+	/** @var ValueObject\Uuid */
+	private $uuid;
 	
-	/** @var boolean */
-	protected $isActive;
+	/** @var ValueObject\Activation */
+	private $activation;
 	
-	/** @var string */
-	protected $courierSymbol;
+	/** @var ValueObject\ShipmentId */
+	private $shipmentId;
 	
-	/** @var TransportAliasCollector */
-	protected $aliases;
+	/** @var ValueObject\Domains */
+	private $domains;
+	
+	/** @var ValueObject\Names */
+	private $names;
 	
 	/**
-	 * @return bool
+	 * @param Transport\Uuid $uuid
 	 */
-	public function isActive(): bool
+	public function setUuid(Transport\Uuid $uuid): void
 	{
-		return $this->isActive;
+		$this->uuid = $uuid;
 	}
 	
 	/**
-	 * @param ValueObject\Transport\IsActive $isActive
+	 * @param Transport\Activation $activation
 	 */
-	public function setIsActive(ValueObject\Transport\IsActive $isActive)
+	public function setActivation(Transport\Activation $activation): void
 	{
-		$this->isActive = $isActive->getValue();
+		$this->activation = $activation;
+	}
+	
+	/**
+	 * @param Transport\ShipmentId $shipmentId
+	 */
+	public function setShipmentId(Transport\ShipmentId $shipmentId): void
+	{
+		$this->shipmentId = $shipmentId;
+	}
+	
+	/**
+	 * @param Transport\Domains $domains
+	 */
+	public function setDomains(Transport\Domains $domains): void
+	{
+		$this->domains = $domains;
+	}
+	
+	/**
+	 * @param Transport\Names $names
+	 */
+	public function setNames(Transport\Names $names): void
+	{
+		$this->names = $names;
 	}
 	
 	/**
 	 * @return string
 	 */
-	public function getCourierSymbol(): string
+	protected function aggregateId(): string
 	{
-		return $this->courierSymbol;
+		return $this->uuid->toString();
 	}
 	
 	/**
-	 * @param ValueObject\Transport\CourierSymbol $courierSymbol
+	 * @param Transport\Uuid $uuid
+	 * @param Transport\Activation $activation
+	 * @param Transport\ShipmentId $shipmentId
+	 * @param Transport\Domains $domains
+	 * @param Transport\Names $names
+	 * @return Transport
 	 */
-	public function setCourierSymbol(ValueObject\Transport\CourierSymbol $courierSymbol)
+	public static function createNewTransport(
+		ValueObject\Uuid $uuid,
+		ValueObject\Activation $activation,
+		ValueObject\ShipmentId $shipmentId,
+		ValueObject\Domains $domains,
+		ValueObject\Names $names
+	): Transport
 	{
-		$this->courierSymbol = $courierSymbol->getValue();
+		$transport = new Transport();
+		
+		$transport->recordThat(Event\NewTransportCreated::occur($uuid->toString(), [
+			'activation'  => $activation->toString(),
+			'shipment_id' => $shipmentId->toString(),
+			'domains'     => $domains->toString(),
+			'names'       => $names->toString()
+		]));
+		
+		return $transport;
 	}
 	
 	/**
-	 * @return TransportAliasCollector
+	 * @param Transport\Activation $activation
+	 * @param Transport\ShipmentId $shipmentId
+	 * @param Transport\Domains $domains
+	 * @param Transport\Names $names
 	 */
-	public function getAliases(): TransportAliasCollector
+	public function changeExistingTransport(
+		ValueObject\Activation $activation,
+		ValueObject\ShipmentId $shipmentId,
+		ValueObject\Domains $domains,
+		ValueObject\Names $names
+	): void
 	{
-		return $this->aliases;
+		$this->recordThat(Event\ExistingTransportChanged::occur($this->aggregateId(), [
+			'activation'  => $activation->toString(),
+			'shipment_id' => $shipmentId->toString(),
+			'domains'     => $domains->toString(),
+			'names'       => $names->toString()
+		]));
 	}
 	
-	/**
-	 * @param TransportAliasCollector $aliases
-	 */
-	public function setAliases(TransportAliasCollector $aliases)
+	public function removeExistingTransport(): void
 	{
-		$this->aliases = $aliases;
+		$this->recordThat(Event\ExistingTransportRemoved::occur($this->aggregateId(), []));
 	}
 }

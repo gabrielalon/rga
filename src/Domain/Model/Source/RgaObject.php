@@ -2,7 +2,7 @@
 
 namespace RGA\Domain\Model\Source;
 
-use RGA\Domain\ValueObject\Applicant;
+use RGA\Domain\Model\Rga\Rga\Applicant;
 use RGA\Infrastructure\Source\RgaObject\RgaObjectInterface;
 
 class RgaObject

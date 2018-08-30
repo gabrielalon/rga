@@ -2,51 +2,103 @@
 
 namespace RGA\Domain\Model\Behaviour;
 
-use RGA\Domain\ValueObject;
-use RGA\Infrastructure\Model\Identify;
-use RGA\Infrastructure\Model\Translate;
+use RGA\Domain\Model\Behaviour\Behaviour as ValueObject;
+use RGA\Domain\Model\Behaviour\Event\ExistingBehaviourChanged;
+use RGA\Domain\Model\Behaviour\Event\NewBehaviourCreated;
+use RGA\Infrastructure\SegregationSourcing\Aggregate;
 
-class Behaviour
-	implements Identify\Guidable, Translate\Localable
+final class Behaviour
+	extends Aggregate\AggregateRoot
 {
-	use Identify\Guided;
-	use Translate\Localed;
-
-	/** @var string */
+	/** @var ValueObject\Uuid */
+	private $uuid;
+	
+	/** @var ValueObject\Type */
 	private $type;
-
-	/** @var boolean */
-	private $isActive;
+	
+	/** @var ValueObject\Names */
+	private $names;
+	
+	/** @var ValueObject\Activation */
+	private $activation;
+	
+	/**
+	 * @param Behaviour\Uuid $uuid
+	 */
+	public function setUuid(Behaviour\Uuid $uuid): void
+	{
+		$this->uuid = $uuid;
+	}
+	
+	/**
+	 * @param Behaviour\Type $type
+	 */
+	public function setType(Behaviour\Type $type): void
+	{
+		$this->type = $type;
+	}
+	
+	/**
+	 * @param Behaviour\Names $names
+	 */
+	public function setNames(Behaviour\Names $names): void
+	{
+		$this->names = $names;
+	}
+	
+	/**
+	 * @param Behaviour\Activation $activation
+	 */
+	public function setActivation(Behaviour\Activation $activation): void
+	{
+		$this->activation = $activation;
+	}
 	
 	/**
 	 * @return string
 	 */
-	public function getType(): string
+	protected function aggregateId(): string
 	{
-		return $this->type;
+		return $this->uuid->toString();
 	}
 	
 	/**
-	 * @param ValueObject\Behaviour\Type $type
+	 * @param Behaviour\Uuid $uuid
+	 * @param Behaviour\Type $type
+	 * @param Behaviour\Names $names
+	 * @param Behaviour\Activation $activation
+	 * @return Behaviour
 	 */
-	public function setType(ValueObject\Behaviour\Type $type): void
+	public static function createNewBehaviour(
+		ValueObject\Uuid $uuid,
+		ValueObject\Type $type,
+		ValueObject\Names $names,
+		ValueObject\Activation $activation
+	): Behaviour
 	{
-		$this->type = $type->getValue();
+		$behaviour = new Behaviour();
+		
+		$behaviour->recordThat(NewBehaviourCreated::occur($uuid->toString(), [
+			'type' => $type->toString(),
+			'names' => $names->toString(),
+			'activation' => $activation->toString()
+		]));
+		
+		return $behaviour;
 	}
 	
 	/**
-	 * @return bool
+	 * @param Behaviour\Names $names
+	 * @param Behaviour\Activation $activation
 	 */
-	public function isActive(): bool
+	public function changeExistingBehaviour(
+		ValueObject\Names $names,
+		ValueObject\Activation $activation
+	): void
 	{
-		return $this->isActive;
-	}
-	
-	/**
-	 * @param ValueObject\Behaviour\IsActive $isActive
-	 */
-	public function setIsActive(ValueObject\Behaviour\IsActive $isActive): void
-	{
-		$this->isActive = $isActive->getValue();
+		$this->recordThat(ExistingBehaviourChanged::occur($this->aggregateId(), [
+			'names' => $names->toString(),
+			'activation' => $activation->toString()
+		]));
 	}
 }

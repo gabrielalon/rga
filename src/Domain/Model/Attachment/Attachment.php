@@ -2,83 +2,106 @@
 
 namespace RGA\Domain\Model\Attachment;
 
-use RGA\Domain\ValueObject;
+use RGA\Domain\Model\Attachment\Attachment as ValueObject;
+use RGA\Domain\Model\Attachment\Event;
+use RGA\Infrastructure\SegregationSourcing\Aggregate;
 
 class Attachment
+	extends Aggregate\AggregateRoot
 {
-	/** @var string */
+	/** @var ValueObject\Uuid */
+	private $uuid;
+	
+	/** @var ValueObject\RgaUuid */
 	private $rgaUuid;
 	
-	/** @var string */
+	/** @var ValueObject\FileType */
 	private $fileType;
 	
-	/** @var string */
+	/** @var ValueObject\FileName */
 	private $fileName;
 	
-	/** @var string */
+	/** @var ValueObject\OriginalFileName */
 	private $originalFileName;
 	
 	/**
-	 * @return string
+	 * @param Attachment\Uuid $uuid
 	 */
-	public function getRgaUuid(): string
+	public function setUuid(Attachment\Uuid $uuid): void
 	{
-		return $this->rgaUuid;
+		$this->uuid = $uuid;
 	}
 	
 	/**
-	 * @param ValueObject\Attachment\RgaUuid $rgaUuid
+	 * @param Attachment\RgaUuid $rgaUuid
 	 */
-	public function setRgaUuid(ValueObject\Attachment\RgaUuid $rgaUuid): void
+	public function setRgaUuid(Attachment\RgaUuid $rgaUuid): void
 	{
-		$this->rgaUuid = $rgaUuid->getValue();
+		$this->rgaUuid = $rgaUuid;
 	}
 	
 	/**
-	 * @return string
+	 * @param Attachment\FileType $fileType
 	 */
-	public function getFileType(): string
+	public function setFileType(Attachment\FileType $fileType): void
 	{
-		return $this->fileType;
+		$this->fileType = $fileType;
 	}
 	
 	/**
-	 * @param ValueObject\Attachment\FileType $fileType
+	 * @param Attachment\FileName $fileName
 	 */
-	public function setFileType(ValueObject\Attachment\FileType $fileType): void
+	public function setFileName(Attachment\FileName $fileName): void
 	{
-		$this->fileType = $fileType->getValue();
+		$this->fileName = $fileName;
 	}
 	
 	/**
-	 * @return string
+	 * @param Attachment\OriginalFileName $originalFileName
 	 */
-	public function getFileName(): string
+	public function setOriginalFileName(Attachment\OriginalFileName $originalFileName): void
 	{
-		return $this->fileName;
-	}
-	
-	/**
-	 * @param ValueObject\Attachment\FileName $fileName
-	 */
-	public function setFileName(ValueObject\Attachment\FileName $fileName): void
-	{
-		$this->fileName = $fileName->getValue();
+		$this->originalFileName = $originalFileName;
 	}
 	
 	/**
 	 * @return string
 	 */
-	public function getOriginalFileName(): string
+	protected function aggregateId(): string
 	{
-		return $this->originalFileName;
+		return $this->uuid->toString();
 	}
 	
 	/**
-	 * @param ValueObject\Attachment\OriginalFileName $originalFileName
+	 * @param Attachment\Uuid $uuid
+	 * @param Attachment\RgaUuid $rgaUuid
+	 * @param Attachment\FileType $fileType
+	 * @param Attachment\FileName $fileName
+	 * @param Attachment\OriginalFileName $originalFileName
+	 * @return Attachment
 	 */
-	public function setOriginalFileName(ValueObject\Attachment\OriginalFileName $originalFileName): void
+	public static function createNewAttachment(
+		ValueObject\Uuid $uuid,
+		ValueObject\RgaUuid $rgaUuid,
+		ValueObject\FileType $fileType,
+		ValueObject\FileName $fileName,
+		ValueObject\OriginalFileName $originalFileName
+	): Attachment
 	{
-		$this->originalFileName = $originalFileName->getValue();
+		$attachment = new Attachment();
+		
+		$attachment->recordThat(Event\NewAttachmentCreated::occur($uuid->toString(), [
+			'rga_uuid'           => $rgaUuid->toString(),
+			'file_type'          => $fileType->toString(),
+			'file_name'          => $fileName->toString(),
+			'original_file_name' => $originalFileName->toString()
+		]));
+		
+		return $attachment;
+	}
+	
+	public function removeExistingAttachment(): void
+	{
+		$this->recordThat(Event\ExistingAttachmentRemoved::occur($this->aggregateId(), []));
 	}
 }

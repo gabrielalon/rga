@@ -12,4 +12,13 @@ class RgaObjectItemCollector
 	{
 		$this->offsetSet($item->getId(), $item);
 	}
+	
+	/**
+	 * @param integer $id
+	 * @return RgaObjectItem
+	 */
+	public function get($id)
+	{
+		return $this->offsetGet($id);
+	}
 }

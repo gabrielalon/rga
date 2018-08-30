@@ -2,55 +2,88 @@
 
 namespace RGA\Domain\Model\Dictionary;
 
-use RGA\Domain\ValueObject;
-use RGA\Infrastructure\Model\Identify;
-use RGA\Infrastructure\Model\Translate;
+use RGA\Domain\Model\Dictionary\Dictionary as ValueObject;
+use RGA\Domain\Model\Dictionary\Event;
+use RGA\Infrastructure\SegregationSourcing\Aggregate;
 
 class Dictionary
-	implements Identify\Guidable, Translate\Localable
+	extends Aggregate\AggregateRoot
 {
-	use Identify\Guided;
-	use Translate\Localed;
-
-	/**
-	 * @var string
-	 */
+	/** @var ValueObject\Uuid */
+	private $uuid;
+	
+	/** @var ValueObject\Type */
 	private $type;
-
+	
+	/** @var ValueObject\Values */
+	private $values;
+	
 	/**
-	 * @var boolean
+	 * @param Dictionary\Uuid $uuid
 	 */
-	private $isDeletable;
+	public function setUuid(Dictionary\Uuid $uuid): void
+	{
+		$this->uuid = $uuid;
+	}
+	
+	/**
+	 * @param Dictionary\Type $type
+	 */
+	public function setType(Dictionary\Type $type): void
+	{
+		$this->type = $type;
+	}
+	
+	/**
+	 * @param Dictionary\Values $values
+	 */
+	public function setValues(Dictionary\Values $values): void
+	{
+		$this->values = $values;
+	}
 	
 	/**
 	 * @return string
 	 */
-	public function getType(): string
+	protected function aggregateId(): string
 	{
-		return $this->type;
+		return $this->uuid->toString();
 	}
 	
 	/**
-	 * @param ValueObject\Dictionary\Type $type
+	 * @param Dictionary\Uuid $uuid
+	 * @param Dictionary\Type $type
+	 * @param Dictionary\Values $values
+	 * @return Dictionary
 	 */
-	public function setType(ValueObject\Dictionary\Type $type): void
+	public static function createNewDictionary(
+		ValueObject\Uuid $uuid,
+		ValueObject\Type $type,
+		ValueObject\Values $values
+	): Dictionary
 	{
-		$this->type = $type->getValue();
+		$dictionary = new Dictionary();
+		
+		$dictionary->recordThat(Event\NewDictionaryCreated::occur($uuid->toString(), [
+			'type' => $type->toString(),
+			'values' => $values->toString()
+		]));
+		
+		return $dictionary;
 	}
-
+	
 	/**
-	 * @return bool
+	 * @param Dictionary\Values $values
 	 */
-	public function isDeletable(): bool
+	public function changeExistingDictionary(ValueObject\Values $values): void
 	{
-		return $this->isDeletable;
+		$this->recordThat(Event\ExistingDictionaryChanged::occur($this->aggregateId(), [
+			'values' => $values->toString()
+		]));
 	}
-
-	/**
-	 * @param ValueObject\Dictionary\IsDeletable $isDeletable
-	 */
-	public function setIsDeletable(ValueObject\Dictionary\IsDeletable $isDeletable): void
+	
+	public function removeExistingDictionary(): void
 	{
-		$this->isDeletable = $isDeletable->getValue();
+		$this->recordThat(Event\ExistingDictionaryRemoved::occur($this->aggregateId(), []));
 	}
 }
