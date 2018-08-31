@@ -49,8 +49,8 @@ class CreateTransportHandlerTest
 		$this->assertEquals($entity->getUuid()->toString(), $uuid->toString());
 		$this->assertEquals($entity->getActivation()->toString(), '1');
 		$this->assertEquals($entity->getShipmentId()->toString(), '2');
-		$this->assertEquals($entity->getDomains(), \json_encode($domains));
-		$this->assertEquals($entity->getNames()->toString(), \json_encode($names));
+		$this->assertEquals($entity->getDomains()->toString(), \serialize($domains));
+		$this->assertEquals($entity->getNames()->toString(), \serialize($names));
 		
 		/** @var InMemoryEventStreamRepository $streamRepository */
 		$streamRepository = $this->getFromContainer(EventStreamRepositoryInterface::class);

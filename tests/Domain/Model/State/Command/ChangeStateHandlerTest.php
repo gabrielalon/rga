@@ -81,9 +81,9 @@ class ChangeStateHandlerTest
 		$this->assertEquals($entity->isFinishable()->toString(), '0');
 		$this->assertEquals($entity->isCloseable()->toString(), '0');
 		$this->assertEquals($entity->isSendingEmail()->toString(), '0');
-		$this->assertEquals($entity->getNames()->toString(), \json_encode($names));
-		$this->assertEquals($entity->getEmailSubjects()->toString(), \json_encode($emailSubjects));
-		$this->assertEquals($entity->getEmailBodies()->toString(), \json_encode($emailBodies));
+		$this->assertEquals($entity->getNames()->toString(), \serialize($names));
+		$this->assertEquals($entity->getEmailSubjects()->toString(), \serialize($emailSubjects));
+		$this->assertEquals($entity->getEmailBodies()->toString(), \serialize($emailBodies));
 		
 		/** @var InMemoryEventStreamRepository $streamRepository */
 		$streamRepository = $this->getFromContainer(EventStreamRepositoryInterface::class);

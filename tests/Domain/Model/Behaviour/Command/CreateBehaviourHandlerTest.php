@@ -41,7 +41,7 @@ class CreateBehaviourHandlerTest
 		
 		$this->assertEquals($entity->getUuid()->toString(), $uuid->toString());
 		$this->assertEquals($entity->getType()->toString(), Type::COMPLAINT);
-		$this->assertEquals($entity->getNames()->toString(), \json_encode($names));
+		$this->assertEquals($entity->getNames()->toString(), \serialize($names));
 		$this->assertEquals($entity->getActivation()->toString(), '1');
 		
 		/** @var InMemoryEventStreamRepository $streamRepository */

@@ -13,7 +13,7 @@ class ExistingDictionaryChanged
 	 */
 	public function dictionaryValues(): Dictionary\Values
 	{
-		return Dictionary\Values::fromArray((array)(\json_decode($this->payload['values'], true) ?? []));
+		return Dictionary\Values::fromArray((array)($this->payload['values'] ? \unserialize($this->payload['values'], ['allowed_classes' => false]) : []));
 	}
 	
 	/**

@@ -72,6 +72,6 @@ final class Domains
 			$domains[] = $domain->toString();
 		}
 		
-		return \json_encode($domains);
+		return \serialize($domains);
 	}
 }

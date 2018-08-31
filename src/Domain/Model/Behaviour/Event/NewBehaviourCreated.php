@@ -30,7 +30,7 @@ class NewBehaviourCreated
 	 */
 	public function behaviourNames(): Behaviour\Names
 	{
-		return Behaviour\Names::fromArray((array)(\json_decode($this->payload['names'], true) ?? []));
+		return Behaviour\Names::fromArray((array)($this->payload['names'] ? \unserialize($this->payload['names'], ['allowed_classes' => false]) : []));
 	}
 	
 	/**

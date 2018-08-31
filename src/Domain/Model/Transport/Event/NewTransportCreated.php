@@ -37,7 +37,7 @@ class NewTransportCreated
 	 */
 	public function transportDomains(): Transport\Domains
 	{
-		return Transport\Domains::fromArray((array)(\json_decode($this->payload['domains'], true) ?? []));
+		return Transport\Domains::fromArray((array)($this->payload['domains'] ? \unserialize($this->payload['domains'], ['allowed_classes' => false]) : []));
 	}
 	
 	/**
@@ -45,7 +45,7 @@ class NewTransportCreated
 	 */
 	public function transportNames(): Transport\Names
 	{
-		return Transport\Names::fromArray((array)(\json_decode($this->payload['names'], true) ?? []));
+		return Transport\Names::fromArray((array)($this->payload['names'] ? \unserialize($this->payload['names'], ['allowed_classes' => false]) : []));
 	}
 	
 	/**

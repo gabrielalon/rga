@@ -45,7 +45,7 @@ class ChangeBehaviourHandlerTest
 		$entity = $projector->get($uuid->toString());
 		
 		$this->assertEquals($entity->getUuid()->toString(), $uuid->toString());
-		$this->assertEquals($entity->getNames()->toString(), \json_encode($names));
+		$this->assertEquals($entity->getNames()->toString(), \serialize($names));
 		$this->assertEquals($entity->getActivation()->toString(), '0');
 		
 		/** @var InMemoryEventStreamRepository $streamRepository */

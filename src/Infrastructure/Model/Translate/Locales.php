@@ -107,6 +107,6 @@ abstract class Locales
 			$data[$locale] = $value->toString();
 		}
 		
-		return \json_encode($data);
+		return \serialize($data);
 	}
 }

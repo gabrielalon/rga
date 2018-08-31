@@ -77,7 +77,7 @@ class NewStateCreated
 	 */
 	public function stateNames(): State\Names
 	{
-		return State\Names::fromArray((array)(\json_decode($this->payload['names'], true) ?? []));
+		return State\Names::fromArray((array)($this->payload['names'] ? \unserialize($this->payload['names'], ['allowed_classes' => false]) : []));
 	}
 	
 	/**
@@ -85,7 +85,7 @@ class NewStateCreated
 	 */
 	public function stateEmailSubjects(): State\EmailSubjects
 	{
-		return State\EmailSubjects::fromArray((array)(\json_decode($this->payload['email_subjects'], true) ?? []));
+		return State\EmailSubjects::fromArray((array)($this->payload['email_subjects'] ? \unserialize($this->payload['email_subjects'], ['allowed_classes' => false]) : []));
 	}
 	
 	/**
@@ -93,7 +93,7 @@ class NewStateCreated
 	 */
 	public function stateEmailBodies(): State\EmailBodies
 	{
-		return State\EmailBodies::fromArray((array)(\json_decode($this->payload['email_bodies'], true) ?? []));
+		return State\EmailBodies::fromArray((array)($this->payload['email_bodies'] ? \unserialize($this->payload['email_bodies'], ['allowed_classes' => false]) : []));
 	}
 	
 	/**
