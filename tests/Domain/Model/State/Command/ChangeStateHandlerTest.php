@@ -6,6 +6,8 @@ use RGA\Domain\Model\State\Command\ChangeState;
 use RGA\Domain\Model\State\Command\CreateState;
 use RGA\Domain\Model\State\Event\ExistingStateChanged;
 use RGA\Domain\Model\State\Projection\StateProjectorInterface;
+use RGA\Domain\Model\State\State;
+use RGA\Infrastructure\SegregationSourcing\Aggregate\AggregateType;
 use RGA\Infrastructure\SegregationSourcing\Aggregate\EventBridge\AggregateChanged;
 use RGA\Infrastructure\SegregationSourcing\Event\Persist\EventStreamRepositoryInterface;
 use RGA\Infrastructure\SegregationSourcing\Snapshot\Persist\SnapshotRepositoryInterface;
@@ -110,7 +112,7 @@ class ChangeStateHandlerTest
 		
 		/** @var InMemorySnapshotRepository $snapshotRepository */
 		$snapshotRepository = $this->getFromContainer(SnapshotRepositoryInterface::class);
-		$snapshot = $snapshotRepository->get($uuid->toString());
+		$snapshot = $snapshotRepository->get(AggregateType::fromAggregateRootClass(State::class), $uuid->toString());
 		
 		$this->assertEquals($snapshot['aggregate_version'], 2);
 	}

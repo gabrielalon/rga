@@ -13,6 +13,7 @@ class ChangeDictionary
 	private $values;
 	
 	/**
+	 * @param string $uuid
 	 * @param array $values
 	 */
 	public function __construct(string $uuid, array $values)

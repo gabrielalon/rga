@@ -3,9 +3,11 @@
 namespace RGA\Test\Domain\Model\Attachment\Command;
 
 use RGA\Application\Assert\Exception\AssertionFailedException;
+use RGA\Domain\Model\Attachment\Attachment;
 use RGA\Domain\Model\Attachment\Command\CreateAttachment;
 use RGA\Domain\Model\Attachment\Event\NewAttachmentCreated;
 use RGA\Domain\Model\Attachment\Projection\AttachmentProjectorInterface;
+use RGA\Infrastructure\SegregationSourcing\Aggregate\AggregateType;
 use RGA\Infrastructure\SegregationSourcing\Aggregate\EventBridge\AggregateChanged;
 use RGA\Infrastructure\SegregationSourcing\Event\Persist\EventStreamRepositoryInterface;
 use RGA\Infrastructure\SegregationSourcing\Snapshot\Persist\SnapshotRepositoryInterface;
@@ -70,7 +72,7 @@ class CreateAttachmentHandlerTest
 		
 		/** @var InMemorySnapshotRepository $snapshotRepository */
 		$snapshotRepository = $this->getFromContainer(SnapshotRepositoryInterface::class);
-		$snapshot = $snapshotRepository->get($uuid->toString());
+		$snapshot = $snapshotRepository->get(AggregateType::fromAggregateRootClass(Attachment::class), $uuid->toString());
 		
 		$this->assertEquals($snapshot['aggregate_version'], 1);
 	}

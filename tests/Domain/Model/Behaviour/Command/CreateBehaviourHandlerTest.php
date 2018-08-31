@@ -3,10 +3,12 @@
 namespace RGA\Test\Domain\Model\Behaviour\Command;
 
 use RGA\Application\Assert\Exception\AssertionFailedException;
+use RGA\Domain\Model\Behaviour\Behaviour;
 use RGA\Domain\Model\Behaviour\Command\CreateBehaviour;
 use RGA\Domain\Model\Behaviour\Enum\Type;
 use RGA\Domain\Model\Behaviour\Event\NewBehaviourCreated;
 use RGA\Domain\Model\Behaviour\Projection\BehaviourProjectorInterface;
+use RGA\Infrastructure\SegregationSourcing\Aggregate\AggregateType;
 use RGA\Infrastructure\SegregationSourcing\Aggregate\EventBridge\AggregateChanged;
 use RGA\Infrastructure\SegregationSourcing\Event\Persist\EventStreamRepositoryInterface;
 use RGA\Infrastructure\SegregationSourcing\Snapshot\Persist\SnapshotRepositoryInterface;
@@ -62,7 +64,7 @@ class CreateBehaviourHandlerTest
 		
 		/** @var InMemorySnapshotRepository $snapshotRepository */
 		$snapshotRepository = $this->getFromContainer(SnapshotRepositoryInterface::class);
-		$snapshot = $snapshotRepository->get($uuid->toString());
+		$snapshot = $snapshotRepository->get(AggregateType::fromAggregateRootClass(Behaviour::class), $uuid->toString());
 		
 		$this->assertEquals($snapshot['aggregate_version'], 1);
 	}

@@ -6,6 +6,8 @@ use RGA\Domain\Model\Transport\Command\ChangeTransport;
 use RGA\Domain\Model\Transport\Command\CreateTransport;
 use RGA\Domain\Model\Transport\Event\ExistingTransportChanged;
 use RGA\Domain\Model\Transport\Projection\TransportProjectorInterface;
+use RGA\Domain\Model\Transport\Transport;
+use RGA\Infrastructure\SegregationSourcing\Aggregate\AggregateType;
 use RGA\Infrastructure\SegregationSourcing\Aggregate\EventBridge\AggregateChanged;
 use RGA\Infrastructure\SegregationSourcing\Event\Persist\EventStreamRepositoryInterface;
 use RGA\Infrastructure\SegregationSourcing\Snapshot\Persist\SnapshotRepositoryInterface;
@@ -82,7 +84,7 @@ class ChangeTransportHandlerTest
 		
 		/** @var InMemorySnapshotRepository $snapshotRepository */
 		$snapshotRepository = $this->getFromContainer(SnapshotRepositoryInterface::class);
-		$snapshot = $snapshotRepository->get($uuid->toString());
+		$snapshot = $snapshotRepository->get(AggregateType::fromAggregateRootClass(Transport::class), $uuid->toString());
 		
 		$this->assertEquals($snapshot['aggregate_version'], 2);
 	}

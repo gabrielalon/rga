@@ -6,6 +6,8 @@ use RGA\Application\Assert\Exception\AssertionFailedException;
 use RGA\Domain\Model\Transport\Command\CreateTransport;
 use RGA\Domain\Model\Transport\Event\NewTransportCreated;
 use RGA\Domain\Model\Transport\Projection\TransportProjectorInterface;
+use RGA\Domain\Model\Transport\Transport;
+use RGA\Infrastructure\SegregationSourcing\Aggregate\AggregateType;
 use RGA\Infrastructure\SegregationSourcing\Aggregate\EventBridge\AggregateChanged;
 use RGA\Infrastructure\SegregationSourcing\Event\Persist\EventStreamRepositoryInterface;
 use RGA\Infrastructure\SegregationSourcing\Snapshot\Persist\SnapshotRepositoryInterface;
@@ -71,7 +73,7 @@ class CreateTransportHandlerTest
 		
 		/** @var InMemorySnapshotRepository $snapshotRepository */
 		$snapshotRepository = $this->getFromContainer(SnapshotRepositoryInterface::class);
-		$snapshot = $snapshotRepository->get($uuid->toString());
+		$snapshot = $snapshotRepository->get(AggregateType::fromAggregateRootClass(Transport::class), $uuid->toString());
 		
 		$this->assertEquals($snapshot['aggregate_version'], 1);
 	}

@@ -2,6 +2,7 @@
 
 namespace RGA\Test\Infrastructure\SegregationSourcing\Snapshot;
 
+use RGA\Infrastructure\SegregationSourcing\Aggregate\AggregateType;
 use RGA\Infrastructure\SegregationSourcing\Snapshot\Persist\SnapshotRepositoryInterface;
 use RGA\Infrastructure\SegregationSourcing\Snapshot\Snapshot\Snapshot;
 
@@ -16,24 +17,28 @@ class InMemorySnapshotRepository
 	 */
 	public function save(Snapshot $snapshot): void
 	{
-		$this->snapshots[$snapshot->getAggregateId()] = $snapshot;
+		$this->snapshots[$snapshot->getAggregateType()->getAggregateType()][$snapshot->getAggregateId()] = $snapshot;
 	}
 	
 	/**
+	 * @param AggregateType $aggregateType
 	 * @param string $aggregateId
 	 * @return array
 	 */
-	public function get(string $aggregateId): array
+	public function get(AggregateType $aggregateType, string $aggregateId): array
 	{
-		if (false === isset($this->snapshots[$aggregateId]))
+		if (false === isset($this->snapshots[$aggregateType->getAggregateType()][$aggregateId]))
 		{
 			throw new \RuntimeException('Snapshot not found for aggregate: ' . $aggregateId);
 		}
 		
+		/** @var Snapshot $snapshot */
+		$snapshot = $this->snapshots[$aggregateType->getAggregateType()][$aggregateId];
+		
 		return [
-			'aggregate_root' => $this->snapshots[$aggregateId]->getAggregateRoot(),
-			'aggregate_version' => $this->snapshots[$aggregateId]->getLastVersion(),
-			'created_at' => $this->snapshots[$aggregateId]->getCreatedAt()
+			'aggregate_root' => $snapshot->getAggregateRoot(),
+			'aggregate_version' => $snapshot->getLastVersion(),
+			'created_at' => $snapshot->getCreatedAt()
 		];
 	}
 }

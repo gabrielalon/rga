@@ -4,9 +4,11 @@ namespace RGA\Test\Domain\Model\Dictionary\Command;
 
 use RGA\Application\Assert\Exception\AssertionFailedException;
 use RGA\Domain\Model\Dictionary\Command\CreateDictionary;
+use RGA\Domain\Model\Dictionary\Dictionary;
 use RGA\Domain\Model\Dictionary\Enum\Type;
 use RGA\Domain\Model\Dictionary\Event\NewDictionaryCreated;
 use RGA\Domain\Model\Dictionary\Projection\DictionaryProjectorInterface;
+use RGA\Infrastructure\SegregationSourcing\Aggregate\AggregateType;
 use RGA\Infrastructure\SegregationSourcing\Aggregate\EventBridge\AggregateChanged;
 use RGA\Infrastructure\SegregationSourcing\Event\Persist\EventStreamRepositoryInterface;
 use RGA\Infrastructure\SegregationSourcing\Snapshot\Persist\SnapshotRepositoryInterface;
@@ -60,7 +62,7 @@ class CreateDictionaryHandlerTest
 		
 		/** @var InMemorySnapshotRepository $snapshotRepository */
 		$snapshotRepository = $this->getFromContainer(SnapshotRepositoryInterface::class);
-		$snapshot = $snapshotRepository->get($uuid->toString());
+		$snapshot = $snapshotRepository->get(AggregateType::fromAggregateRootClass(Dictionary::class), $uuid->toString());
 		
 		$this->assertEquals($snapshot['aggregate_version'], 1);
 	}

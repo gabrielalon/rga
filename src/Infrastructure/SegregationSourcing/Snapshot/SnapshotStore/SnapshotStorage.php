@@ -48,7 +48,7 @@ class SnapshotStorage
 	 */
 	public function get(Aggregate\AggregateType $aggregateType, string $aggregateId): Snapshot
 	{
-		$result = $this->snapshotRepository->get($aggregateId);
+		$result = $this->snapshotRepository->get($aggregateType, $aggregateId);
 		
 		$snapshot = new Snapshot(
 			$aggregateType,

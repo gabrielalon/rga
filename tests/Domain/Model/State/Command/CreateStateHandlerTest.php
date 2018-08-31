@@ -5,6 +5,8 @@ namespace RGA\Test\Domain\Model\State\Command;
 use RGA\Domain\Model\State\Command\CreateState;
 use RGA\Domain\Model\State\Event\NewStateCreated;
 use RGA\Domain\Model\State\Projection\StateProjectorInterface;
+use RGA\Domain\Model\State\State;
+use RGA\Infrastructure\SegregationSourcing\Aggregate\AggregateType;
 use RGA\Infrastructure\SegregationSourcing\Aggregate\EventBridge\AggregateChanged;
 use RGA\Infrastructure\SegregationSourcing\Event\Persist\EventStreamRepositoryInterface;
 use RGA\Infrastructure\SegregationSourcing\Snapshot\Persist\SnapshotRepositoryInterface;
@@ -90,7 +92,7 @@ class CreateStateHandlerTest
 		
 		/** @var InMemorySnapshotRepository $snapshotRepository */
 		$snapshotRepository = $this->getFromContainer(SnapshotRepositoryInterface::class);
-		$snapshot = $snapshotRepository->get($uuid->toString());
+		$snapshot = $snapshotRepository->get(AggregateType::fromAggregateRootClass(State::class), $uuid->toString());
 		
 		$this->assertEquals($snapshot['aggregate_version'], 1);
 	}
