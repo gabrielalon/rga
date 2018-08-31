@@ -67,11 +67,19 @@ final class Domains
 		$domains = [];
 		
 		/** @var Domain $domain */
-		foreach ($this->domains->getArrayCopy() as $domain)
+		foreach ($this->all() as $domain)
 		{
 			$domains[] = $domain->toString();
 		}
 		
 		return \serialize($domains);
+	}
+	
+	/**
+	 * @return Domain[]
+	 */
+	public function all(): array
+	{
+		return $this->domains->getArrayCopy();
 	}
 }
