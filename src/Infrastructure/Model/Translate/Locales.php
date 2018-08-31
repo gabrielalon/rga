@@ -53,6 +53,14 @@ abstract class Locales
 	}
 	
 	/**
+	 * @return array
+	 */
+	public function getLocales(): array
+	{
+		return $this->data->getArrayCopy();
+	}
+	
+	/**
 	 * @return string
 	 */
 	public function toString(): string
