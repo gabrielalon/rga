@@ -38,6 +38,14 @@ final class Domains
 	}
 	
 	/**
+	 * @param string $domain
+	 */
+	public function addDomain(string $domain): void
+	{
+		$this->domains->add(Domain::fromString($domain));
+	}
+	
+	/**
 	 * @return string
 	 */
 	public function toString(): string

@@ -12,7 +12,7 @@ class Collection
 	 */
 	public function add(Domain $domain): void
 	{
-		$this->append($domain);
+		$this->offsetSet($domain->toString(), $domain);
 	}
 	
 	/**
