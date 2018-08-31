@@ -37,6 +37,15 @@ abstract class Locales
 	
 	/**
 	 * @param string $locale
+	 * @param string $value
+	 */
+	public function addLocale(string $locale, string $value): void
+	{
+		$this->data->add(Translate\Locale::fromString($locale), Translate\Value::fromString($value));
+	}
+	
+	/**
+	 * @param string $locale
 	 * @return Translate\Value
 	 */
 	public function getLocale(string $locale): Translate\Value
