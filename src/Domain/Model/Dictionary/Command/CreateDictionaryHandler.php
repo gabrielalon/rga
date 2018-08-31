@@ -29,7 +29,7 @@ class CreateDictionaryHandler
 		$dictionary = Dictionary::createNewDictionary(
 			Dictionary\Uuid::fromString($message->getUuid()),
 			Dictionary\Type::fromString($message->getType()),
-			Dictionary\Values::fromArray($message->getValues())
+			Dictionary\Entries::fromArray($message->getValues())
 		);
 		
 		$this->repository->save($dictionary);

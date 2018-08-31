@@ -41,7 +41,7 @@ class CreateDictionaryHandlerTest
 		
 		$this->assertEquals($entity->getUuid()->toString(), $uuid->toString());
 		$this->assertEquals($entity->getType()->toString(), Type::CONTACT_PREFERENCE);
-		$this->assertEquals($entity->getValues()->toString(), \serialize($values));
+		$this->assertEquals($entity->getEntries()->toString(), \serialize($values));
 		
 		/** @var InMemoryEventStreamRepository $streamRepository */
 		$streamRepository = $this->getFromContainer(EventStreamRepositoryInterface::class);
@@ -57,7 +57,7 @@ class CreateDictionaryHandlerTest
 			
 			$this->assertTrue($entity->getUuid()->equals($event->dictionaryUuid()));
 			$this->assertTrue($entity->getType()->equals($event->dictionaryType()));
-			$this->assertTrue($entity->getValues()->equals($event->dictionaryValues()));
+			$this->assertTrue($entity->getEntries()->equals($event->dictionaryValues()));
 		}
 		
 		/** @var InMemorySnapshotRepository $snapshotRepository */

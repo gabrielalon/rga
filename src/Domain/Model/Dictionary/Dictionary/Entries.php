@@ -4,15 +4,15 @@ namespace RGA\Domain\Model\Dictionary\Dictionary;
 
 use RGA\Infrastructure\Model\Translate\Locales;
 
-final class Values
+final class Entries
 	extends Locales
 {
 	/**
 	 * @param array $data
-	 * @return Values
+	 * @return Entries
 	 */
-	public static function fromArray(array $data): Values
+	public static function fromArray(array $data): Entries
 	{
-		return new Values($data);
+		return new Entries($data);
 	}
 }

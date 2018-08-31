@@ -15,8 +15,8 @@ class Dictionary
 	/** @var ValueObject\Type */
 	private $type;
 	
-	/** @var ValueObject\Values */
-	private $values;
+	/** @var ValueObject\Entries */
+	private $entries;
 	
 	/**
 	 * @param Dictionary\Uuid $uuid
@@ -35,11 +35,11 @@ class Dictionary
 	}
 	
 	/**
-	 * @param Dictionary\Values $values
+	 * @param Dictionary\Entries $entries
 	 */
-	public function setValues(Dictionary\Values $values): void
+	public function setEntries(Dictionary\Entries $entries): void
 	{
-		$this->values = $values;
+		$this->entries = $entries;
 	}
 	
 	/**
@@ -53,13 +53,13 @@ class Dictionary
 	/**
 	 * @param Dictionary\Uuid $uuid
 	 * @param Dictionary\Type $type
-	 * @param Dictionary\Values $values
+	 * @param Dictionary\Entries $values
 	 * @return Dictionary
 	 */
 	public static function createNewDictionary(
 		ValueObject\Uuid $uuid,
 		ValueObject\Type $type,
-		ValueObject\Values $values
+		ValueObject\Entries $values
 	): Dictionary
 	{
 		$dictionary = new Dictionary();
@@ -73,9 +73,9 @@ class Dictionary
 	}
 	
 	/**
-	 * @param Dictionary\Values $values
+	 * @param Dictionary\Entries $values
 	 */
-	public function changeExistingDictionary(ValueObject\Values $values): void
+	public function changeExistingDictionary(ValueObject\Entries $values): void
 	{
 		$this->recordThat(Event\ExistingDictionaryChanged::occur($this->aggregateId(), [
 			'values' => $values->toString()

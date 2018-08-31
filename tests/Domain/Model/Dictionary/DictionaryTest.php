@@ -18,14 +18,14 @@ class DictionaryTest
 	/** @var ValueObject\Type */
 	private $type;
 	
-	/** @var ValueObject\Values */
+	/** @var ValueObject\Entries */
 	private $values;
 	
 	protected function setUp()
 	{
 		$this->uuid = ValueObject\Uuid::fromString(\Ramsey\Uuid\Uuid::uuid4()->toString());
 		$this->type = ValueObject\Type::fromString(Enum\Type::__default);
-		$this->values = ValueObject\Values::fromArray(['pl' => 'test', 'en' => 'testowo']);
+		$this->values = ValueObject\Entries::fromArray(['pl' => 'test', 'en' => 'testowo']);
 	}
 	
 	/**
@@ -56,7 +56,7 @@ class DictionaryTest
 	{
 		$dictionary = $this->reconstituteDictionaryFromHistory($this->newDictionaryCreated());
 		
-		$values = ValueObject\Values::fromArray(['pl' => 'testowo', 'en' => 'test']);
+		$values = ValueObject\Entries::fromArray(['pl' => 'testowo', 'en' => 'test']);
 		
 		$dictionary->changeExistingDictionary($values);
 		

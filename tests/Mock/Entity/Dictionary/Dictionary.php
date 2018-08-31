@@ -12,8 +12,8 @@ class Dictionary
 	/** @var ValueObject\Type */
 	private $type;
 	
-	/** @var ValueObject\Values */
-	private $values;
+	/** @var ValueObject\Entries */
+	private $entries;
 	
 	/**
 	 * @return ValueObject\Uuid
@@ -54,20 +54,20 @@ class Dictionary
 	}
 	
 	/**
-	 * @return ValueObject\Values
+	 * @return ValueObject\Entries
 	 */
-	public function getValues(): ValueObject\Values
+	public function getEntries(): ValueObject\Entries
 	{
-		return $this->values;
+		return $this->entries;
 	}
 	
 	/**
-	 * @param ValueObject\Values $values
+	 * @param ValueObject\Entries $entries
 	 * @return Dictionary
 	 */
-	public function setValues(ValueObject\Values $values): Dictionary
+	public function setEntries(ValueObject\Entries $entries): Dictionary
 	{
-		$this->values = $values;
+		$this->entries = $entries;
 		
 		return $this;
 	}

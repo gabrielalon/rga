@@ -9,11 +9,11 @@ class ExistingDictionaryChanged
 	extends Aggregate\EventBridge\AggregateChanged
 {
 	/**
-	 * @return Dictionary\Values
+	 * @return Dictionary\Entries
 	 */
-	public function dictionaryValues(): Dictionary\Values
+	public function dictionaryValues(): Dictionary\Entries
 	{
-		return Dictionary\Values::fromArray((array)($this->payload['values'] ? \unserialize($this->payload['values'], ['allowed_classes' => false]) : []));
+		return Dictionary\Entries::fromArray((array)($this->payload['values'] ? \unserialize($this->payload['values'], ['allowed_classes' => false]) : []));
 	}
 	
 	/**
@@ -21,6 +21,6 @@ class ExistingDictionaryChanged
 	 */
 	public function populate(Aggregate\AggregateRoot $dictionary): void
 	{
-		$dictionary->setValues($this->dictionaryValues());
+		$dictionary->setEntries($this->dictionaryValues());
 	}
 }

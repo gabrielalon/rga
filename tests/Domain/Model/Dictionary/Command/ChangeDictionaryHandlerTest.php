@@ -45,7 +45,7 @@ class ChangeDictionaryHandlerTest
 		$entity = $projector->get($uuid->toString());
 		
 		$this->assertEquals($entity->getUuid()->toString(), $uuid->toString());
-		$this->assertEquals($entity->getValues()->toString(), \serialize($values));
+		$this->assertEquals($entity->getEntries()->toString(), \serialize($values));
 		
 		/** @var InMemoryEventStreamRepository $streamRepository */
 		$streamRepository = $this->getFromContainer(EventStreamRepositoryInterface::class);
@@ -60,7 +60,7 @@ class ChangeDictionaryHandlerTest
 			$event = $event::fromEventStream($eventStream);
 			
 			$this->assertEquals($entity->getUuid()->toString(), $event->aggregateId());
-			$this->assertTrue($entity->getValues()->equals($event->dictionaryValues()));
+			$this->assertTrue($entity->getEntries()->equals($event->dictionaryValues()));
 		}
 		
 		/** @var InMemorySnapshotRepository $snapshotRepository */

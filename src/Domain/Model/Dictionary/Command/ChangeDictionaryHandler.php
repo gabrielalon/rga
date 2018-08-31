@@ -28,7 +28,7 @@ class ChangeDictionaryHandler
 	{
 		$dictionary = $this->repository->find($message->getUuid());
 		
-		$dictionary->changeExistingDictionary(Dictionary\Values::fromArray($message->getValues()));
+		$dictionary->changeExistingDictionary(Dictionary\Entries::fromArray($message->getValues()));
 		
 		$this->repository->save($dictionary);
 	}
