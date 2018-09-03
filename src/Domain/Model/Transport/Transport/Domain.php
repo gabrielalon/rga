@@ -23,7 +23,7 @@ final class Domain
 	 */
 	private function __construct(string $domain)
 	{
-		Assertion::url($domain,'Invalid domain string: ' . $domain);
+		Assertion::string($domain,'Invalid domain string: ' . $domain);
 		
 		$this->domain = $domain;
 	}
