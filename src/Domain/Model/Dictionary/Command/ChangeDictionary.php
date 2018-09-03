@@ -10,23 +10,23 @@ class ChangeDictionary
 	use Command\CommandTrait;
 	
 	/** @var array */
-	private $values;
+	private $entries;
 	
 	/**
 	 * @param string $uuid
-	 * @param array $values
+	 * @param array $entries
 	 */
-	public function __construct(string $uuid, array $values)
+	public function __construct(string $uuid, array $entries)
 	{
 		$this->setUuid($uuid);
-		$this->values = $values;
+		$this->entries = $entries;
 	}
 	
 	/**
 	 * @return array
 	 */
-	public function getValues(): array
+	public function getEntries(): array
 	{
-		return $this->values;
+		return $this->entries;
 	}
 }

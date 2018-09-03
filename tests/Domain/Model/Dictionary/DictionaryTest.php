@@ -56,9 +56,9 @@ class DictionaryTest
 	{
 		$dictionary = $this->reconstituteDictionaryFromHistory($this->newDictionaryCreated());
 		
-		$values = ValueObject\Entries::fromArray(['pl' => 'testowo', 'en' => 'test']);
+		$entries = ValueObject\Entries::fromArray(['pl' => 'testowo', 'en' => 'test']);
 		
-		$dictionary->changeExistingDictionary($values);
+		$dictionary->changeExistingDictionary($entries);
 		
 		/** @var AggregateChanged[] $events */
 		$events = $this->popRecordedEvents($dictionary);
@@ -69,7 +69,7 @@ class DictionaryTest
 		$event = $events[0];
 		
 		$this->assertSame(Event\ExistingDictionaryChanged::class, $event->messageName());
-		$this->assertTrue($values->equals($event->dictionaryValues()));
+		$this->assertTrue($entries->equals($event->dictionaryValues()));
 	}
 	
 	/**
@@ -91,7 +91,7 @@ class DictionaryTest
 	{
 		return Event\NewDictionaryCreated::occur($this->uuid->toString(), [
 			'type' => $this->type->toString(),
-			'values' => $this->values->toString()
+			'entries' => $this->values->toString()
 		]);
 	}
 }

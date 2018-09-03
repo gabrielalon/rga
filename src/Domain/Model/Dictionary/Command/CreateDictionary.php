@@ -13,17 +13,17 @@ class CreateDictionary
 	private $type;
 	
 	/** @var array */
-	private $values;
+	private $entries;
 	
 	/**
 	 * @param string $type
-	 * @param array $values
+	 * @param array $entries
 	 */
-	public function __construct(string $uuid, string $type, array $values)
+	public function __construct(string $uuid, string $type, array $entries)
 	{
 		$this->setUuid($uuid);
 		$this->type = $type;
-		$this->values = $values;
+		$this->entries = $entries;
 	}
 	
 	/**
@@ -37,8 +37,8 @@ class CreateDictionary
 	/**
 	 * @return array
 	 */
-	public function getValues(): array
+	public function getEntries(): array
 	{
-		return $this->values;
+		return $this->entries;
 	}
 }

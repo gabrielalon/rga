@@ -28,13 +28,13 @@ class ChangeDictionaryHandlerTest
 	{
 		//given
 		$uuid = \Ramsey\Uuid\Uuid::uuid4();
-		$values = ['pl' => 'test', 'en' => 'testowe'];
+		$entries = ['pl' => 'test', 'en' => 'testowe'];
 		
-		$command = new CreateDictionary($uuid->toString(), Type::CONTACT_PREFERENCE, $values);
+		$command = new CreateDictionary($uuid->toString(), Type::CONTACT_PREFERENCE, $entries);
 		$this->getCommandBus()->dispatch($command);
 		
-		$values = ['pl' => 'testowo', 'en' => 'test'];
-		$command = new ChangeDictionary($uuid->toString(), $values);
+		$entries = ['pl' => 'testowo', 'en' => 'test'];
+		$command = new ChangeDictionary($uuid->toString(), $entries);
 		
 		//when
 		$this->getCommandBus()->dispatch($command);
@@ -45,7 +45,7 @@ class ChangeDictionaryHandlerTest
 		$entity = $projector->get($uuid->toString());
 		
 		$this->assertEquals($entity->getUuid()->toString(), $uuid->toString());
-		$this->assertEquals($entity->getEntries()->toString(), \serialize($values));
+		$this->assertEquals($entity->getEntries()->toString(), \serialize($entries));
 		
 		/** @var InMemoryEventStreamRepository $streamRepository */
 		$streamRepository = $this->getFromContainer(EventStreamRepositoryInterface::class);

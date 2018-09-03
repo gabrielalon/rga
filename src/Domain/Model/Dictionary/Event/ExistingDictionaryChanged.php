@@ -13,7 +13,7 @@ class ExistingDictionaryChanged
 	 */
 	public function dictionaryValues(): Dictionary\Entries
 	{
-		return Dictionary\Entries::fromArray((array)($this->payload['values'] ? \unserialize($this->payload['values'], ['allowed_classes' => false]) : []));
+		return Dictionary\Entries::fromArray((array)($this->payload['entries'] ? \unserialize($this->payload['entries'], ['allowed_classes' => false]) : []));
 	}
 	
 	/**

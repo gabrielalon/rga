@@ -28,8 +28,8 @@ class CreateDictionaryHandlerTest
 	{
 		//given
 		$uuid = \Ramsey\Uuid\Uuid::uuid4();
-		$values = ['pl' => 'test', 'en' => 'testowe'];
-		$command = new CreateDictionary($uuid->toString(), Type::CONTACT_PREFERENCE, $values);
+		$entries = ['pl' => 'test', 'en' => 'testowe'];
+		$command = new CreateDictionary($uuid->toString(), Type::CONTACT_PREFERENCE, $entries);
 		
 		//when
 		$this->getCommandBus()->dispatch($command);
@@ -41,7 +41,7 @@ class CreateDictionaryHandlerTest
 		
 		$this->assertEquals($entity->getUuid()->toString(), $uuid->toString());
 		$this->assertEquals($entity->getType()->toString(), Type::CONTACT_PREFERENCE);
-		$this->assertEquals($entity->getEntries()->toString(), \serialize($values));
+		$this->assertEquals($entity->getEntries()->toString(), \serialize($entries));
 		
 		/** @var InMemoryEventStreamRepository $streamRepository */
 		$streamRepository = $this->getFromContainer(EventStreamRepositoryInterface::class);

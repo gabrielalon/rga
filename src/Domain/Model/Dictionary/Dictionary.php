@@ -66,7 +66,7 @@ class Dictionary
 		
 		$dictionary->recordThat(Event\NewDictionaryCreated::occur($uuid->toString(), [
 			'type' => $type->toString(),
-			'values' => $values->toString()
+			'entries' => $values->toString()
 		]));
 		
 		return $dictionary;
@@ -78,7 +78,7 @@ class Dictionary
 	public function changeExistingDictionary(ValueObject\Entries $values): void
 	{
 		$this->recordThat(Event\ExistingDictionaryChanged::occur($this->aggregateId(), [
-			'values' => $values->toString()
+			'entries' => $values->toString()
 		]));
 	}
 	
