@@ -2,41 +2,28 @@
 
 namespace RGA\Domain\Model\Rga\Integration\Warranty;
 
-use RGA\Infrastructure\Source\Warranty\ConfigInterface;
+use RGA\Infrastructure\Source\Warranty;
 
 class Config
-	implements ConfigInterface
+	implements Warranty\ConfigInterface
 {
-	/** @var integer */
-	private $daysToReturns;
-
-	/** @var integer */
-	private $monthsToComplaint;
-
-	public function __construct()
+	/** @var Warranty\ConfigStorage\ConfigStorageInterface */
+	private $storage;
+	
+	/**
+	 * @param Warranty\ConfigStorage\ConfigStorageInterface $storage
+	 */
+	public function __construct(Warranty\ConfigStorage\ConfigStorageInterface $storage)
 	{
-		$file = __DIR__ . '/../../../../../../config/warranty.php';
-		if (true === file_exists($file))
-		{
-			$warranty = include($file);
-			if (true === \is_array($warranty))
-			{
-				$this->daysToReturns = $warranty['days_to_returns'];
-				$this->monthsToComplaint = $warranty['months_to_complaints'];
-
-				return;
-			}
-		}
-
-		throw new \RuntimeException('Warranty not configured');
+		$this->storage = $storage;
 	}
-
+	
 	/**
 	 * @return int
 	 */
 	public function getDaysToReturns(): int
 	{
-		return $this->daysToReturns;
+		return $this->storage->getDaysToReturns();
 	}
 
 	/**
@@ -44,6 +31,6 @@ class Config
 	 */
 	public function getMonthsToComplaint(): int
 	{
-		return $this->monthsToComplaint;
+		return $this->storage->getMonthsToComplaint();
 	}
 }

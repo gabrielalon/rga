@@ -37,7 +37,7 @@ trait CreateRgaHandlerTestTrait
 		$this->transportUuid = ValueObject\TransportUuid::fromString(\Ramsey\Uuid\Uuid::uuid4()->toString());
 		
 		$this->sourceService = new OrderSourceService();
-		$this->warrantyCalculator = new Calculator(new Config());
+		$this->warrantyCalculator = $this->getFromContainer(Calculator::class);
 		
 		$this->bank = (new ValueObject\Applicant\Bank('ing', '00 0000 0000 0000 0000'));
 	}

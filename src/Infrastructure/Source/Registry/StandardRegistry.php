@@ -15,7 +15,7 @@ class StandardRegistry
 	 * @return Service\ServiceInterface
 	 * @throws \InvalidArgumentException
 	 */
-	public function get($objectType)
+	public function get($objectType): Service\ServiceInterface
 	{
 		if (true === isset($this->items[$objectType]))
 		{
@@ -39,7 +39,7 @@ class StandardRegistry
 	/**
 	 * @return Service\ServiceInterface[]
 	 */
-	public function all()
+	public function all(): array
 	{
 		return $this->items;
 	}

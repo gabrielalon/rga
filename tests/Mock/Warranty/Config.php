@@ -3,32 +3,40 @@
 namespace RGA\Test\Mock\Warranty;
 
 use RGA\Infrastructure\Source\Warranty\ConfigInterface;
+use RGA\Infrastructure\Source\Warranty\ConfigStorage\ConfigStorageInterface;
+use RGA\Test\Mock\Warranty\ConfigStorage\ArgumentConfiguration;
 
 class Config
 	implements ConfigInterface
 {
-	public $daysToReturns;
-	
-	public $monthsToComplaint;
+	/** @var ConfigStorageInterface */
+	private $storage;
 	
 	/**
-	 * RgaShopConfig constructor.
-	 *
-	 * @param $daysToReturns
-	 * @param $monthsToComplaint
+	 * @param int $daysToReturns
+	 * @param int $monthsToComplaint
+	 * @return Config
 	 */
-	public function __construct($daysToReturns, $monthsToComplaint)
+	public static function fromDates(int $daysToReturns, int $monthsToComplaint): Config
 	{
-		$this->daysToReturns = $daysToReturns;
-		$this->monthsToComplaint = $monthsToComplaint;
+		return new Config(new ArgumentConfiguration($daysToReturns, $monthsToComplaint));
 	}
+	
+	/**
+	 * @param ConfigStorageInterface $storage
+	 */
+	public function __construct(ConfigStorageInterface $storage)
+	{
+		$this->storage = $storage;
+	}
+	
 	
 	/**
 	 * @return mixed
 	 */
 	public function getDaysToReturns(): int
 	{
-		return $this->daysToReturns;
+		return $this->storage->getDaysToReturns();
 	}
 	
 	/**
@@ -36,6 +44,6 @@ class Config
 	 */
 	public function getMonthsToComplaint(): int
 	{
-		return $this->monthsToComplaint;
+		return $this->storage->getMonthsToComplaint();
 	}
 }

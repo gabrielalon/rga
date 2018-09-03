@@ -12,6 +12,7 @@ use RGA\Domain\Model\Source\RgaObject;
 use RGA\Domain\Model\Source\RgaObjectItem;
 use RGA\Infrastructure\SegregationSourcing\Aggregate\EventBridge\AggregateChanged;
 use RGA\Test\Domain\Model\AggregateChangedTestCase;
+use RGA\Test\Mock\Container\DI;
 use RGA\Test\Mock\Source\OrderSourceService;
 
 class RgaTest
@@ -47,7 +48,7 @@ class RgaTest
 		$this->transportUuid = ValueObject\TransportUuid::fromString(\Ramsey\Uuid\Uuid::uuid4()->toString());
 		
 		$this->sourceService = new OrderSourceService();
-		$this->warrantyCalculator = new Calculator(new Config());
+		$this->warrantyCalculator = DI::newInstance()->get(Calculator::class);
 		
 		$this->bank = (new Rga\Applicant\Bank('ing', '00 0000 0000 0000 0000'));
 	}

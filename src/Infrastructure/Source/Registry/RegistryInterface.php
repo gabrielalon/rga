@@ -11,7 +11,7 @@ interface RegistryInterface
 	 * @return ServiceInterface
 	 * @throws \InvalidArgumentException
 	 */
-	public function get($objectType);
+	public function get($objectType): ServiceInterface;
 	
 	/**
 	 * @param ServiceInterface $service
@@ -21,5 +21,5 @@ interface RegistryInterface
 	/**
 	 * @return ServiceInterface[]
 	 */
-	public function all();
+	public function all(): array;
 }

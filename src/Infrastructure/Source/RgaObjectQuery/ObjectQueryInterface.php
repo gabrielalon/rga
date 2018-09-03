@@ -12,7 +12,7 @@ interface ObjectQueryInterface
 	 * @return RgaObject\RgaObjectInterface
 	 * @throws \RuntimeException
 	 */
-	public function getByObjectInfo($type, $id);
+	public function getByObjectInfo($type, $id): RgaObject\RgaObjectInterface;
 	
 	/**
 	 * @param string $type
@@ -20,5 +20,5 @@ interface ObjectQueryInterface
 	 * @return RgaObject\RgaObjectItemInterface
 	 * @throws \RuntimeException
 	 */
-	public function getByObjectItemInfo($type, $itemId);
+	public function getByObjectItemInfo($type, $itemId): RgaObject\RgaObjectItemInterface;
 }

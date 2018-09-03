@@ -18,7 +18,7 @@ class CalculatorTest
 	 */
 	public function testFinalDateOfReturn($daysToReturns, $monthsToComplaints, $creationDate, $expected)
 	{
-		$config = new Config($daysToReturns, $monthsToComplaints);
+		$config = Config::fromDates($daysToReturns, $monthsToComplaints);
 		$calculator = new Calculator($config);
 		$calculator->setCreationDate($creationDate);
 		$finalDateOfReturn = $calculator->getFinalDateOfReturn();
@@ -35,7 +35,7 @@ class CalculatorTest
 	 */
 	public function testFinalDateOfComplaint($daysToReturns, $monthsToComplaints, $creationDate, $warranty, $expected)
 	{
-		$config = new Config($daysToReturns, $monthsToComplaints);
+		$config = Config::fromDates($daysToReturns, $monthsToComplaints);
 		$calculator = new Calculator($config);
 		$calculator->setCreationDate($creationDate);
 		$finalDateOfComplaint = $calculator->getFinalDateOfComplaint($warranty);
