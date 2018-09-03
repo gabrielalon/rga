@@ -31,7 +31,7 @@ class StandardQuery
 		
 		if (null === $typeService)
 		{
-			throw new \Exception('Service for object type "'.$objectType.'" not found');
+			throw new \Exception('Service for object type "' . $objectType . '" not found');
 		}
 		
 		return $typeService->buildObject($objectId);
@@ -49,7 +49,7 @@ class StandardQuery
 		
 		if (null === $typeService)
 		{
-			throw new \Exception('Service for object type "'.$objectType.'" not found');
+			throw new \Exception('Service for object type "' . $objectType . '" not found');
 		}
 		
 		return $typeService->buildObjectItem($objectId);

@@ -576,7 +576,7 @@ class Rga
 	public function stateRgaChanged(ValueObject\StateUuid $stateUuid): void
 	{
 		$this->recordThat(Event\StateRgaChanged::occur($this->aggregateId(), [
-			'state_uuid' => $stateUuid
+			'state_uuid' => $stateUuid->toString()
 		]));
 	}
 	
