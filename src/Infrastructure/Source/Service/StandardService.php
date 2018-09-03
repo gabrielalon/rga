@@ -47,10 +47,7 @@ class StandardService
 		$rmaObjectItemBuilder = new RgaObjectItemBuilder(
 			$itemId,
 			0,
-			'',
-			$this->sourceType(),
-			0,
-			null
+			''
 		);
 		
 		return $rmaObjectItemBuilder->build();
