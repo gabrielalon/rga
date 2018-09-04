@@ -5,6 +5,7 @@ namespace RGA\Infrastructure\Source\Service;
 use RGA\Domain\Model\Rga\Rga\Applicant\Applicant;
 use RGA\Domain\Model\Source\RgaObjectBuilder;
 use RGA\Domain\Model\Source\RgaObjectItemBuilder;
+use RGA\Domain\Model\Source\RgaObjectItemCollector;
 use RGA\Infrastructure\Source\RgaObject;
 
 class StandardService
@@ -33,6 +34,11 @@ class StandardService
 			time(),
 			true
 		);
+		
+		$items = new RgaObjectItemCollector();
+		$items->add($this->buildObjectItem($id));
+		
+		$builder->setItems($items);
 		
 		return $builder->build();
 	}

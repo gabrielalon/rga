@@ -20,4 +20,12 @@ class EventStreamCollection
 	{
 		return parent::getArrayCopy();
 	}
+	
+	/**
+	 * @return EventStream[]
+	 */
+	public function all(): array
+	{
+		return $this->getArrayCopy();
+	}
 }
