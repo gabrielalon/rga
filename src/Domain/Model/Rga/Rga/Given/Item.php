@@ -2,7 +2,10 @@
 
 namespace RGA\Domain\Model\Rga\Rga\Given;
 
+use RGA\Infrastructure\Source\RgaObject\RgaObjectItemInterface;
+
 class Item
+	implements RgaObjectItemInterface
 {
 	/** @var integer */
 	private $sourceItemID;
@@ -107,5 +110,61 @@ class Item
 	public function getAttachments(): array
 	{
 		return $this->attachments;
+	}
+	
+	/**
+	 * @return integer
+	 */
+	public function getId(): int
+	{
+		return (int)$this->getGivenSourceID();
+	}
+	
+	/**
+	 * @return integer
+	 */
+	public function getVariantId(): int
+	{
+		return (int)$this->getGivenSourceID();
+	}
+	
+	/**
+	 * @return boolean
+	 */
+	public function isRgaAble(): bool
+	{
+		return true;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getName(): string
+	{
+		return $this->getGivenName();
+	}
+	
+	/**
+	 * @return integer|null
+	 */
+	public function getFinalDateOfComplaint(): ?int
+	{
+		return null;
+	}
+	
+	/**
+	 * @return integer|null
+	 */
+	public function getFinalDateOfReturn(): ?int
+	{
+		return null;
+	}
+	
+	/**
+	 * @return integer|null
+	 */
+	public function getWarranty(): ?int
+	{
+		return null;
 	}
 }
