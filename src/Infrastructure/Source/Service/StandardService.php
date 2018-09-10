@@ -36,7 +36,7 @@ class StandardService
 		);
 		
 		$items = new RgaObjectItemCollector();
-		$items->add($this->buildObjectItem($id));
+		$items->add($this->buildObjectItem(0));
 		
 		$builder->setItems($items);
 		
