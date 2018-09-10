@@ -19,8 +19,14 @@ class BelongsTo
 	public static function assert(Applicant $applicant, RgaObject $source): void
 	{
 		$isValid = (
-			$applicant->getId() === $source->getApplicant()->getId() &&
-			$applicant->getType() === $source->getApplicant()->getType()
+			(
+				$applicant->getId() === $source->getApplicant()->getId() &&
+				$applicant->getType() === $source->getApplicant()->getType()
+			)
+			||
+			(
+				0 === $applicant->getId() // some kind of guest
+			)
 		);
 		
 		if (false === $isValid)
