@@ -484,12 +484,20 @@ class Rga
 	{
 		$rga = new Rga();
 		
-		$sourceItem = $source->getItems()->get($item->getSourceItemID());
 		$warrantyCalculator->setCreationDate($source->getCreatedAt());
 		
 		Source\Condition\Condition\IsObjectReady::assert($source);
-		Source\Condition\Condition\IsObjectItemReady::assert($references->getBehaviourType(), $sourceItem, $warrantyCalculator);
 		Source\Condition\Ownership\BelongsTo::assert($applicant, $source);
+		
+		if ($source->getItems()->has($item->getSourceItemID()))
+		{
+			$sourceItem = $source->getItems()->get($item->getSourceItemID());
+			Source\Condition\Condition\IsObjectItemReady::assert($references->getBehaviourType(), $sourceItem, $warrantyCalculator);
+		}
+		else
+		{
+			$sourceItem = $item;
+		}
 		
 		$rga->recordThat(Event\NewRgaCreated::occur($uuid->toString(), [
 			'created_at' => \date('Y-m-d H:i:s'),

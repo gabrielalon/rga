@@ -17,8 +17,17 @@ class RgaObjectItemCollector
 	 * @param integer $id
 	 * @return RgaObjectItem
 	 */
-	public function get($id)
+	public function get($id): RgaObjectItem
 	{
 		return $this->offsetGet($id);
+	}
+	
+	/**
+	 * @param integer $id
+	 * @return bool
+	 */
+	public function has($id): bool
+	{
+		return $this->offsetExists($id);
 	}
 }
