@@ -117,7 +117,7 @@ class Item
 	 */
 	public function getId(): int
 	{
-		return (int)$this->getGivenSourceID();
+		return 0;
 	}
 	
 	/**
@@ -125,7 +125,7 @@ class Item
 	 */
 	public function getVariantId(): int
 	{
-		return (int)$this->getGivenSourceID();
+		return 0;
 	}
 	
 	/**
