@@ -4,8 +4,54 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e14a68474ba0c32bffcaed42b826e1e",
+    "content-hash": "87783f7bf582f7da961494db2eeef1ec",
     "packages": [
+        {
+            "name": "ayeo/price",
+            "version": "1.0.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ayeo/price.git",
+                "reference": "d6549edcbf4da7abd1fd88d84ea28ac70418d30f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ayeo/price/zipball/d6549edcbf4da7abd1fd88d84ea28ac70418d30f",
+                "reference": "d6549edcbf4da7abd1fd88d84ea28ac70418d30f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ayeo\\Price\\": "src//",
+                    "Ayeo\\Price\\Test\\": "tests//"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ayeo",
+                    "email": "me@ayeo.pl",
+                    "homepage": "http://ayeo.pl"
+                }
+            ],
+            "description": "Simple price model",
+            "homepage": "https://github.com/ayeo/price",
+            "keywords": [
+                "model",
+                "price"
+            ],
+            "time": "2018-07-26T10:43:10+00:00"
+        },
         {
             "name": "psr/container",
             "version": "1.0.0",

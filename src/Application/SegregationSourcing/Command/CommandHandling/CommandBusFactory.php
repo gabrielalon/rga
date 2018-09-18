@@ -8,6 +8,7 @@ use RGA\Application\SegregationSourcing\Event\EventSourcing\EventBusFactory;
 use RGA\Domain\Model\Attachment;
 use RGA\Domain\Model\Behaviour;
 use RGA\Domain\Model\Dictionary;
+use RGA\Domain\Model\ReturnPackage;
 use RGA\Domain\Model\Rga;
 use RGA\Domain\Model\State;
 use RGA\Domain\Model\Transport;
@@ -161,6 +162,20 @@ class CommandBusFactory
 			->route(Transport\Command\RemoveTransport::class)
 			->to(new Transport\Command\RemoveTransportHandler(
 				new Persist\Transport\TransportRepository($eventStorage, $snapshotStorage)
+			));
+		
+		// ReturnPackage
+		
+		$router
+			->route(ReturnPackage\Command\CreateReturnPackage::class)
+			->to(new ReturnPackage\Command\CreateReturnPackageHandler(
+				new Persist\ReturnPackage\ReturnPackageRepository($eventStorage, $snapshotStorage)
+			));
+		
+		$router
+			->route(ReturnPackage\Command\SetReturnPackage::class)
+			->to(new ReturnPackage\Command\SetReturnPackageHandler(
+				new Persist\ReturnPackage\ReturnPackageRepository($eventStorage, $snapshotStorage)
 			));
 		
 		$bus = new CommandBus();

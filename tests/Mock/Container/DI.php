@@ -44,6 +44,7 @@ class DI
 				Model\State\Projection\StateProjectorInterface::class => new Infrastructure\State\Projection\InMemoryStateProjector(),
 				Model\Transport\Projection\TransportProjectorInterface::class => new Infrastructure\Transport\Projection\InMemoryTransportProjector(),
 				Model\Attachment\Projection\AttachmentProjectorInterface::class => new Infrastructure\Attachment\Projection\InMemoryAttachmentProjector(),
+				Model\ReturnPackage\Projection\ReturnPackageProjectorInterface::class => new Infrastructure\ReturnPackage\Projection\InMemoryReturnPackageProjector(),
 				Model\Rga\Projection\RgaProjectorInterface::class => new Infrastructure\Rga\Projection\InMemoryRgaProjector(),
 				ConfigInterface::class => new Model\Rga\Integration\Warranty\Config(new VendorConfigurationFile()),
 				Model\Rga\Integration\Warranty\Calculator::class => new Model\Rga\Integration\Warranty\Calculator(new Model\Rga\Integration\Warranty\Config(new VendorConfigurationFile()))

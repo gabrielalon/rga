@@ -25,7 +25,8 @@
     }
   },
   "require": {
-    "psr/container": "^1.0"
+    "psr/container": "^1.0",
+    "ayeo/price": "^1.0"
   },
   "require-dev": {
     "ramsey/uuid": "^3.7",

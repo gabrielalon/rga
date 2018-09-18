@@ -7,6 +7,7 @@ use RGA\Application\SegregationSourcing\Event\Plugin\EventRouter;
 use RGA\Domain\Model\Attachment;
 use RGA\Domain\Model\Behaviour;
 use RGA\Domain\Model\Dictionary;
+use RGA\Domain\Model\ReturnPackage;
 use RGA\Domain\Model\Rga;
 use RGA\Domain\Model\State;
 use RGA\Domain\Model\Transport;
@@ -106,6 +107,15 @@ class EventBusFactory
 		$router
 			->route(Transport\Event\ExistingTransportRemoved::class)
 			->to([$container->get(Transport\Projection\TransportProjectorInterface::class), 'onExistingTransportRemoved']);
+		
+		// ReturnPackage
+		$router
+			->route(ReturnPackage\Event\NewReturnPackageCreated::class)
+			->to([$container->get(ReturnPackage\Projection\ReturnPackageProjectorInterface::class), 'onNewReturnPackageCreated']);
+		
+		$router
+			->route(ReturnPackage\Event\ReturnPackageSet::class)
+			->to([$container->get(ReturnPackage\Projection\ReturnPackageProjectorInterface::class), 'onReturnPackageSet']);
 		
 		$bus = new EventBus();
 		$bus->setRouter($router);
