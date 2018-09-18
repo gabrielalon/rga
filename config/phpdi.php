@@ -1,5 +1,7 @@
 <?php
 
+use RGA\Application\SegregationSourcing;
+use RGA\Application\Service;
 use RGA\Domain\Model\Rga;
 use Psr\Container\ContainerInterface;
 use RGA\Infrastructure\Source;
@@ -37,5 +39,45 @@ return [
 		);
 		
 		return $query;
+	},
+
+	Service\Behaviour\BehaviourService::class => function (ContainerInterface $container) {
+		$service = new Service\Behaviour\BehaviourService(
+			SegregationSourcing\Command\CommandHandling\CommandBusFactory::get($container)
+		);
+		
+		return $service;
+	},
+	
+	Service\Dictionary\DictionaryService::class => function (ContainerInterface $container) {
+		$service = new Service\Dictionary\DictionaryService(
+			SegregationSourcing\Command\CommandHandling\CommandBusFactory::get($container)
+		);
+		
+		return $service;
+	},
+	
+	Service\Rga\RgaService::class => function (ContainerInterface $container) {
+		$service = new Service\Rga\RgaService(
+			SegregationSourcing\Command\CommandHandling\CommandBusFactory::get($container)
+		);
+		
+		return $service;
+	},
+	
+	Service\State\StateService::class => function (ContainerInterface $container) {
+		$service = new Service\State\StateService(
+			SegregationSourcing\Command\CommandHandling\CommandBusFactory::get($container)
+		);
+		
+		return $service;
+	},
+	
+	Service\Transport\TransportService::class => function (ContainerInterface $container) {
+		$service = new Service\Transport\TransportService(
+			SegregationSourcing\Command\CommandHandling\CommandBusFactory::get($container)
+		);
+		
+		return $service;
 	}
 ];
