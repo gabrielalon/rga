@@ -57,6 +57,14 @@ return [
 		return $service;
 	},
 	
+	Service\ReturnPackage\ReturnPackageService::class => function (ContainerInterface $container) {
+		$service = new Service\ReturnPackage\ReturnPackageService(
+			SegregationSourcing\Command\CommandHandling\CommandBusFactory::get($container)
+		);
+		
+		return $service;
+	},
+	
 	Service\Rga\RgaService::class => function (ContainerInterface $container) {
 		$service = new Service\Rga\RgaService(
 			SegregationSourcing\Command\CommandHandling\CommandBusFactory::get($container)
