@@ -2,8 +2,7 @@
 <phpunit bootstrap="vendor/autoload.php"
 		 backupGlobals="false"
 		 colors="true"
-		 verbose="true"
-		 cacheResult="false">
+		 verbose="true">
 	<testsuites>
 		<testsuite name="RGATests">
 			<directory suffix="Test.php">./tests</directory>
