@@ -9,9 +9,9 @@ class RgaService
 	extends Service\AbstractService
 {
 	/**
-	 * @param RgaDataProvider $provider
+	 * @param RgaApplicantProvider $provider
 	 */
-	public function changeApplicant(RgaDataProvider $provider): void
+	public function changeApplicant(RgaApplicantProvider $provider): void
 	{
 		$command = new Command\ChangeApplicantRga(
 			$provider->uuid(),
