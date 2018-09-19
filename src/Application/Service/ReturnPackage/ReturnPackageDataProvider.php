@@ -36,5 +36,5 @@ interface ReturnPackageDataProvider
 	/**
 	 * @return \DateTimeImmutable
 	 */
-	public function setAt(): string;
+	public function setAt(): \DateTimeImmutable;
 }

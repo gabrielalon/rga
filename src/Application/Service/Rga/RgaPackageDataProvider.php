@@ -15,5 +15,5 @@ interface RgaPackageDataProvider
 	/**
 	 * @return \DateTimeImmutable
 	 */
-	public function setAt(): string;
+	public function setAt(): \DateTimeImmutable;
 }
