@@ -28,10 +28,13 @@ class EventBus
 	 */
 	public function dispatch(EventInterface $event): void
 	{
-		/** @var callable $listener */
-		foreach ($this->router->map($event->messageName()) as $listener)
+		/**
+		 * @var object $projector
+		 * @var string $method
+		 */
+		foreach ($this->router->map($event->messageName()) as list($projector, $method))
 		{
-			\call_user_func($listener, $event);
+			$projector->{$method}($event);
 		}
 	}
 }
