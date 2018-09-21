@@ -11,4 +11,8 @@ class Type
 	
 	public const COMPLAINT = 'complaint';
 	public const RETURN = 'return';
+	
+	// older
+	public const COMPLAIMENT = 'complaiment';
+	public const SERVICE = 'service';
 }
