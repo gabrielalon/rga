@@ -15,6 +15,9 @@ class Dictionary
 	/** @var ValueObject\Entries */
 	private $entries;
 	
+	/** @var ValueObject\BehavioursUuid */
+	private $behaviours;
+	
 	/**
 	 * @return ValueObject\Uuid
 	 */
@@ -68,6 +71,25 @@ class Dictionary
 	public function setEntries(ValueObject\Entries $entries): Dictionary
 	{
 		$this->entries = $entries;
+		
+		return $this;
+	}
+	
+	/**
+	 * @return ValueObject\BehavioursUuid
+	 */
+	public function getBehaviours(): ValueObject\BehavioursUuid
+	{
+		return $this->behaviours;
+	}
+	
+	/**
+	 * @param ValueObject\BehavioursUuid $behaviours
+	 * @return Dictionary
+	 */
+	public function setBehaviours(ValueObject\BehavioursUuid $behaviours): Dictionary
+	{
+		$this->behaviours = $behaviours;
 		
 		return $this;
 	}

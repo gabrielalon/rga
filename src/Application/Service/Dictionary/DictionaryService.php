@@ -16,7 +16,8 @@ class DictionaryService
 		$command = new Command\CreateDictionary(
 			$provider->uuid(),
 			$provider->type(),
-			$provider->entries()
+			$provider->entries(),
+			$provider->behaviours()
 		);
 		
 		$this->handle($command);
@@ -29,7 +30,8 @@ class DictionaryService
 	{
 		$command = new Command\ChangeDictionary(
 			$provider->uuid(),
-			$provider->entries()
+			$provider->entries(),
+			$provider->behaviours()
 		);
 		
 		$this->handle($command);

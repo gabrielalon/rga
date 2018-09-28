@@ -16,4 +16,9 @@ interface DictionaryDataProvider
 	 * @return string
 	 */
 	public function type(): string;
+	
+	/**
+	 * @return string[]
+	 */
+	public function behaviours(): array;
 }

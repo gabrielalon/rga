@@ -20,7 +20,9 @@ class InMemoryDictionaryProjector
 		$this->entities[$event->dictionaryUuid()->toString()] = (new Dictionary())
 			->setUuid($event->dictionaryUuid())
 			->setType($event->dictionaryType())
-			->setEntries($event->dictionaryValues());
+			->setEntries($event->dictionaryValues())
+			->setBehaviours($event->dictionaryBehaviours())
+		;
 	}
 	
 	/**
@@ -30,6 +32,7 @@ class InMemoryDictionaryProjector
 	{
 		$entity = $this->get($event->aggregateId());
 		$entity->setEntries($event->dictionaryValues());
+		$entity->setBehaviours($event->dictionaryBehaviours());
 		$this->entities[$event->aggregateId()] = $entity;
 	}
 	

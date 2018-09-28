@@ -29,7 +29,8 @@ class CreateDictionaryHandlerTest
 		//given
 		$uuid = \Ramsey\Uuid\Uuid::uuid4();
 		$entries = ['pl' => 'test', 'en' => 'testowe'];
-		$command = new CreateDictionary($uuid->toString(), Type::CONTACT_PREFERENCE, $entries);
+		$behaviours = [\Ramsey\Uuid\Uuid::uuid4()->toString()];
+		$command = new CreateDictionary($uuid->toString(), Type::CONTACT_PREFERENCE, $entries, $behaviours);
 		
 		//when
 		$this->getCommandBus()->dispatch($command);
@@ -42,6 +43,7 @@ class CreateDictionaryHandlerTest
 		$this->assertEquals($entity->getUuid()->toString(), $uuid->toString());
 		$this->assertEquals($entity->getType()->toString(), Type::CONTACT_PREFERENCE);
 		$this->assertEquals($entity->getEntries()->toString(), \serialize($entries));
+		$this->assertEquals($entity->getBehaviours()->toString(), \serialize($behaviours));
 		
 		/** @var InMemoryEventStreamRepository $streamRepository */
 		$streamRepository = $this->getFromContainer(EventStreamRepositoryInterface::class);
@@ -58,6 +60,7 @@ class CreateDictionaryHandlerTest
 			$this->assertTrue($entity->getUuid()->equals($event->dictionaryUuid()));
 			$this->assertTrue($entity->getType()->equals($event->dictionaryType()));
 			$this->assertTrue($entity->getEntries()->equals($event->dictionaryValues()));
+			$this->assertTrue($entity->getBehaviours()->equals($event->dictionaryBehaviours()));
 		}
 		
 		/** @var InMemorySnapshotRepository $snapshotRepository */
@@ -76,7 +79,8 @@ class CreateDictionaryHandlerTest
 		//given
 		$uuid = \Ramsey\Uuid\Uuid::uuid4();
 		$vaues = ['pl' => 'test', 'en' => 'testowe'];
-		$command = new CreateDictionary($uuid->toString(), 'test', $vaues);
+		$behaviours = [\Ramsey\Uuid\Uuid::uuid4()->toString()];
+		$command = new CreateDictionary($uuid->toString(), 'test', $vaues, $behaviours);
 		
 		//when
 		$this->expectException(AssertionFailedException::class);

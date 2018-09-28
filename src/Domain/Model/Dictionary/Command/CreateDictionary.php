@@ -15,15 +15,21 @@ class CreateDictionary
 	/** @var array */
 	private $entries;
 	
+	/** @var array */
+	private $behaviours;
+	
 	/**
+	 * @param string $uuid
 	 * @param string $type
 	 * @param array $entries
+	 * @param array $behaviours
 	 */
-	public function __construct(string $uuid, string $type, array $entries)
+	public function __construct(string $uuid, string $type, array $entries, array $behaviours)
 	{
 		$this->setUuid($uuid);
 		$this->type = $type;
 		$this->entries = $entries;
+		$this->behaviours = $behaviours;
 	}
 	
 	/**
@@ -40,5 +46,13 @@ class CreateDictionary
 	public function getEntries(): array
 	{
 		return $this->entries;
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function getBehaviours(): array
+	{
+		return $this->behaviours;
 	}
 }

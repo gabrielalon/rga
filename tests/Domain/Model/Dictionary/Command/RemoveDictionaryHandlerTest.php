@@ -27,8 +27,9 @@ class RemoveDictionaryHandlerTest
 		//given
 		$uuid = \Ramsey\Uuid\Uuid::uuid4();
 		$values = ['pl' => 'test', 'en' => 'testowe'];
+		$behaviours = [\Ramsey\Uuid\Uuid::uuid4()->toString()];
 		
-		$command = new CreateDictionary($uuid->toString(), Type::CONTACT_PREFERENCE, $values);
+		$command = new CreateDictionary($uuid->toString(), Type::CONTACT_PREFERENCE, $values, $behaviours);
 		$this->getCommandBus()->dispatch($command);
 		
 		//when

@@ -21,11 +21,15 @@ class DictionaryTest
 	/** @var ValueObject\Entries */
 	private $values;
 	
+	/** @var ValueObject\BehavioursUuid */
+	private $behaviours;
+	
 	protected function setUp()
 	{
 		$this->uuid = ValueObject\Uuid::fromString(\Ramsey\Uuid\Uuid::uuid4()->toString());
 		$this->type = ValueObject\Type::fromString(Enum\Type::__default);
 		$this->values = ValueObject\Entries::fromArray(['pl' => 'test', 'en' => 'testowo']);
+		$this->behaviours = ValueObject\BehavioursUuid::fromArray([\Ramsey\Uuid\Uuid::uuid4()->toString()]);
 	}
 	
 	/**
@@ -33,7 +37,7 @@ class DictionaryTest
 	 */
 	public function it_creates_new_dictionary()
 	{
-		$dictionary = Dictionary::createNewDictionary($this->uuid, $this->type, $this->values);
+		$dictionary = Dictionary::createNewDictionary($this->uuid, $this->type, $this->values, $this->behaviours);
 		
 		/** @var AggregateChanged[] $events */
 		$events = $this->popRecordedEvents($dictionary);
@@ -47,6 +51,7 @@ class DictionaryTest
 		$this->assertTrue($this->uuid->equals($event->dictionaryUuid()));
 		$this->assertTrue($this->type->equals($event->dictionaryType()));
 		$this->assertTrue($this->values->equals($event->dictionaryValues()));
+		$this->assertTrue($this->behaviours->equals($event->dictionaryBehaviours()));
 	}
 	
 	/**
@@ -57,8 +62,9 @@ class DictionaryTest
 		$dictionary = $this->reconstituteDictionaryFromHistory($this->newDictionaryCreated());
 		
 		$entries = ValueObject\Entries::fromArray(['pl' => 'testowo', 'en' => 'test']);
+		$behaviours = ValueObject\BehavioursUuid::fromArray([\Ramsey\Uuid\Uuid::uuid4()->toString()]);
 		
-		$dictionary->changeExistingDictionary($entries);
+		$dictionary->changeExistingDictionary($entries, $behaviours);
 		
 		/** @var AggregateChanged[] $events */
 		$events = $this->popRecordedEvents($dictionary);
@@ -70,6 +76,7 @@ class DictionaryTest
 		
 		$this->assertSame(Event\ExistingDictionaryChanged::class, $event->messageName());
 		$this->assertTrue($entries->equals($event->dictionaryValues()));
+		$this->assertTrue($behaviours->equals($event->dictionaryBehaviours()));
 	}
 	
 	/**
@@ -91,7 +98,8 @@ class DictionaryTest
 	{
 		return Event\NewDictionaryCreated::occur($this->uuid->toString(), [
 			'type' => $this->type->toString(),
-			'entries' => $this->values->toString()
+			'entries' => $this->values->toString(),
+			'behaviours' => $this->behaviours->toString()
 		]);
 	}
 }

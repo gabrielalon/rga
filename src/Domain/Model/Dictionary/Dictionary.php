@@ -18,6 +18,9 @@ class Dictionary
 	/** @var ValueObject\Entries */
 	private $entries;
 	
+	/** @var ValueObject\BehavioursUuid */
+	private $behaviours;
+	
 	/**
 	 * @param Dictionary\Uuid $uuid
 	 */
@@ -43,6 +46,14 @@ class Dictionary
 	}
 	
 	/**
+	 * @param Dictionary\BehavioursUuid $behaviours
+	 */
+	public function setBehaviours(Dictionary\BehavioursUuid $behaviours): void
+	{
+		$this->behaviours = $behaviours;
+	}
+	
+	/**
 	 * @return string
 	 */
 	protected function aggregateId(): string
@@ -54,19 +65,22 @@ class Dictionary
 	 * @param Dictionary\Uuid $uuid
 	 * @param Dictionary\Type $type
 	 * @param Dictionary\Entries $values
+	 * @param Dictionary\BehavioursUuid $behaviours
 	 * @return Dictionary
 	 */
 	public static function createNewDictionary(
 		ValueObject\Uuid $uuid,
 		ValueObject\Type $type,
-		ValueObject\Entries $values
+		ValueObject\Entries $values,
+		ValueObject\BehavioursUuid $behaviours
 	): Dictionary
 	{
 		$dictionary = new Dictionary();
 		
 		$dictionary->recordThat(Event\NewDictionaryCreated::occur($uuid->toString(), [
 			'type' => $type->toString(),
-			'entries' => $values->toString()
+			'entries' => $values->toString(),
+			'behaviours' => $behaviours->toString()
 		]));
 		
 		return $dictionary;
@@ -74,11 +88,16 @@ class Dictionary
 	
 	/**
 	 * @param Dictionary\Entries $values
+	 * @param Dictionary\BehavioursUuid $behaviours
 	 */
-	public function changeExistingDictionary(ValueObject\Entries $values): void
+	public function changeExistingDictionary(
+		ValueObject\Entries $values,
+		ValueObject\BehavioursUuid $behaviours
+	): void
 	{
 		$this->recordThat(Event\ExistingDictionaryChanged::occur($this->aggregateId(), [
-			'entries' => $values->toString()
+			'entries' => $values->toString(),
+			'behaviours' => $behaviours->toString()
 		]));
 	}
 	

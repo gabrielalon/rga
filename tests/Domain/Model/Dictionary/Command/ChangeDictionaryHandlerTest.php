@@ -29,12 +29,14 @@ class ChangeDictionaryHandlerTest
 		//given
 		$uuid = \Ramsey\Uuid\Uuid::uuid4();
 		$entries = ['pl' => 'test', 'en' => 'testowe'];
+		$behaviours = [\Ramsey\Uuid\Uuid::uuid4()->toString()];
 		
-		$command = new CreateDictionary($uuid->toString(), Type::CONTACT_PREFERENCE, $entries);
+		$command = new CreateDictionary($uuid->toString(), Type::CONTACT_PREFERENCE, $entries, $behaviours);
 		$this->getCommandBus()->dispatch($command);
 		
 		$entries = ['pl' => 'testowo', 'en' => 'test'];
-		$command = new ChangeDictionary($uuid->toString(), $entries);
+		$behaviours = [\Ramsey\Uuid\Uuid::uuid4()->toString()];
+		$command = new ChangeDictionary($uuid->toString(), $entries, $behaviours);
 		
 		//when
 		$this->getCommandBus()->dispatch($command);
@@ -46,6 +48,7 @@ class ChangeDictionaryHandlerTest
 		
 		$this->assertEquals($entity->getUuid()->toString(), $uuid->toString());
 		$this->assertEquals($entity->getEntries()->toString(), \serialize($entries));
+		$this->assertEquals($entity->getBehaviours()->toString(), \serialize($behaviours));
 		
 		/** @var InMemoryEventStreamRepository $streamRepository */
 		$streamRepository = $this->getFromContainer(EventStreamRepositoryInterface::class);
@@ -61,6 +64,7 @@ class ChangeDictionaryHandlerTest
 			
 			$this->assertEquals($entity->getUuid()->toString(), $event->aggregateId());
 			$this->assertTrue($entity->getEntries()->equals($event->dictionaryValues()));
+			$this->assertTrue($entity->getBehaviours()->equals($event->dictionaryBehaviours()));
 		}
 		
 		/** @var InMemorySnapshotRepository $snapshotRepository */
