@@ -11,6 +11,9 @@ class VendorConfigurationFile
 	/** @var integer */
 	private $monthsToComplaint;
 	
+	/** @var integer */
+	private $warrantyInMonths;
+	
 	public function __construct()
 	{
 		$this->loadData();
@@ -26,6 +29,7 @@ class VendorConfigurationFile
 			{
 				$this->daysToReturns = $warranty['days_to_returns'];
 				$this->monthsToComplaint = $warranty['months_to_complaints'];
+				$this->warrantyInMonths = $warranty['warranty_in_months'];
 				
 				return;
 			}
@@ -48,5 +52,13 @@ class VendorConfigurationFile
 	public function getMonthsToComplaint(): int
 	{
 		return $this->monthsToComplaint;
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getWarrantyInMonths(): int
+	{
+		return $this->warrantyInMonths;
 	}
 }

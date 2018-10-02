@@ -24,7 +24,7 @@ class ArgumentConfiguration
 	}
 	
 	/**
-	 * @return mixed
+	 * @return int
 	 */
 	public function getDaysToReturns(): int
 	{
@@ -32,10 +32,18 @@ class ArgumentConfiguration
 	}
 	
 	/**
-	 * @return mixed
+	 * @return int
 	 */
 	public function getMonthsToComplaint(): int
 	{
 		return $this->monthsToComplaint;
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getWarrantyInMonths(): int
+	{
+		return 12;
 	}
 }

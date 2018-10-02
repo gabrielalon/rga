@@ -33,4 +33,12 @@ class Config
 	{
 		return $this->storage->getMonthsToComplaint();
 	}
+	
+	/**
+	 * @return int
+	 */
+	public function getWarrantyInMonths(): int
+	{
+		return $this->storage->getWarrantyInMonths();
+	}
 }

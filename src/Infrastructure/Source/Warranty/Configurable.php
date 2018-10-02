@@ -13,4 +13,9 @@ interface Configurable
 	 * @return int
 	 */
 	public function getMonthsToComplaint(): int;
+	
+	/**
+	 * @return int
+	 */
+	public function getWarrantyInMonths(): int;
 }

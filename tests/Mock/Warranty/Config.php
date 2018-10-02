@@ -30,9 +30,8 @@ class Config
 		$this->storage = $storage;
 	}
 	
-	
 	/**
-	 * @return mixed
+	 * @return int
 	 */
 	public function getDaysToReturns(): int
 	{
@@ -40,10 +39,18 @@ class Config
 	}
 	
 	/**
-	 * @return mixed
+	 * @return int
 	 */
 	public function getMonthsToComplaint(): int
 	{
 		return $this->storage->getMonthsToComplaint();
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function getWarrantyInMonths(): int
+	{
+		return $this->storage->getWarrantyInMonths();
 	}
 }
