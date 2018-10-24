@@ -56,8 +56,10 @@ class CreateRgaHandler
 	{
 		foreach ($message->getItems() as $item)
 		{
+			$uuid = $item->getRgaUuid($message->getUuid());
+			
 			$rga = Rga::createNewRga(
-				Rga\Uuid::fromString($message->getUuid()),
+				Rga\Uuid::fromString($uuid),
 				$message->getReferences(),
 				$item,
 				$message->getApplicant(),

@@ -28,6 +28,9 @@ class Item
 	/** @var Attachment[] */
 	private $attachments = [];
 	
+	/** @var string */
+	private $rgaUuid;
+	
 	/**
 	 * @param int $sourceItemID
 	 * @param string $givenSourceID
@@ -36,6 +39,7 @@ class Item
 	 * @param string $expectation
 	 * @param string $incident
 	 * @param Attachment[] $attachments
+	 * @param string $rgaUuid
 	 */
 	public function __construct(
 		int $sourceItemID,
@@ -44,7 +48,8 @@ class Item
 		string $reason,
 		string $expectation,
 		string $incident,
-		array $attachments = []
+		array $attachments = [],
+		string $rgaUuid = null
 	)
 	{
 		$this->sourceItemID = $sourceItemID;
@@ -54,6 +59,7 @@ class Item
 		$this->expectation = $expectation;
 		$this->incident = $incident;
 		$this->attachments = $attachments;
+		$this->rgaUuid = $rgaUuid;
 	}
 	
 	/**
@@ -166,5 +172,19 @@ class Item
 	public function getWarranty(): ?int
 	{
 		return null;
+	}
+	
+	/**
+	 * @param string $defaultUuid
+	 * @return string
+	 */
+	public function getRgaUuid($defaultUuid): string
+	{
+		if (false === empty($this->rgaUuid) && $this->rgaUuid !== $defaultUuid)
+		{
+			return $this->rgaUuid;
+		}
+		
+		return $defaultUuid;
 	}
 }
