@@ -9,6 +9,14 @@ final class EmailBodies
 {
 	/**
 	 * @param array $data
+	 */
+	protected function __construct(array $data)
+	{
+		$this->setData($data);
+	}
+	
+	/**
+	 * @param array $data
 	 * @return EmailBodies
 	 */
 	public static function fromArray(array $data): EmailBodies

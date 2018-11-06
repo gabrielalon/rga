@@ -25,6 +25,14 @@ abstract class Locales
 		Assertion::isArray($data, 'Invalid Data array');
 		Assertion::notEmpty($data, 'Data array is empty');
 		
+		$this->setData($data);
+	}
+	
+	/**
+	 * @param array $data
+	 */
+	protected function setData(array $data): void
+	{
 		$collection = new Utils\Collection();
 		
 		foreach ($data as $locale => $value)

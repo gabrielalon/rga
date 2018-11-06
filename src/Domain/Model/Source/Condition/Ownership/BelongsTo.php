@@ -5,6 +5,7 @@ namespace RGA\Domain\Model\Source\Condition\Ownership;
 use RGA\Application\Assert;
 use RGA\Domain\Model\Rga\Rga\Applicant\Applicant;
 use RGA\Domain\Model\Source\RgaObject;
+use RGA\Infrastructure\Source\Service\StandardService;
 
 class BelongsTo
 	extends Assert\Assertion
@@ -26,6 +27,10 @@ class BelongsTo
 			||
 			(
 				0 === $applicant->getId() // some kind of guest
+			)
+			||
+			(
+				$source->getType() === (new StandardService())->sourceType()
 			)
 		);
 		

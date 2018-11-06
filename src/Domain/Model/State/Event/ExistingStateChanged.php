@@ -13,7 +13,7 @@ class ExistingStateChanged
 	 */
 	public function stateIsEditable(): State\IsEditable
 	{
-		return State\IsEditable::fromBoolean((bool)($this->payload['is_editable'] ?? false));
+		return State\IsEditable::fromBoolean((bool)($this->payload['editable'] ?? false));
 	}
 	
 	/**
@@ -21,7 +21,7 @@ class ExistingStateChanged
 	 */
 	public function stateIsDeletable(): State\IsDeletable
 	{
-		return State\IsDeletable::fromBoolean((bool)($this->payload['is_deletable'] ?? false));
+		return State\IsDeletable::fromBoolean((bool)($this->payload['deletable'] ?? false));
 	}
 	
 	/**
@@ -29,7 +29,7 @@ class ExistingStateChanged
 	 */
 	public function stateIsRejectable(): State\IsRejectable
 	{
-		return State\IsRejectable::fromBoolean((bool)($this->payload['is_rejectable'] ?? false));
+		return State\IsRejectable::fromBoolean((bool)($this->payload['rejectable'] ?? false));
 	}
 	
 	/**
@@ -37,7 +37,7 @@ class ExistingStateChanged
 	 */
 	public function stateIsFinishable(): State\IsFinishable
 	{
-		return State\IsFinishable::fromBoolean((bool)($this->payload['is_finishable'] ?? false));
+		return State\IsFinishable::fromBoolean((bool)($this->payload['finishable'] ?? false));
 	}
 	
 	/**
@@ -45,7 +45,7 @@ class ExistingStateChanged
 	 */
 	public function stateIsCloseable(): State\IsCloseable
 	{
-		return State\IsCloseable::fromBoolean((bool)($this->payload['is_closeable'] ?? false));
+		return State\IsCloseable::fromBoolean((bool)($this->payload['closeable'] ?? false));
 	}
 	
 	/**
@@ -53,7 +53,7 @@ class ExistingStateChanged
 	 */
 	public function stateIsSendingEmail(): State\IsSendingEmail
 	{
-		return State\IsSendingEmail::fromBoolean((bool)($this->payload['is_sending_email'] ?? false));
+		return State\IsSendingEmail::fromBoolean((bool)($this->payload['sending_email'] ?? false));
 	}
 	
 	/**
