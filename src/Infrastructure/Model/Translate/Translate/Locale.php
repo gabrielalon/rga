@@ -25,7 +25,7 @@ final class Locale
 	 */
 	private function __construct(string $locale)
 	{
-		Assertion::inArray($locale, (new Enum\Locale())->getConstList(), 'Invalid Locale string: ' . $locale);
+		Assertion::regex( $locale,'/[a-zA-Z]{2,}/', 'Invalid Locale string: ' . $locale);
 		
 		$this->locale = $locale;
 	}
