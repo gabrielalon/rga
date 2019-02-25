@@ -9,5 +9,5 @@ interface MessageBusInterface
 	/**
 	 * @param RouterInterface $router
 	 */
-	public function setRouter(RouterInterface $router): void;
+	public function setRouter(RouterInterface $router);
 }

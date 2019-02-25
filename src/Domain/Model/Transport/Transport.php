@@ -2,66 +2,81 @@
 
 namespace RGA\Domain\Model\Transport;
 
-use RGA\Domain\Model\Transport\Transport as ValueObject;
-use RGA\Domain\Model\Transport\Event;
+use RGA\Domain\Model\Transport\Transport as VO;
+use RGA\Application\Transport\Event;
 use RGA\Infrastructure\SegregationSourcing\Aggregate;
 
 class Transport
 	extends Aggregate\AggregateRoot
 {
-	/** @var ValueObject\Uuid */
-	private $uuid;
+	/** @var VO\Uuid */
+	protected $uuid;
 	
-	/** @var ValueObject\Activation */
-	private $activation;
+	/** @var VO\Active */
+	protected $active;
 	
-	/** @var ValueObject\ShipmentId */
-	private $shipmentId;
+	/** @var VO\ShipmentId */
+	protected $shipmentId;
 	
-	/** @var ValueObject\Domains */
-	private $domains;
+	/** @var VO\Domains */
+	protected $domains;
 	
-	/** @var ValueObject\Names */
-	private $names;
+	/** @var VO\Names */
+	protected $names;
 	
 	/**
 	 * @param Transport\Uuid $uuid
+	 * @return Transport
 	 */
-	public function setUuid(Transport\Uuid $uuid): void
+	public function setUuid(Transport\Uuid $uuid): Transport
 	{
 		$this->uuid = $uuid;
+		
+		return $this;
 	}
 	
 	/**
-	 * @param Transport\Activation $activation
+	 * @param Transport\Active $active
+	 * @return Transport
 	 */
-	public function setActivation(Transport\Activation $activation): void
+	public function setActivation(Transport\Active $active): Transport
 	{
-		$this->activation = $activation;
+		$this->active = $active;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Transport\ShipmentId $shipmentId
+	 * @return Transport
 	 */
-	public function setShipmentId(Transport\ShipmentId $shipmentId): void
+	public function setShipmentId(Transport\ShipmentId $shipmentId): Transport
 	{
 		$this->shipmentId = $shipmentId;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Transport\Domains $domains
+	 * @return Transport
 	 */
-	public function setDomains(Transport\Domains $domains): void
+	public function setDomains(Transport\Domains $domains): Transport
 	{
 		$this->domains = $domains;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Transport\Names $names
+	 * @return Transport
 	 */
-	public function setNames(Transport\Names $names): void
+	public function setNames(Transport\Names $names): Transport
 	{
 		$this->names = $names;
+		
+		return $this;
 	}
 	
 	/**
@@ -73,19 +88,27 @@ class Transport
 	}
 	
 	/**
+	 * {@inheritdoc}
+	 */
+	public function setAggregateId($id): void
+	{
+		$this->setUuid(VO\Uuid::fromString($id));
+	}
+	
+	/**
 	 * @param Transport\Uuid $uuid
-	 * @param Transport\Activation $activation
+	 * @param Transport\Active $activation
 	 * @param Transport\ShipmentId $shipmentId
 	 * @param Transport\Domains $domains
 	 * @param Transport\Names $names
 	 * @return Transport
 	 */
 	public static function createNewTransport(
-		ValueObject\Uuid $uuid,
-		ValueObject\Activation $activation,
-		ValueObject\ShipmentId $shipmentId,
-		ValueObject\Domains $domains,
-		ValueObject\Names $names
+		VO\Uuid $uuid,
+		VO\Active $activation,
+		VO\ShipmentId $shipmentId,
+		VO\Domains $domains,
+		VO\Names $names
 	): Transport
 	{
 		$transport = new Transport();
@@ -101,16 +124,16 @@ class Transport
 	}
 	
 	/**
-	 * @param Transport\Activation $activation
+	 * @param Transport\Active $activation
 	 * @param Transport\ShipmentId $shipmentId
 	 * @param Transport\Domains $domains
 	 * @param Transport\Names $names
 	 */
 	public function changeExistingTransport(
-		ValueObject\Activation $activation,
-		ValueObject\ShipmentId $shipmentId,
-		ValueObject\Domains $domains,
-		ValueObject\Names $names
+		VO\Active $activation,
+		VO\ShipmentId $shipmentId,
+		VO\Domains $domains,
+		VO\Names $names
 	): void
 	{
 		$this->recordThat(Event\ExistingTransportChanged::occur($this->aggregateId(), [

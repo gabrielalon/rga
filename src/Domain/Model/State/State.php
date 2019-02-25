@@ -2,132 +2,165 @@
 
 namespace RGA\Domain\Model\State;
 
-use RGA\Domain\Model\State\State as ValueObject;
-use RGA\Domain\Model\State\Event;
+use RGA\Domain\Model\State\State as VO;
+use RGA\Application\State\Event;
 use RGA\Infrastructure\SegregationSourcing\Aggregate;
 
 class State
 	extends Aggregate\AggregateRoot
 {
-	/** @var ValueObject\Uuid */
-	private $uuid;
+	/** @var VO\Uuid */
+	protected $uuid;
 	
-	/** @var ValueObject\IsEditable */
-	private $isEditable;
+	/** @var VO\IsEditable */
+	protected $isEditable;
 	
-	/** @var ValueObject\IsDeletable */
-	private $isDeletable;
+	/** @var VO\IsDeletable */
+	protected $isDeletable;
 	
-	/** @var ValueObject\IsRejectable */
-	private $isRejectable;
+	/** @var VO\IsRejectable */
+	protected $isRejectable;
 	
-	/** @var ValueObject\IsFinishable */
-	private $isFinishable;
+	/** @var VO\IsFinishable */
+	protected $isFinishable;
 	
-	/** @var ValueObject\IsCloseable */
-	private $isCloseable;
+	/** @var VO\IsCloseable */
+	protected $isCloseable;
 	
-	/** @var ValueObject\IsSendingEmail */
-	private $isSendingEmail;
+	/** @var VO\IsSendingEmail */
+	protected $isSendingEmail;
 	
-	/** @var ValueObject\ColorCode */
-	private $colorCode;
+	/** @var VO\ColorCode */
+	protected $colorCode;
 	
-	/** @var ValueObject\Names */
-	private $names;
+	/** @var VO\Names */
+	protected $names;
 	
-	/** @var ValueObject\EmailSubjects */
-	private $emailSubjects;
+	/** @var VO\EmailSubjects */
+	protected $emailSubjects;
 	
-	/** @var ValueObject\EmailBodies */
-	private $emailBodies;
+	/** @var VO\EmailBodies */
+	protected $emailBodies;
 	
 	/**
 	 * @param State\Uuid $uuid
+	 * @return State
 	 */
-	public function setUuid(State\Uuid $uuid): void
+	public function setUuid(State\Uuid $uuid): State
 	{
 		$this->uuid = $uuid;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param State\IsEditable $isEditable
+	 * @return State
 	 */
-	public function setIsEditable(State\IsEditable $isEditable): void
+	public function setIsEditable(State\IsEditable $isEditable): State
 	{
 		$this->isEditable = $isEditable;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param State\IsDeletable $isDeletable
+	 * @return State
 	 */
-	public function setIsDeletable(State\IsDeletable $isDeletable): void
+	public function setIsDeletable(State\IsDeletable $isDeletable): State
 	{
 		$this->isDeletable = $isDeletable;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param State\IsRejectable $isRejectable
+	 * @return State
 	 */
-	public function setIsRejectable(State\IsRejectable $isRejectable): void
+	public function setIsRejectable(State\IsRejectable $isRejectable): State
 	{
 		$this->isRejectable = $isRejectable;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param State\IsFinishable $isFinishable
+	 * @return State
 	 */
-	public function setIsFinishable(State\IsFinishable $isFinishable): void
+	public function setIsFinishable(State\IsFinishable $isFinishable): State
 	{
 		$this->isFinishable = $isFinishable;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param State\IsCloseable $isCloseable
+	 * @return State
 	 */
-	public function setIsCloseable(State\IsCloseable $isCloseable): void
+	public function setIsCloseable(State\IsCloseable $isCloseable): State
 	{
 		$this->isCloseable = $isCloseable;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param State\IsSendingEmail $isSendingEmail
+	 * @return State
 	 */
-	public function setIsSendingEmail(State\IsSendingEmail $isSendingEmail): void
+	public function setIsSendingEmail(State\IsSendingEmail $isSendingEmail): State
 	{
 		$this->isSendingEmail = $isSendingEmail;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param State\ColorCode $colorCode
+	 * @return State
 	 */
-	public function setColorCode(State\ColorCode $colorCode): void
+	public function setColorCode(State\ColorCode $colorCode): State
 	{
 		$this->colorCode = $colorCode;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param State\Names $names
+	 * @return State
 	 */
-	public function setNames(State\Names $names): void
+	public function setNames(State\Names $names): State
 	{
 		$this->names = $names;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param State\EmailSubjects $emailSubjects
+	 * @return State
 	 */
-	public function setEmailSubjects(State\EmailSubjects $emailSubjects): void
+	public function setEmailSubjects(State\EmailSubjects $emailSubjects): State
 	{
 		$this->emailSubjects = $emailSubjects;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param State\EmailBodies $emailBodies
+	 * @return State
 	 */
-	public function setEmailBodies(State\EmailBodies $emailBodies): void
+	public function setEmailBodies(State\EmailBodies $emailBodies): State
 	{
 		$this->emailBodies = $emailBodies;
+		
+		return $this;
 	}
 	
 	/**
@@ -136,6 +169,14 @@ class State
 	protected function aggregateId(): string
 	{
 		return $this->uuid->toString();
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	public function setAggregateId($id): void
+	{
+		$this->setUuid(VO\Uuid::fromString($id));
 	}
 	
 	/**
@@ -153,17 +194,17 @@ class State
 	 * @return State
 	 */
 	public static function createNewState(
-		ValueObject\Uuid $uuid,
-		ValueObject\IsEditable $isEditable,
-		ValueObject\IsDeletable $isDeletable,
-		ValueObject\IsRejectable $isRejectable,
-		ValueObject\IsFinishable $isFinishable,
-		ValueObject\IsCloseable $isCloseable,
-		ValueObject\IsSendingEmail $isSendingEmail,
-		ValueObject\ColorCode $colorCode,
-		ValueObject\Names $names,
-		ValueObject\EmailSubjects $emailSubjects,
-		ValueObject\EmailBodies $emailBodies
+		VO\Uuid $uuid,
+		VO\IsEditable $isEditable,
+		VO\IsDeletable $isDeletable,
+		VO\IsRejectable $isRejectable,
+		VO\IsFinishable $isFinishable,
+		VO\IsCloseable $isCloseable,
+		VO\IsSendingEmail $isSendingEmail,
+		VO\ColorCode $colorCode,
+		VO\Names $names,
+		VO\EmailSubjects $emailSubjects,
+		VO\EmailBodies $emailBodies
 	): State
 	{
 		$state = new State();
@@ -197,16 +238,16 @@ class State
 	 * @param State\EmailBodies $emailBodies
 	 */
 	public function changeExistingState(
-		ValueObject\IsEditable $isEditable,
-		ValueObject\IsDeletable $isDeletable,
-		ValueObject\IsRejectable $isRejectable,
-		ValueObject\IsFinishable $isFinishable,
-		ValueObject\IsCloseable $isCloseable,
-		ValueObject\IsSendingEmail $isSendingEmail,
-		ValueObject\ColorCode $colorCode,
-		ValueObject\Names $names,
-		ValueObject\EmailSubjects $emailSubjects,
-		ValueObject\EmailBodies $emailBodies
+		VO\IsEditable $isEditable,
+		VO\IsDeletable $isDeletable,
+		VO\IsRejectable $isRejectable,
+		VO\IsFinishable $isFinishable,
+		VO\IsCloseable $isCloseable,
+		VO\IsSendingEmail $isSendingEmail,
+		VO\ColorCode $colorCode,
+		VO\Names $names,
+		VO\EmailSubjects $emailSubjects,
+		VO\EmailBodies $emailBodies
 	): void
 	{
 		$this->recordThat(Event\ExistingStateChanged::occur($this->aggregateId(), [

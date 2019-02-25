@@ -37,6 +37,14 @@ final class IsEditable
 	}
 	
 	/**
+	 * @return bool
+	 */
+	public function raw(): bool
+	{
+		return $this->editable;
+	}
+	
+	/**
 	 * @param IsEditable $other
 	 * @return bool
 	 */

@@ -37,6 +37,14 @@ final class IsProductReceived
 	}
 	
 	/**
+	 * @return bool
+	 */
+	public function raw(): bool
+	{
+		return $this->productReceived;
+	}
+	
+	/**
 	 * @param IsProductReceived $other
 	 * @return bool
 	 */

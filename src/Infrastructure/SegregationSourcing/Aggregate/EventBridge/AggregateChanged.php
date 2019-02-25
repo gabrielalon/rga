@@ -26,11 +26,22 @@ abstract class AggregateChanged
 	
 	/**
 	 * @param EventStream $stream
-	 * @return static
+	 * @return AggregateChanged
 	 */
 	public static function fromEventStream(EventStream $stream): self
 	{
 		return new static($stream->getAggregateId(), $stream->getPayload(), $stream->getMetadata());
+	}
+	
+	/**
+	 * @param string $aggregateId
+	 * @param array $payload
+	 * @param array $metadata
+	 * @return AggregateChanged
+	 */
+	public static function fromEventStreamData(string $aggregateId, array $payload, array $metadata = []): self
+	{
+		return new static($aggregateId, $payload, $metadata);
 	}
 	
 	/**
@@ -42,15 +53,15 @@ abstract class AggregateChanged
 	{
 		$this->metadata = $metadata;
 		$this->setAggregateId($aggregateId);
-		$this->setVersion($metadata['_aggregate_version'] ?? 1);
+		$this->setVersion(isset($metadata['_aggregate_version']) ? $metadata['_aggregate_version'] : 1);
 		$this->setPayload($payload);
 		$this->init();
 	}
 	
 	/**
-	 * @return string
+	 * @return integer|string
 	 */
-	public function aggregateId(): string
+	public function aggregateId()
 	{
 		return $this->metadata['_aggregate_id'];
 	}
@@ -61,6 +72,14 @@ abstract class AggregateChanged
 	public function payload(): array
 	{
 		return $this->payload;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function payloadJSON(): string
+	{
+		return \json_encode($this->payload());
 	}
 	
 	/**

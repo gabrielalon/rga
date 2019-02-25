@@ -8,7 +8,7 @@ class EventStreamCollection
 	/**
 	 * @param EventStream $stream
 	 */
-	public function add(EventStream $stream): void
+	public function add(EventStream $stream)
 	{
 		$this->append($stream);
 	}
@@ -24,7 +24,7 @@ class EventStreamCollection
 	/**
 	 * @return EventStream[]
 	 */
-	public function all(): array
+	public function all()
 	{
 		return $this->getArrayCopy();
 	}

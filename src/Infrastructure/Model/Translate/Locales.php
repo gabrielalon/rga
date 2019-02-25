@@ -8,7 +8,7 @@ use RGA\Infrastructure\Model\Translate\Utils;
 
 abstract class Locales
 {
-	/** @var array */
+	/** @var Utils\Collection */
 	private $data;
 	
 	/**
@@ -100,9 +100,9 @@ abstract class Locales
 	}
 	
 	/**
-	 * @return string
+	 * @return array
 	 */
-	public function __toString(): string
+	public function raw(): array
 	{
 		$data = [];
 		
@@ -115,6 +115,14 @@ abstract class Locales
 			$data[$locale] = $value->toString();
 		}
 		
-		return \serialize($data);
+		return $data;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function __toString(): string
+	{
+		return \serialize($this->raw());
 	}
 }

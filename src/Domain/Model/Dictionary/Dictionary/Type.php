@@ -3,7 +3,7 @@
 namespace RGA\Domain\Model\Dictionary\Dictionary;
 
 use RGA\Application\Assert\Assertion;
-use RGA\Domain\Model\Dictionary\Enum;
+use RGA\Application\Dictionary\Enum;
 
 final class Type
 {

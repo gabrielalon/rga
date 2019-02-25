@@ -3,7 +3,7 @@
 namespace RGA\Domain\Model\Transport\Transport;
 
 use RGA\Application\Assert\Assertion;
-use RGA\Domain\Model\Transport\Utils;
+use RGA\Application\Transport\Utils;
 
 final class Domains
 {
@@ -25,7 +25,6 @@ final class Domains
 	protected function __construct(array $domains)
 	{
 		Assertion::isArray($domains, 'Invalid Domains array');
-		Assertion::notEmpty($domains, 'Domains array is empty');
 		
 		$collection = new Utils\Collection();
 		
@@ -72,6 +71,14 @@ final class Domains
 	 */
 	public function __toString(): string
 	{
+		return \serialize($this->raw());
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function raw(): array
+	{
 		$domains = [];
 		
 		/** @var Domain $domain */
@@ -80,7 +87,7 @@ final class Domains
 			$domains[] = $domain->toString();
 		}
 		
-		return \serialize($domains);
+		return $domains;
 	}
 	
 	/**

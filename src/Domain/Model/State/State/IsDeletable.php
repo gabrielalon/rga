@@ -37,6 +37,14 @@ final class IsDeletable
 	}
 	
 	/**
+	 * @return bool
+	 */
+	public function raw(): bool
+	{
+		return $this->deletable;
+	}
+	
+	/**
 	 * @param IsDeletable $other
 	 * @return bool
 	 */

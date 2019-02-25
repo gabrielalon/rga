@@ -28,6 +28,9 @@ class Item
 	/** @var Attachment[] */
 	private $attachments = [];
 	
+	/** @var Additional[] */
+	private $additionals = [];
+	
 	/** @var string */
 	private $rgaUuid;
 	
@@ -39,6 +42,7 @@ class Item
 	 * @param string $expectation
 	 * @param string $incident
 	 * @param Attachment[] $attachments
+	 * @param Additional[] $additionals
 	 * @param string $rgaUuid
 	 */
 	public function __construct(
@@ -49,6 +53,7 @@ class Item
 		string $expectation,
 		string $incident,
 		array $attachments = [],
+		array $additionals = [],
 		string $rgaUuid = null
 	)
 	{
@@ -59,6 +64,7 @@ class Item
 		$this->expectation = $expectation;
 		$this->incident = $incident;
 		$this->attachments = $attachments;
+		$this->additionals = $additionals;
 		$this->rgaUuid = $rgaUuid;
 	}
 	
@@ -116,6 +122,14 @@ class Item
 	public function getAttachments(): array
 	{
 		return $this->attachments;
+	}
+	
+	/**
+	 * @return Additional[]
+	 */
+	public function getAdditionals(): array
+	{
+		return $this->additionals;
 	}
 	
 	/**

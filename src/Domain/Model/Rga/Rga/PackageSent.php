@@ -37,6 +37,14 @@ final class PackageSent
 	}
 	
 	/**
+	 * @return bool
+	 */
+	public function raw(): bool
+	{
+		return $this->sent;
+	}
+	
+	/**
 	 * @param PackageSent $other
 	 * @return bool
 	 */

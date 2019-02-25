@@ -7,5 +7,5 @@ interface MessageInterface
 	/**
 	 * @return string
 	 */
-	public function messageName(): string;
+	public function messageName();
 }

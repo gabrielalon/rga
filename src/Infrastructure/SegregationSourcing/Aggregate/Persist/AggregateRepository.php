@@ -4,6 +4,8 @@ namespace RGA\Infrastructure\SegregationSourcing\Aggregate\Persist;
 
 use RGA\Infrastructure\SegregationSourcing\Aggregate;
 use RGA\Infrastructure\SegregationSourcing\Event\EventStore\EventStorage;
+use RGA\Infrastructure\SegregationSourcing\Event\EventStore\Stream\EventStream;
+use RGA\Infrastructure\SegregationSourcing\Event\EventStore\Stream\EventStreamCollection;
 use RGA\Infrastructure\SegregationSourcing\Snapshot\SnapshotStore\SnapshotStorage;
 
 abstract class AggregateRepository
@@ -73,10 +75,24 @@ abstract class AggregateRepository
 		}
 		else
 		{
+			$this->completeEmptyEventsWithAggregateRoot($events, $aggregateId);
+			
 			$aggregateRoot = $this->getAggregateTranslator()
 				->reconstituteAggregateFromHistory($this->aggregateType, $events);
 		}
 		
 		return $aggregateRoot;
+	}
+	
+	/**
+	 * @param \ArrayIterator $events
+	 * @param string $aggregateId
+	 */
+	private function completeEmptyEventsWithAggregateRoot(\ArrayIterator $events, string $aggregateId): void
+	{
+		if (0 === $events->count())
+		{
+			$events->append(Aggregate\EventBridge\EmptyAggregate::fromEventStreamData($aggregateId, [], []));
+		}
 	}
 }

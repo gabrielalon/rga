@@ -37,6 +37,14 @@ final class IsSendingEmail
 	}
 	
 	/**
+	 * @return bool
+	 */
+	public function raw(): bool
+	{
+		return $this->sendingEmail;
+	}
+	
+	/**
 	 * @param IsSendingEmail $other
 	 * @return bool
 	 */

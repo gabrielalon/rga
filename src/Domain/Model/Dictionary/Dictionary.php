@@ -3,54 +3,66 @@
 namespace RGA\Domain\Model\Dictionary;
 
 use RGA\Domain\Model\Dictionary\Dictionary as ValueObject;
-use RGA\Domain\Model\Dictionary\Event;
+use RGA\Application\Dictionary\Event;
 use RGA\Infrastructure\SegregationSourcing\Aggregate;
 
 class Dictionary
 	extends Aggregate\AggregateRoot
 {
 	/** @var ValueObject\Uuid */
-	private $uuid;
+	protected $uuid;
 	
 	/** @var ValueObject\Type */
-	private $type;
+	protected $type;
 	
 	/** @var ValueObject\Entries */
-	private $entries;
+	protected $entries;
 	
 	/** @var ValueObject\BehavioursUuid */
-	private $behaviours;
+	protected $behaviours;
 	
 	/**
 	 * @param Dictionary\Uuid $uuid
+	 * @return Dictionary
 	 */
-	public function setUuid(Dictionary\Uuid $uuid): void
+	public function setUuid(Dictionary\Uuid $uuid): Dictionary
 	{
 		$this->uuid = $uuid;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Dictionary\Type $type
+	 * @return Dictionary
 	 */
-	public function setType(Dictionary\Type $type): void
+	public function setType(Dictionary\Type $type): Dictionary
 	{
 		$this->type = $type;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Dictionary\Entries $entries
+	 * @return Dictionary
 	 */
-	public function setEntries(Dictionary\Entries $entries): void
+	public function setEntries(Dictionary\Entries $entries): Dictionary
 	{
 		$this->entries = $entries;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Dictionary\BehavioursUuid $behaviours
+	 * @return Dictionary
 	 */
-	public function setBehaviours(Dictionary\BehavioursUuid $behaviours): void
+	public function setBehaviours(Dictionary\BehavioursUuid $behaviours): Dictionary
 	{
 		$this->behaviours = $behaviours;
+		
+		return $this;
 	}
 	
 	/**
@@ -59,6 +71,14 @@ class Dictionary
 	protected function aggregateId(): string
 	{
 		return $this->uuid->toString();
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	public function setAggregateId($id): void
+	{
+		$this->setUuid(Dictionary\Uuid::fromString($id));
 	}
 	
 	/**

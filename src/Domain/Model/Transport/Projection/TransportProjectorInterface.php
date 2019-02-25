@@ -2,7 +2,7 @@
 
 namespace RGA\Domain\Model\Transport\Projection;
 
-use RGA\Domain\Model\Transport\Event;
+use RGA\Application\Transport\Event;
 
 interface TransportProjectorInterface
 {

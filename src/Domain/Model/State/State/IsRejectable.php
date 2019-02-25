@@ -37,6 +37,14 @@ final class IsRejectable
 	}
 	
 	/**
+	 * @return bool
+	 */
+	public function raw(): bool
+	{
+		return $this->rejectable;
+	}
+	
+	/**
 	 * @param IsRejectable $other
 	 * @return bool
 	 */

@@ -2,19 +2,19 @@
 
 namespace RGA\Infrastructure\SegregationSourcing\Event\EventStore\BusBridge;
 
-use RGA\Application\SegregationSourcing\Event\EventSourcing\EventBus;
 use RGA\Infrastructure\SegregationSourcing\Event\Event\EventInterface;
+use RGA\Infrastructure\SegregationSourcing\Event\EventSourcing\EventBusInterface;
 use RGA\Infrastructure\SegregationSourcing\Event\EventStore\EventStorage;
 
 class EventPublisher
 {
-	/** @var EventBus */
+	/** @var EventBusInterface */
 	private $eventBus;
 	
 	/**
-	 * @param EventBus $eventBus
+	 * @param EventBusInterface $eventBus
 	 */
-	public function __construct(EventBus $eventBus)
+	public function __construct(EventBusInterface $eventBus)
 	{
 		$this->eventBus = $eventBus;
 	}
@@ -22,7 +22,7 @@ class EventPublisher
 	/**
 	 * @param EventStorage $eventStorage
 	 */
-	public function attachToEventStorage(EventStorage $eventStorage): void
+	public function attachToEventStorage(EventStorage $eventStorage)
 	{
 		$eventStorage->setEventPublisher($this);
 	}
@@ -30,7 +30,7 @@ class EventPublisher
 	/**
 	 * @param EventInterface $event
 	 */
-	public function release(EventInterface $event): void
+	public function release(EventInterface $event)
 	{
 		$this->eventBus->dispatch($event);
 	}
