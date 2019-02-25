@@ -15,7 +15,7 @@ final class CallbackSerializer
 	 * @param callable|null $serializeCallback
 	 * @param callable|null $unserializeCallback
 	 */
-	public function __construct(?callable $serializeCallback, ?callable $unserializeCallback)
+	public function __construct($serializeCallback, $unserializeCallback)
 	{
 		if (null !== $serializeCallback && null !== $unserializeCallback)
 		{
@@ -28,7 +28,7 @@ final class CallbackSerializer
 	 * @param object|array $data
 	 * @return string
 	 */
-	public function serialize($data): string
+	public function serialize($data)
 	{
 		return call_user_func($this->serializeCallback, $data);
 	}
@@ -37,7 +37,7 @@ final class CallbackSerializer
 	 * @param string $serialized
 	 * @return object|array
 	 */
-	public function unserialize(string $serialized)
+	public function unserialize($serialized)
 	{
 		return call_user_func($this->unserializeCallback, $serialized);
 	}

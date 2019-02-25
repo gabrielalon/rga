@@ -2,39 +2,138 @@
 
 namespace RGA\Domain\Model\ReturnPackage;
 
-use RGA\Domain\Model\ReturnPackage\ReturnPackage as ValueObject;
-use RGA\Domain\Model\ReturnPackage\Event;
+use RGA\Domain\Model\ReturnPackage\ReturnPackage as VO;
+use RGA\Application\ReturnPackage\Event;
 use RGA\Infrastructure\SegregationSourcing\Aggregate;
 
 class ReturnPackage
 	extends Aggregate\AggregateRoot
 {
-	/** @var ValueObject\Id */
-	private $id;
+	/** @var VO\Id */
+	protected $id;
 	
-	/** @var ValueObject\RgaUuid */
-	private $rgaUuid;
+	/** @var VO\RgaUuid */
+	protected $rgaUuid;
 	
-	/** @var ValueObject\TransportUuid */
-	private $transportUuid;
+	/** @var VO\TransportUuid */
+	protected $transportUuid;
 	
-	/** @var ValueObject\NettPrice */
-	private $nettPrice;
+	/** @var VO\NettPrice */
+	protected $nettPrice;
 	
-	/** @var ValueObject\VatRate */
-	private $vatRate;
+	/** @var VO\VatRate */
+	protected $vatRate;
 	
-	/** @var ValueObject\Currency */
-	private $currency;
+	/** @var VO\Currency */
+	protected $currency;
 	
-	/** @var ValueObject\PackageSent */
-	private $packageSent;
+	/** @var VO\PackageSent */
+	protected $packageSent;
 	
-	/** @var ValueObject\PackageNo */
-	private $packageNo;
+	/** @var VO\PackageNo */
+	protected $packageNo;
 	
-	/** @var ValueObject\PackageSentAt */
-	private $packageSentAt;
+	/** @var VO\PackageSentAt */
+	protected $packageSentAt;
+	
+	/**
+	 * @param VO\Id $id
+	 * @return ReturnPackage
+	 */
+	public function setId(VO\Id $id): ReturnPackage
+	{
+		$this->id = $id;
+		
+		return $this;
+	}
+	
+	/**
+	 * @param VO\RgaUuid $rgaUuid
+	 * @return ReturnPackage
+	 */
+	public function setRgaUuid(VO\RgaUuid $rgaUuid): ReturnPackage
+	{
+		$this->rgaUuid = $rgaUuid;
+		
+		return $this;
+	}
+	
+	/**
+	 * @param VO\TransportUuid $transportUuid
+	 * @return ReturnPackage
+	 */
+	public function setTransportUuid(VO\TransportUuid $transportUuid): ReturnPackage
+	{
+		$this->transportUuid = $transportUuid;
+		
+		return $this;
+	}
+	
+	/**
+	 * @param VO\NettPrice $nettPrice
+	 * @return ReturnPackage
+	 */
+	public function setNettPrice(VO\NettPrice $nettPrice): ReturnPackage
+	{
+		$this->nettPrice = $nettPrice;
+		
+		return $this;
+	}
+	
+	/**
+	 * @param VO\VatRate $vatRate
+	 * @return ReturnPackage
+	 */
+	public function setVatRate(VO\VatRate $vatRate): ReturnPackage
+	{
+		$this->vatRate = $vatRate;
+		
+		return $this;
+	}
+	
+	/**
+	 * @param VO\Currency $currency
+	 * @return ReturnPackage
+	 */
+	public function setCurrency(VO\Currency $currency): ReturnPackage
+	{
+		$this->currency = $currency;
+		
+		return $this;
+	}
+	
+	/**
+	 * @param VO\PackageSent $packageSent
+	 * @return ReturnPackage
+	 */
+	public function setPackageSent(VO\PackageSent $packageSent): ReturnPackage
+	{
+		$this->packageSent = $packageSent;
+		
+		return $this;
+	}
+	
+	/**
+	 * @param VO\PackageNo $packageNo
+	 * @return ReturnPackage
+	 */
+	public function setPackageNo(VO\PackageNo $packageNo): ReturnPackage
+	{
+		$this->packageNo = $packageNo;
+		
+		return $this;
+	}
+	
+	/**
+	 * @param VO\PackageSentAt $packageSentAt
+	 * @return ReturnPackage
+	 */
+	public function setPackageSentAt(VO\PackageSentAt $packageSentAt): ReturnPackage
+	{
+		$this->packageSentAt = $packageSentAt;
+		
+		return $this;
+	}
 	
 	/**
 	 * @return string
@@ -45,93 +144,29 @@ class ReturnPackage
 	}
 	
 	/**
-	 * @param ValueObject\Id $id
+	 * {@inheritdoc}
 	 */
-	public function setId(ValueObject\Id $id): void
+	public function setAggregateId($id): void
 	{
-		$this->id = $id;
+		$this->setId(VO\Id::fromInteger((int)$id));
 	}
 	
 	/**
-	 * @param ValueObject\RgaUuid $rgaUuid
-	 */
-	public function setRgaUuid(ValueObject\RgaUuid $rgaUuid): void
-	{
-		$this->rgaUuid = $rgaUuid;
-	}
-	
-	/**
-	 * @param ValueObject\TransportUuid $transportUuid
-	 */
-	public function setTransportUuid(ValueObject\TransportUuid $transportUuid): void
-	{
-		$this->transportUuid = $transportUuid;
-	}
-	
-	/**
-	 * @param ValueObject\NettPrice $nettPrice
-	 */
-	public function setNettPrice(ValueObject\NettPrice $nettPrice): void
-	{
-		$this->nettPrice = $nettPrice;
-	}
-	
-	/**
-	 * @param ValueObject\VatRate $vatRate
-	 */
-	public function setVatRate(ValueObject\VatRate $vatRate): void
-	{
-		$this->vatRate = $vatRate;
-	}
-	
-	/**
-	 * @param ValueObject\Currency $currency
-	 */
-	public function setCurrency(ValueObject\Currency $currency): void
-	{
-		$this->currency = $currency;
-	}
-	
-	/**
-	 * @param ValueObject\PackageSent $packageSent
-	 */
-	public function setPackageSent(ValueObject\PackageSent $packageSent): void
-	{
-		$this->packageSent = $packageSent;
-	}
-	
-	/**
-	 * @param ValueObject\PackageNo $packageNo
-	 */
-	public function setPackageNo(ValueObject\PackageNo $packageNo): void
-	{
-		$this->packageNo = $packageNo;
-	}
-	
-	/**
-	 * @param ValueObject\PackageSentAt $packageSentAt
-	 */
-	public function setPackageSentAt(ValueObject\PackageSentAt $packageSentAt): void
-	{
-		$this->packageSentAt = $packageSentAt;
-	}
-	
-	/**
-	 * @param ValueObject\Id $id
-	 * @param ValueObject\RgaUuid $rgaUuid
-	 * @param ValueObject\TransportUuid $transportUuid
-	 * @param ValueObject\NettPrice $nettPrice
-	 * @param ValueObject\VatRate $vatRate
-	 * @param ValueObject\Currency $currency
+	 * @param VO\Id $id
+	 * @param VO\RgaUuid $rgaUuid
+	 * @param VO\TransportUuid $transportUuid
+	 * @param VO\NettPrice $nettPrice
+	 * @param VO\VatRate $vatRate
+	 * @param VO\Currency $currency
 	 * @return ReturnPackage
 	 */
 	public static function createNewReturnPackage(
-		ValueObject\Id $id,
-		ValueObject\RgaUuid $rgaUuid,
-		ValueObject\TransportUuid $transportUuid,
-		ValueObject\NettPrice $nettPrice,
-		ValueObject\VatRate $vatRate,
-		ValueObject\Currency $currency
+		VO\Id $id,
+		VO\RgaUuid $rgaUuid,
+		VO\TransportUuid $transportUuid,
+		VO\NettPrice $nettPrice,
+		VO\VatRate $vatRate,
+		VO\Currency $currency
 		
 	): ReturnPackage
 	{
@@ -149,12 +184,12 @@ class ReturnPackage
 	}
 	
 	/**
-	 * @param ValueObject\PackageNo $packageNo
-	 * @param ValueObject\PackageSentAt $packageSentAt
+	 * @param VO\PackageNo $packageNo
+	 * @param VO\PackageSentAt $packageSentAt
 	 */
 	public function setReturnPackage(
-		ValueObject\PackageNo $packageNo,
-		ValueObject\PackageSentAt $packageSentAt
+		VO\PackageNo $packageNo,
+		VO\PackageSentAt $packageSentAt
 	): void
 	{
 		$this->recordThat(Event\ReturnPackageSet::occur($this->aggregateId(), [

@@ -2,7 +2,7 @@
 
 namespace RGA\Domain\Model\Rga\Projection;
 
-use RGA\Domain\Model\Rga\Event;
+use RGA\Application\Rga\Event;
 
 interface RgaProjectorInterface
 {

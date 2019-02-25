@@ -2,452 +2,573 @@
 
 namespace RGA\Domain\Model\Rga;
 
+use RGA\Application\Rga\Event;
+use RGA\Application\Rga\Integration;
 use RGA\Domain\Model\Source;
-use RGA\Domain\Model\Rga\Event;
-use RGA\Domain\Model\Rga\Rga as ValueObject;
+use RGA\Domain\Model\Rga\Rga as VO;
 use RGA\Infrastructure\SegregationSourcing\Aggregate;
 
 class Rga
 	extends Aggregate\AggregateRoot
 {
-	/** @var ValueObject\Uuid */
-	private $uuid;
+	/** @var VO\Uuid */
+	protected $uuid;
 	
-	/** @var ValueObject\CreatedAt */
-	private $createdAt;
+	/** @var VO\CreatedAt */
+	protected $createdAt;
 	
-	/** @var ValueObject\BehaviourUuid */
-	private $behaviourUuid;
+	/** @var VO\BehaviourUuid */
+	protected $behaviourUuid;
 	
-	/** @var ValueObject\StateUuid */
-	private $stateUuid;
+	/** @var VO\StateUuid */
+	protected $stateUuid;
 	
-	/** @var ValueObject\TransportUuid */
-	private $transportUuid;
+	/** @var VO\TransportUuid */
+	protected $transportUuid;
 	
-	/** @var ValueObject\SourceObjectType */
-	private $sourceObjectType;
+	/** @var VO\SourceObjectType */
+	protected $sourceObjectType;
 	
-	/** @var ValueObject\SourceObjectId */
-	private $sourceObjectId;
+	/** @var VO\SourceObjectId */
+	protected $sourceObjectId;
 	
-	/** @var ValueObject\SourceObjectItemId */
-	private $sourceObjectItemId;
+	/** @var VO\SourceObjectItemId */
+	protected $sourceObjectItemId;
 	
-	/** @var ValueObject\SourceDateOfCreation */
-	private $sourceDateOfCreation;
+	/** @var VO\SourceDateOfCreation */
+	protected $sourceDateOfCreation;
 	
-	/** @var ValueObject\ProductName */
-	private $productName;
+	/** @var VO\ProductName */
+	protected $productName;
 	
-	/** @var ValueObject\ProductVariantId */
-	private $productVariantId;
+	/** @var VO\ProductVariantId */
+	protected $productVariantId;
 	
-	/** @var ValueObject\ApplicantGivenSourceObjectId */
-	private $applicantGivenSourceObjectId;
+	/** @var VO\ApplicantGivenSourceObjectId */
+	protected $applicantGivenSourceObjectId;
 	
-	/** @var ValueObject\ApplicantGivenSourceIdentification */
-	private $applicantGivenSourceIdentification;
+	/** @var VO\ApplicantGivenSourceIdentification */
+	protected $applicantGivenSourceIdentification;
 	
-	/** @var ValueObject\ApplicantGivenProductName */
-	private $applicantGivenProductName;
+	/** @var VO\ApplicantGivenProductName */
+	protected $applicantGivenProductName;
 	
-	/** @var ValueObject\ApplicantReasons */
-	private $applicantReasons;
+	/** @var VO\ApplicantReasons */
+	protected $applicantReasons;
 	
-	/** @var ValueObject\ApplicantExpectations */
-	private $applicantExpectations;
+	/** @var VO\ApplicantExpectations */
+	protected $applicantExpectations;
 	
-	/** @var ValueObject\ApplicantDescriptionOfIncident */
-	private $applicantDescriptionOfIncident;
+	/** @var VO\ApplicantDescriptionOfIncident */
+	protected $applicantDescriptionOfIncident;
 	
-	/** @var ValueObject\ApplicantContactPreference */
-	private $applicantContactPreference;
+	/** @var VO\ApplicantContactPreference */
+	protected $applicantContactPreference;
 	
-	/** @var ValueObject\ApplicantObjectType */
-	private $applicantObjectType;
+	/** @var VO\ApplicantObjectType */
+	protected $applicantObjectType;
 	
-	/** @var ValueObject\ApplicantObjectId */
-	private $applicantObjectId;
+	/** @var VO\ApplicantObjectId */
+	protected $applicantObjectId;
 	
-	/** @var ValueObject\ApplicantEmail */
-	private $applicantEmail;
+	/** @var VO\ApplicantEmail */
+	protected $applicantEmail;
 	
-	/** @var ValueObject\ApplicantTelephone */
-	private $applicantTelephone;
+	/** @var VO\ApplicantTelephone */
+	protected $applicantTelephone;
 	
-	/** @var ValueObject\ApplicantFullName */
-	private $applicantFullName;
+	/** @var VO\ApplicantFullName */
+	protected $applicantFullName;
 	
-	/** @var ValueObject\ApplicantStreetName */
-	private $applicantStreetName;
+	/** @var VO\ApplicantStreetName */
+	protected $applicantStreetName;
 	
-	/** @var ValueObject\ApplicantBuildingNumber */
-	private $applicantBuildingNumber;
+	/** @var VO\ApplicantBuildingNumber */
+	protected $applicantBuildingNumber;
 	
-	/** @var ValueObject\ApplicantApartmentNumber */
-	private $applicantApartmentNumber;
+	/** @var VO\ApplicantApartmentNumber */
+	protected $applicantApartmentNumber;
 	
-	/** @var ValueObject\ApplicantPostalCode */
-	private $applicantPostalCode;
+	/** @var VO\ApplicantPostalCode */
+	protected $applicantPostalCode;
 	
-	/** @var ValueObject\ApplicantCity */
-	private $applicantCity;
+	/** @var VO\ApplicantCity */
+	protected $applicantCity;
 	
-	/** @var ValueObject\ApplicantCountryCode */
-	private $applicantCountryCode;
+	/** @var VO\ApplicantCountryCode */
+	protected $applicantCountryCode;
 	
-	/** @var ValueObject\ApplicantBankAccountNumber */
-	private $applicantBankAccountNumber;
+	/** @var VO\ApplicantBankAccountNumber */
+	protected $applicantBankAccountNumber;
 	
-	/** @var ValueObject\ApplicantBankName */
-	private $applicantBankName;
+	/** @var VO\ApplicantBankName */
+	protected $applicantBankName;
 	
-	/** @var ValueObject\AdminNotes */
-	private $adminNotes;
+	/** @var VO\AdminNotes */
+	protected $adminNotes;
 	
-	/** @var ValueObject\AdminNotesForApplicant */
-	private $adminNotesForApplicant;
+	/** @var VO\AdminNotesForApplicant */
+	protected $adminNotesForApplicant;
 	
-	/** @var ValueObject\IsProductReceived */
-	private $isProductReceived;
+	/** @var VO\IsProductReceived */
+	protected $isProductReceived;
 	
-	/** @var ValueObject\IsCashReturned */
-	private $isCashReturned;
+	/** @var VO\IsCashReturned */
+	protected $isCashReturned;
 	
-	/** @var ValueObject\IsProductReturned */
-	private $isProductReturned;
+	/** @var VO\IsProductReturned */
+	protected $isProductReturned;
 	
-	/** @var ValueObject\IsDeleted */
-	private $isDeleted;
+	/** @var VO\IsDeleted */
+	protected $isDeleted;
 	
-	/** @var ValueObject\PackageSent */
-	private $packageSent;
+	/** @var VO\PackageSent */
+	protected $packageSent;
 	
-	/** @var ValueObject\PackageNo */
-	private $packageNo;
+	/** @var VO\PackageNo */
+	protected $packageNo;
 	
-	/** @var ValueObject\PackageSentAt */
-	private $packageSentAt;
+	/** @var VO\PackageSentAt */
+	protected $packageSentAt;
 	
 	/**
 	 * @param Rga\Uuid $uuid
+	 * @return Rga
 	 */
-	public function setUuid(Rga\Uuid $uuid): void
+	public function setUuid(Rga\Uuid $uuid): Rga
 	{
 		$this->uuid = $uuid;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\CreatedAt $createdAt
+	 * @return Rga
 	 */
-	public function setCreatedAt(Rga\CreatedAt $createdAt): void
+	public function setCreatedAt(Rga\CreatedAt $createdAt): Rga
 	{
 		$this->createdAt = $createdAt;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\BehaviourUuid $behaviourUuid
+	 * @return Rga
 	 */
-	public function setBehaviourUuid(Rga\BehaviourUuid $behaviourUuid): void
+	public function setBehaviourUuid(Rga\BehaviourUuid $behaviourUuid): Rga
 	{
 		$this->behaviourUuid = $behaviourUuid;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\StateUuid $stateUuid
+	 * @return Rga
 	 */
-	public function setStateUuid(Rga\StateUuid $stateUuid): void
+	public function setStateUuid(Rga\StateUuid $stateUuid): Rga
 	{
 		$this->stateUuid = $stateUuid;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\TransportUuid $transportUuid
+	 * @return Rga
 	 */
-	public function setTransportUuid(Rga\TransportUuid $transportUuid): void
+	public function setTransportUuid(Rga\TransportUuid $transportUuid): Rga
 	{
 		$this->transportUuid = $transportUuid;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\SourceObjectType $sourceObjectType
+	 * @return Rga
 	 */
-	public function setSourceObjectType(Rga\SourceObjectType $sourceObjectType): void
+	public function setSourceObjectType(Rga\SourceObjectType $sourceObjectType): Rga
 	{
 		$this->sourceObjectType = $sourceObjectType;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\SourceObjectId $sourceObjectId
+	 * @return Rga
 	 */
-	public function setSourceObjectId(Rga\SourceObjectId $sourceObjectId): void
+	public function setSourceObjectId(Rga\SourceObjectId $sourceObjectId): Rga
 	{
 		$this->sourceObjectId = $sourceObjectId;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\SourceObjectItemId $sourceObjectItemId
+	 * @return Rga
 	 */
-	public function setSourceObjectItemId(Rga\SourceObjectItemId $sourceObjectItemId): void
+	public function setSourceObjectItemId(Rga\SourceObjectItemId $sourceObjectItemId): Rga
 	{
 		$this->sourceObjectItemId = $sourceObjectItemId;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\SourceDateOfCreation $sourceDateOfCreation
+	 * @return Rga
 	 */
-	public function setSourceDateOfCreation(Rga\SourceDateOfCreation $sourceDateOfCreation): void
+	public function setSourceDateOfCreation(Rga\SourceDateOfCreation $sourceDateOfCreation): Rga
 	{
 		$this->sourceDateOfCreation = $sourceDateOfCreation;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ProductName $productName
+	 * @return Rga
 	 */
-	public function setProductName(Rga\ProductName $productName): void
+	public function setProductName(Rga\ProductName $productName): Rga
 	{
 		$this->productName = $productName;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ProductVariantId $productVariantId
+	 * @return Rga
 	 */
-	public function setProductVariantId(Rga\ProductVariantId $productVariantId): void
+	public function setProductVariantId(Rga\ProductVariantId $productVariantId): Rga
 	{
 		$this->productVariantId = $productVariantId;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantGivenSourceObjectId $applicantGivenSourceObjectId
+	 * @return Rga
 	 */
-	public function setApplicantGivenSourceObjectId(Rga\ApplicantGivenSourceObjectId $applicantGivenSourceObjectId): void
+	public function setApplicantGivenSourceObjectId(Rga\ApplicantGivenSourceObjectId $applicantGivenSourceObjectId): Rga
 	{
 		$this->applicantGivenSourceObjectId = $applicantGivenSourceObjectId;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantGivenSourceIdentification $applicantGivenSourceIdentification
+	 * @return Rga
 	 */
-	public function setApplicantGivenSourceIdentification(Rga\ApplicantGivenSourceIdentification $applicantGivenSourceIdentification): void
+	public function setApplicantGivenSourceIdentification(Rga\ApplicantGivenSourceIdentification $applicantGivenSourceIdentification): Rga
 	{
 		$this->applicantGivenSourceIdentification = $applicantGivenSourceIdentification;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantGivenProductName $applicantGivenProductName
+	 * @return Rga
 	 */
-	public function setApplicantGivenProductName(Rga\ApplicantGivenProductName $applicantGivenProductName): void
+	public function setApplicantGivenProductName(Rga\ApplicantGivenProductName $applicantGivenProductName): Rga
 	{
 		$this->applicantGivenProductName = $applicantGivenProductName;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantReasons $applicantReasons
+	 * @return Rga
 	 */
-	public function setApplicantReasons(Rga\ApplicantReasons $applicantReasons): void
+	public function setApplicantReasons(Rga\ApplicantReasons $applicantReasons): Rga
 	{
 		$this->applicantReasons = $applicantReasons;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantExpectations $applicantExpectations
+	 * @return Rga
 	 */
-	public function setApplicantExpectations(Rga\ApplicantExpectations $applicantExpectations): void
+	public function setApplicantExpectations(Rga\ApplicantExpectations $applicantExpectations): Rga
 	{
 		$this->applicantExpectations = $applicantExpectations;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantDescriptionOfIncident $applicantDescriptionOfIncident
+	 * @return Rga
 	 */
-	public function setApplicantDescriptionOfIncident(Rga\ApplicantDescriptionOfIncident $applicantDescriptionOfIncident): void
+	public function setApplicantDescriptionOfIncident(Rga\ApplicantDescriptionOfIncident $applicantDescriptionOfIncident): Rga
 	{
 		$this->applicantDescriptionOfIncident = $applicantDescriptionOfIncident;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantContactPreference $applicantContactPreference
+	 * @return Rga
 	 */
-	public function setApplicantContactPreference(Rga\ApplicantContactPreference $applicantContactPreference): void
+	public function setApplicantContactPreference(Rga\ApplicantContactPreference $applicantContactPreference): Rga
 	{
 		$this->applicantContactPreference = $applicantContactPreference;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantObjectType $applicantObjectType
+	 * @return Rga
 	 */
-	public function setApplicantObjectType(Rga\ApplicantObjectType $applicantObjectType): void
+	public function setApplicantObjectType(Rga\ApplicantObjectType $applicantObjectType): Rga
 	{
 		$this->applicantObjectType = $applicantObjectType;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantObjectId $applicantObjectId
+	 * @return Rga
 	 */
-	public function setApplicantObjectId(Rga\ApplicantObjectId $applicantObjectId): void
+	public function setApplicantObjectId(Rga\ApplicantObjectId $applicantObjectId): Rga
 	{
 		$this->applicantObjectId = $applicantObjectId;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantEmail $applicantEmail
+	 * @return Rga
 	 */
-	public function setApplicantEmail(Rga\ApplicantEmail $applicantEmail): void
+	public function setApplicantEmail(Rga\ApplicantEmail $applicantEmail): Rga
 	{
 		$this->applicantEmail = $applicantEmail;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantTelephone $applicantTelephone
+	 * @return Rga
 	 */
-	public function setApplicantTelephone(Rga\ApplicantTelephone $applicantTelephone): void
+	public function setApplicantTelephone(Rga\ApplicantTelephone $applicantTelephone): Rga
 	{
 		$this->applicantTelephone = $applicantTelephone;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantFullName $applicantFullName
+	 * @return Rga
 	 */
-	public function setApplicantFullName(Rga\ApplicantFullName $applicantFullName): void
+	public function setApplicantFullName(Rga\ApplicantFullName $applicantFullName): Rga
 	{
 		$this->applicantFullName = $applicantFullName;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantStreetName $applicantStreetName
+	 * @return Rga
 	 */
-	public function setApplicantStreetName(Rga\ApplicantStreetName $applicantStreetName): void
+	public function setApplicantStreetName(Rga\ApplicantStreetName $applicantStreetName): Rga
 	{
 		$this->applicantStreetName = $applicantStreetName;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantBuildingNumber $applicantBuildingNumber
+	 * @return Rga
 	 */
-	public function setApplicantBuildingNumber(Rga\ApplicantBuildingNumber $applicantBuildingNumber): void
+	public function setApplicantBuildingNumber(Rga\ApplicantBuildingNumber $applicantBuildingNumber): Rga
 	{
 		$this->applicantBuildingNumber = $applicantBuildingNumber;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantApartmentNumber $applicantApartmentNumber
+	 * @return Rga
 	 */
-	public function setApplicantApartmentNumber(Rga\ApplicantApartmentNumber $applicantApartmentNumber): void
+	public function setApplicantApartmentNumber(Rga\ApplicantApartmentNumber $applicantApartmentNumber): Rga
 	{
 		$this->applicantApartmentNumber = $applicantApartmentNumber;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantPostalCode $applicantPostalCode
+	 * @return Rga
 	 */
-	public function setApplicantPostalCode(Rga\ApplicantPostalCode $applicantPostalCode): void
+	public function setApplicantPostalCode(Rga\ApplicantPostalCode $applicantPostalCode): Rga
 	{
 		$this->applicantPostalCode = $applicantPostalCode;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantCity $applicantCity
+	 * @return Rga
 	 */
-	public function setApplicantCity(Rga\ApplicantCity $applicantCity): void
+	public function setApplicantCity(Rga\ApplicantCity $applicantCity): Rga
 	{
 		$this->applicantCity = $applicantCity;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantCountryCode $applicantCountryCode
+	 * @return Rga
 	 */
-	public function setApplicantCountryCode(Rga\ApplicantCountryCode $applicantCountryCode): void
+	public function setApplicantCountryCode(Rga\ApplicantCountryCode $applicantCountryCode): Rga
 	{
 		$this->applicantCountryCode = $applicantCountryCode;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantBankAccountNumber $applicantBankAccountNumber
+	 * @return Rga
 	 */
-	public function setApplicantBankAccountNumber(Rga\ApplicantBankAccountNumber $applicantBankAccountNumber): void
+	public function setApplicantBankAccountNumber(Rga\ApplicantBankAccountNumber $applicantBankAccountNumber): Rga
 	{
 		$this->applicantBankAccountNumber = $applicantBankAccountNumber;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\ApplicantBankName $applicantBankName
+	 * @return Rga
 	 */
-	public function setApplicantBankName(Rga\ApplicantBankName $applicantBankName): void
+	public function setApplicantBankName(Rga\ApplicantBankName $applicantBankName): Rga
 	{
 		$this->applicantBankName = $applicantBankName;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\AdminNotes $adminNotes
+	 * @return Rga
 	 */
-	public function setAdminNotes(Rga\AdminNotes $adminNotes): void
+	public function setAdminNotes(Rga\AdminNotes $adminNotes): Rga
 	{
 		$this->adminNotes = $adminNotes;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\AdminNotesForApplicant $adminNotesForApplicant
+	 * @return Rga
 	 */
-	public function setAdminNotesForApplicant(Rga\AdminNotesForApplicant $adminNotesForApplicant): void
+	public function setAdminNotesForApplicant(Rga\AdminNotesForApplicant $adminNotesForApplicant): Rga
 	{
 		$this->adminNotesForApplicant = $adminNotesForApplicant;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\IsProductReceived $isProductReceived
+	 * @return Rga
 	 */
-	public function setIsProductReceived(Rga\IsProductReceived $isProductReceived): void
+	public function setIsProductReceived(Rga\IsProductReceived $isProductReceived): Rga
 	{
 		$this->isProductReceived = $isProductReceived;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\IsCashReturned $isCashReturned
+	 * @return Rga
 	 */
-	public function setIsCashReturned(Rga\IsCashReturned $isCashReturned): void
+	public function setIsCashReturned(Rga\IsCashReturned $isCashReturned): Rga
 	{
 		$this->isCashReturned = $isCashReturned;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\IsProductReturned $isProductReturned
+	 * @return Rga
 	 */
-	public function setIsProductReturned(Rga\IsProductReturned $isProductReturned): void
+	public function setIsProductReturned(Rga\IsProductReturned $isProductReturned): Rga
 	{
 		$this->isProductReturned = $isProductReturned;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\IsDeleted $isDeleted
+	 * @return Rga
 	 */
-	public function setIsDeleted(Rga\IsDeleted $isDeleted): void
+	public function setIsDeleted(Rga\IsDeleted $isDeleted): Rga
 	{
 		$this->isDeleted = $isDeleted;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\PackageSent $packageSent
+	 * @return Rga
 	 */
-	public function setPackageSent(Rga\PackageSent $packageSent): void
+	public function setPackageSent(Rga\PackageSent $packageSent): Rga
 	{
 		$this->packageSent = $packageSent;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\PackageNo $packageNo
+	 * @return Rga
 	 */
-	public function setPackageNo(Rga\PackageNo $packageNo): void
+	public function setPackageNo(Rga\PackageNo $packageNo): Rga
 	{
 		$this->packageNo = $packageNo;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Rga\PackageSentAt $packageSentAt
+	 * @return Rga
 	 */
-	public function setPackageSentAt(Rga\PackageSentAt $packageSentAt): void
+	public function setPackageSentAt(Rga\PackageSentAt $packageSentAt): Rga
 	{
 		$this->packageSentAt = $packageSentAt;
+		
+		return $this;
 	}
 	
 	/**
@@ -456,6 +577,14 @@ class Rga
 	protected function aggregateId(): string
 	{
 		return $this->uuid->toString();
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	public function setAggregateId($id): void
+	{
+		$this->setUuid(VO\Uuid::fromString($id));
 	}
 	
 	/**
@@ -561,8 +690,8 @@ class Rga
 	 * @param Rga\PackageSentAt $packageSentAt
 	 */
 	public function setPackageRga(
-		ValueObject\PackageNo $packageNo,
-		ValueObject\PackageSentAt $packageSentAt
+		VO\PackageNo $packageNo,
+		VO\PackageSentAt $packageSentAt
 	): void
 	{
 		$this->recordThat(Event\PackageRgaSet::occur($this->aggregateId(), [
@@ -581,7 +710,7 @@ class Rga
 	/**
 	 * @param Rga\StateUuid $stateUuid
 	 */
-	public function stateRgaChanged(ValueObject\StateUuid $stateUuid): void
+	public function stateRgaChanged(VO\StateUuid $stateUuid): void
 	{
 		$this->recordThat(Event\StateRgaChanged::occur($this->aggregateId(), [
 			'state_uuid' => $stateUuid->toString()
@@ -591,7 +720,7 @@ class Rga
 	/**
 	 * @param Rga\AdminNotes $adminNotes
 	 */
-	public function noteRgaChanged(ValueObject\AdminNotes $adminNotes): void
+	public function noteRgaChanged(VO\AdminNotes $adminNotes): void
 	{
 		$this->recordThat(Event\NoteRgaChanged::occur($this->aggregateId(), [
 			'admin_notes' => $adminNotes->toString()
@@ -605,10 +734,10 @@ class Rga
 	 * @param Rga\IsProductReturned $productReturned
 	 */
 	public function flagsRgaChanged(
-		ValueObject\AdminNotesForApplicant $notes,
-		ValueObject\IsProductReceived $productReceived,
-		ValueObject\IsCashReturned $cashReturned,
-		ValueObject\IsProductReturned $productReturned
+		VO\AdminNotesForApplicant $notes,
+		VO\IsProductReceived $productReceived,
+		VO\IsCashReturned $cashReturned,
+		VO\IsProductReturned $productReturned
 	): void
 	{
 		$this->recordThat(Event\FlagsRgaChanged::occur($this->aggregateId(), [

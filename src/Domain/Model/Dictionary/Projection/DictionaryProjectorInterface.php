@@ -2,7 +2,7 @@
 
 namespace RGA\Domain\Model\Dictionary\Projection;
 
-use RGA\Domain\Model\Dictionary\Event;
+use RGA\Application\Dictionary\Event;
 
 interface DictionaryProjectorInterface
 {

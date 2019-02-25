@@ -11,5 +11,5 @@ interface EventBusInterface
 	/**
 	 * @param EventInterface $event
 	 */
-	public function dispatch(EventInterface $event): void;
+	public function dispatch(EventInterface $event);
 }

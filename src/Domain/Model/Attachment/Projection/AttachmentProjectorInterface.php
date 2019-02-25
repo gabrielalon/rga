@@ -2,7 +2,7 @@
 
 namespace RGA\Domain\Model\Attachment\Projection;
 
-use RGA\Domain\Model\Attachment\Event;
+use RGA\Application\Attachment\Event;
 
 interface AttachmentProjectorInterface
 {

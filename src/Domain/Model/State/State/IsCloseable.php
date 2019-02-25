@@ -37,6 +37,14 @@ final class IsCloseable
 	}
 	
 	/**
+	 * @return bool
+	 */
+	public function raw(): bool
+	{
+		return $this->closeable;
+	}
+	
+	/**
 	 * @param IsCloseable $other
 	 * @return bool
 	 */

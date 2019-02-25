@@ -3,45 +3,45 @@
 namespace RGA\Domain\Model\Dictionary\Dictionary;
 
 use RGA\Application\Assert\Assertion;
-use RGA\Domain\Model\Dictionary\Utils;
+use RGA\Application\Dictionary\Utils;
 
 final class BehavioursUuid
 {
 	/** @var array */
-	private $domains;
+	private $uuids;
 	
 	/**
-	 * @param array $domains
+	 * @param array $uuids
 	 * @return BehavioursUuid
 	 */
-	public static function fromArray(array $domains): BehavioursUuid
+	public static function fromArray(array $uuids): BehavioursUuid
 	{
-		return new BehavioursUuid($domains);
+		return new BehavioursUuid($uuids);
 	}
 	
 	/**
-	 * @param array $domains
+	 * @param array $uuids
 	 */
-	protected function __construct(array $domains)
+	protected function __construct(array $uuids)
 	{
-		Assertion::isArray($domains, 'Invalid BehavioursUuid array');
+		Assertion::isArray($uuids, 'Invalid BehavioursUuid array');
 		
 		$collection = new Utils\Collection();
 		
-		foreach ($domains as $domain)
+		foreach ($uuids as $uuid)
 		{
-			$collection->add(BehaviourUuid::fromString($domain));
+			$collection->add(BehaviourUuid::fromString($uuid));
 		}
 		
-		$this->domains = $collection;
+		$this->uuids = $collection;
 	}
 	
 	/**
-	 * @param string $domain
+	 * @param string $uuid
 	 */
-	public function addDomain(string $domain): void
+	public function addUuid(string $uuid): void
 	{
-		$this->domains->add(BehaviourUuid::fromString($domain));
+		$this->uuids->add(BehaviourUuid::fromString($uuid));
 	}
 	
 	/**
@@ -63,7 +63,7 @@ final class BehavioursUuid
 			return false;
 		}
 		
-		return $this->domains->equals($other->domains);
+		return $this->uuids->equals($other->uuids);
 	}
 	
 	/**
@@ -71,15 +71,23 @@ final class BehavioursUuid
 	 */
 	public function __toString(): string
 	{
-		$domains = [];
+		return \serialize($this->raw());
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function raw(): array
+	{
+		$uuids = [];
 		
-		/** @var BehaviourUuid $domain */
-		foreach ($this->all() as $domain)
+		/** @var BehaviourUuid $uuid */
+		foreach ($this->all() as $uuid)
 		{
-			$domains[] = $domain->toString();
+			$uuids[] = $uuid->toString();
 		}
 		
-		return \serialize($domains);
+		return $uuids;
 	}
 	
 	/**
@@ -87,6 +95,6 @@ final class BehavioursUuid
 	 */
 	public function all(): array
 	{
-		return $this->domains->getArrayCopy();
+		return $this->uuids->getArrayCopy();
 	}
 }

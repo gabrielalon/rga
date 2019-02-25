@@ -2,7 +2,7 @@
 
 namespace RGA\Domain\Model\ReturnPackage\Projection;
 
-use RGA\Domain\Model\ReturnPackage\Event;
+use RGA\Application\ReturnPackage\Event;
 
 interface ReturnPackageProjectorInterface
 {

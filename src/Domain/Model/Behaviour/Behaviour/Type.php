@@ -3,7 +3,7 @@
 namespace RGA\Domain\Model\Behaviour\Behaviour;
 
 use RGA\Application\Assert\Assertion;
-use RGA\Domain\Model\Behaviour\Enum;
+use RGA\Application\Behaviour\Enum;
 
 final class Type
 {

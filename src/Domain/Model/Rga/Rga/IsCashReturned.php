@@ -37,6 +37,14 @@ final class IsCashReturned
 	}
 	
 	/**
+	 * @return bool
+	 */
+	public function raw(): bool
+	{
+		return $this->cashReturned;
+	}
+	
+	/**
 	 * @param IsCashReturned $other
 	 * @return bool
 	 */

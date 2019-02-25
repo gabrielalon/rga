@@ -3,6 +3,8 @@
 namespace RGA\Domain\Model\Source\Condition\Condition;
 
 use RGA\Application\Assert;
+use RGA\Application\Rga\Integration;
+use RGA\Application\Behaviour\Enum;
 use RGA\Domain\Model;
 use RGA\Infrastructure\Source;
 
@@ -14,16 +16,16 @@ class IsObjectItemReady
 	/** @var Model\Source\RgaObjectItem */
 	private $sourceObjectItem;
 	
-	/** @var Model\Rga\Integration\Warranty\Calculator */
+	/** @var Integration\Warranty\Calculator */
 	private $warrantyCalculator;
 	
 	/**
 	 * @param Model\Source\RgaObjectItem $sourceObjectItem
-	 * @param Model\Rga\Integration\Warranty\Calculator $warrantyCalculator
+	 * @param Integration\Warranty\Calculator $warrantyCalculator
 	 */
 	public function __construct(
 		Model\Source\RgaObjectItem $sourceObjectItem,
-		Model\Rga\Integration\Warranty\Calculator $warrantyCalculator
+		Integration\Warranty\Calculator $warrantyCalculator
 	)
 	{
 		$this->sourceObjectItem = $sourceObjectItem;
@@ -37,12 +39,12 @@ class IsObjectItemReady
 	 */
 	public function dateIsMet($behaviourType): bool
 	{
-		if ($behaviourType === Model\Behaviour\Enum\Type::RETURN)
+		if ($behaviourType === Enum\Type::RETURN)
 		{
 			return $this->getFinalDateOfReturn() >= time();
 		}
 		
-		if ($behaviourType === Model\Behaviour\Enum\Type::COMPLAINT)
+		if ($behaviourType === Enum\Type::COMPLAINT)
 		{
 			return $this->getFinalDateOfComplaint() >= time();
 		}
@@ -79,10 +81,10 @@ class IsObjectItemReady
 	/**
 	 * @param string $behaviourType
 	 * @param Model\Source\RgaObjectItem $source
-	 * @param Model\Rga\Integration\Warranty\Calculator $warrantyCalculator
+	 * @param Integration\Warranty\Calculator $warrantyCalculator
 	 * @throws Assert\Exception\AssertionFailedException
 	 */
-	public static function assert($behaviourType, Model\Source\RgaObjectItem $source, Model\Rga\Integration\Warranty\Calculator $warrantyCalculator): void
+	public static function assert($behaviourType, Model\Source\RgaObjectItem $source, Integration\Warranty\Calculator $warrantyCalculator): void
 	{
 		$condition = new static($source, $warrantyCalculator);
 		

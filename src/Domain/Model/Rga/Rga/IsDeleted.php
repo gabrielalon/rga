@@ -37,6 +37,14 @@ final class IsDeleted
 	}
 	
 	/**
+	 * @return bool
+	 */
+	public function raw(): bool
+	{
+		return $this->deleted;
+	}
+	
+	/**
 	 * @param IsDeleted $other
 	 * @return bool
 	 */

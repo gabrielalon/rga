@@ -2,7 +2,7 @@
 
 namespace RGA\Domain\Model\State\Projection;
 
-use RGA\Domain\Model\State\Event;
+use RGA\Application\State\Event;
 
 interface StateProjectorInterface
 {

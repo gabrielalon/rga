@@ -31,12 +31,11 @@ class Snapshot
 	 */
 	public function __construct(
 		AggregateType $aggregateType,
-		string $aggregateId,
+		$aggregateId,
 		$aggregateRoot,
-		int $lastVersion,
+		$lastVersion,
 		\DateTime $createdAt
-	)
-	{
+	) {
 		$this->aggregateType = $aggregateType;
 		$this->aggregateId = $aggregateId;
 		$this->aggregateRoot = $aggregateRoot;
@@ -47,7 +46,7 @@ class Snapshot
 	/**
 	 * @return AggregateType
 	 */
-	public function getAggregateType(): AggregateType
+	public function getAggregateType()
 	{
 		return $this->aggregateType;
 	}
@@ -55,7 +54,7 @@ class Snapshot
 	/**
 	 * @return string
 	 */
-	public function getAggregateId(): string
+	public function getAggregateId()
 	{
 		return $this->aggregateId;
 	}
@@ -71,7 +70,7 @@ class Snapshot
 	/**
 	 * @return int
 	 */
-	public function getLastVersion(): int
+	public function getLastVersion()
 	{
 		return $this->lastVersion;
 	}
@@ -79,7 +78,7 @@ class Snapshot
 	/**
 	 * @return \DateTime
 	 */
-	public function getCreatedAt(): \DateTime
+	public function getCreatedAt()
 	{
 		return $this->createdAt;
 	}

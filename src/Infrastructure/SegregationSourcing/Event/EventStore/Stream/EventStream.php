@@ -32,8 +32,7 @@ class EventStream
 		string $eventName,
 		array $payload,
 		array $metadata
-	)
-	{
+	) {
 		$this->aggregateId = $aggregateId;
 		$this->aggregateVersion = $aggregateVersion;
 		$this->eventName = $eventName;
@@ -44,7 +43,7 @@ class EventStream
 	/**
 	 * @return string
 	 */
-	public function getAggregateId(): string
+	public function getAggregateId()
 	{
 		return $this->aggregateId;
 	}
@@ -52,7 +51,7 @@ class EventStream
 	/**
 	 * @return int
 	 */
-	public function getAggregateVersion(): int
+	public function getAggregateVersion()
 	{
 		return $this->aggregateVersion;
 	}
@@ -60,7 +59,7 @@ class EventStream
 	/**
 	 * @return string
 	 */
-	public function getEventName(): string
+	public function getEventName()
 	{
 		return $this->eventName;
 	}
@@ -68,7 +67,7 @@ class EventStream
 	/**
 	 * @return array
 	 */
-	public function getPayload(): array
+	public function getPayload()
 	{
 		return $this->payload;
 	}
@@ -76,7 +75,7 @@ class EventStream
 	/**
 	 * @return array
 	 */
-	public function getMetadata(): array
+	public function getMetadata()
 	{
 		return $this->metadata;
 	}

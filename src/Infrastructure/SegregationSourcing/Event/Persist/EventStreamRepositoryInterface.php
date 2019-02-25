@@ -17,5 +17,5 @@ interface EventStreamRepositoryInterface
 	 * @param int $lastVersion
 	 * @return EventStreamCollection
 	 */
-	public function load(string $aggregateId, int $lastVersion): EventStreamCollection;
+	public function load($aggregateId, $lastVersion): EventStreamCollection;
 }

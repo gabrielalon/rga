@@ -37,6 +37,14 @@ final class IsFinishable
 	}
 	
 	/**
+	 * @return bool
+	 */
+	public function raw(): bool
+	{
+		return $this->finishable;
+	}
+	
+	/**
 	 * @param IsFinishable $other
 	 * @return bool
 	 */

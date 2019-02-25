@@ -10,7 +10,7 @@ trait AggregateTranslatorTrait
 	/**
 	 * @return AggregateTranslator
 	 */
-	protected function getAggregateTranslator(): AggregateTranslator
+	protected function getAggregateTranslator()
 	{
 		if (null === $this->aggregateTranslator)
 		{

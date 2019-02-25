@@ -11,7 +11,7 @@ class AggregateRepositoryDecorator
 	 * @return AggregateRepositoryDecorator
 	 * @throws \ReflectionException
 	 */
-	public static function newInstance(): AggregateRepositoryDecorator
+	public static function newInstance()
 	{
 		$reflection = new \ReflectionClass(AggregateRepositoryDecorator::class);
 		
@@ -33,7 +33,7 @@ class AggregateRepositoryDecorator
 	 * @param Aggregate\AggregateRoot $aggregateRoot
 	 * @param AggregateRepository $aggregateRepository
 	 */
-	public function recordAggregateRootInRepository(Aggregate\AggregateRoot $aggregateRoot, AggregateRepository $aggregateRepository): void
+	public function recordAggregateRootInRepository(Aggregate\AggregateRoot $aggregateRoot, AggregateRepository $aggregateRepository)
 	{
 		$aggregateRepository->saveAggregateRoot($aggregateRoot);
 	}

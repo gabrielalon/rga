@@ -2,66 +2,81 @@
 
 namespace RGA\Domain\Model\Attachment;
 
-use RGA\Domain\Model\Attachment\Attachment as ValueObject;
-use RGA\Domain\Model\Attachment\Event;
+use RGA\Domain\Model\Attachment\Attachment as VO;
+use RGA\Application\Attachment\Event;
 use RGA\Infrastructure\SegregationSourcing\Aggregate;
 
 class Attachment
 	extends Aggregate\AggregateRoot
 {
-	/** @var ValueObject\Uuid */
-	private $uuid;
+	/** @var VO\Uuid */
+	protected $uuid;
 	
-	/** @var ValueObject\RgaUuid */
-	private $rgaUuid;
+	/** @var VO\RgaUuid */
+	protected $rgaUuid;
 	
-	/** @var ValueObject\FileType */
-	private $fileType;
+	/** @var VO\FileType */
+	protected $fileType;
 	
-	/** @var ValueObject\FileName */
-	private $fileName;
+	/** @var VO\FileName */
+	protected $fileName;
 	
-	/** @var ValueObject\OriginalFileName */
-	private $originalFileName;
+	/** @var VO\OriginalFileName */
+	protected $originalFileName;
 	
 	/**
 	 * @param Attachment\Uuid $uuid
+	 * @return Attachment
 	 */
-	public function setUuid(Attachment\Uuid $uuid): void
+	public function setUuid(Attachment\Uuid $uuid): Attachment
 	{
 		$this->uuid = $uuid;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Attachment\RgaUuid $rgaUuid
+	 * @return Attachment
 	 */
-	public function setRgaUuid(Attachment\RgaUuid $rgaUuid): void
+	public function setRgaUuid(Attachment\RgaUuid $rgaUuid): Attachment
 	{
 		$this->rgaUuid = $rgaUuid;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Attachment\FileType $fileType
+	 * @return Attachment
 	 */
-	public function setFileType(Attachment\FileType $fileType): void
+	public function setFileType(Attachment\FileType $fileType): Attachment
 	{
 		$this->fileType = $fileType;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Attachment\FileName $fileName
+	 * @return Attachment
 	 */
-	public function setFileName(Attachment\FileName $fileName): void
+	public function setFileName(Attachment\FileName $fileName): Attachment
 	{
 		$this->fileName = $fileName;
+		
+		return $this;
 	}
 	
 	/**
 	 * @param Attachment\OriginalFileName $originalFileName
+	 * @return Attachment
 	 */
-	public function setOriginalFileName(Attachment\OriginalFileName $originalFileName): void
+	public function setOriginalFileName(Attachment\OriginalFileName $originalFileName): Attachment
 	{
 		$this->originalFileName = $originalFileName;
+		
+		return $this;
 	}
 	
 	/**
@@ -73,6 +88,14 @@ class Attachment
 	}
 	
 	/**
+	 * {@inheritdoc}
+	 */
+	public function setAggregateId($id): void
+	{
+		$this->setUuid(VO\Uuid::fromString($id));
+	}
+	
+	/**
 	 * @param Attachment\Uuid $uuid
 	 * @param Attachment\RgaUuid $rgaUuid
 	 * @param Attachment\FileType $fileType
@@ -81,11 +104,11 @@ class Attachment
 	 * @return Attachment
 	 */
 	public static function createNewAttachment(
-		ValueObject\Uuid $uuid,
-		ValueObject\RgaUuid $rgaUuid,
-		ValueObject\FileType $fileType,
-		ValueObject\FileName $fileName,
-		ValueObject\OriginalFileName $originalFileName
+		VO\Uuid $uuid,
+		VO\RgaUuid $rgaUuid,
+		VO\FileType $fileType,
+		VO\FileName $fileName,
+		VO\OriginalFileName $originalFileName
 	): Attachment
 	{
 		$attachment = new Attachment();

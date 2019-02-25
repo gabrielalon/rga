@@ -6,4 +6,5 @@ use RGA\Infrastructure\SegregationSourcing\Message\Messaging\MessageHandlerInter
 
 interface CommandHandlerInterface
 	extends MessageHandlerInterface
-{}
+{
+}

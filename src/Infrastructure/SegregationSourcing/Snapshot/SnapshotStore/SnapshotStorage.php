@@ -21,14 +21,16 @@ class SnapshotStorage
 	 */
 	public function __construct(SnapshotRepositoryInterface $snapshotRepository)
 	{
-		$this->snapshotRepository = $snapshotRepository;
 		$this->serializer = new CallbackSerializer(null, null);
+		
+		$this->snapshotRepository = $snapshotRepository;
+		$this->snapshotRepository->setSerializer($this->serializer);
 	}
 	
 	/**
 	 * @param Aggregate\AggregateRoot $aggregateRoot
 	 */
-	public function make(Aggregate\AggregateRoot $aggregateRoot): void
+	public function make(Aggregate\AggregateRoot $aggregateRoot)
 	{
 		$snapshot = new Snapshot(
 			Aggregate\AggregateType::fromAggregateRoot($aggregateRoot),
@@ -46,29 +48,16 @@ class SnapshotStorage
 	 * @param string $aggregateId
 	 * @return Snapshot
 	 */
-	public function get(Aggregate\AggregateType $aggregateType, string $aggregateId): Snapshot
+	public function get(Aggregate\AggregateType $aggregateType, $aggregateId)
 	{
-		$result = $this->snapshotRepository->get($aggregateType, $aggregateId);
+		$dto = $this->snapshotRepository->get($aggregateType, $aggregateId);
 		
-		$snapshot = new Snapshot(
+		return new Snapshot(
 			$aggregateType,
 			$aggregateId,
-			'',
-			0,
-			new \DateTime('now')
+			$this->serializer->unserialize($dto->getRoot()),
+			$dto->getVersion(),
+			$dto->getCreated()
 		);
-		
-		if (true === \is_array($result) && false === empty($result))
-		{
-			$snapshot = new Snapshot(
-				$aggregateType,
-				$aggregateId,
-				$this->serializer->unserialize($result['aggregate_root']),
-				$result['aggregate_version'],
-				$result['created_at']
-			);
-		}
-		
-		return $snapshot;
 	}
 }

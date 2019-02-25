@@ -2,7 +2,7 @@
 
 namespace RGA\Domain\Model\Behaviour\Projection;
 
-use RGA\Domain\Model\Behaviour\Event;
+use RGA\Application\Behaviour\Event;
 
 interface BehaviourProjectorInterface
 {

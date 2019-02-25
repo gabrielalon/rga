@@ -37,6 +37,14 @@ final class IsProductReturned
 	}
 	
 	/**
+	 * @return bool
+	 */
+	public function raw(): bool
+	{
+		return $this->productReturned;
+	}
+	
+	/**
 	 * @param IsProductReturned $other
 	 * @return bool
 	 */

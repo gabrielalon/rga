@@ -8,12 +8,12 @@ interface CommandInterface
 	extends MessageInterface
 {
 	/**
-	 * @return string
+	 * @return string|integer
 	 */
-	public function getUuid(): string;
+	public function getIdentifier();
 	
 	/**
-	 * @param string $uuid
+	 * @param string|integer $identifier
 	 */
-	public function setUuid(string $uuid): void;
+	public function setIdentifier($identifier);
 }

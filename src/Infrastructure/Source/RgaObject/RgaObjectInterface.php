@@ -9,7 +9,7 @@ interface RgaObjectInterface
 	/**
 	 * @return integer
 	 */
-	public function getId(): int;
+	public function getId();
 	
 	/**
 	 * @return string

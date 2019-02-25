@@ -63,9 +63,14 @@ abstract class AggregateRoot
 	}
 	
 	/**
-	 * @return string
+	 * @return string|integer
 	 */
-	abstract protected function aggregateId(): string;
+	abstract protected function aggregateId();
+	
+	/**
+	 * @param string|integer $id
+	 */
+	abstract public function setAggregateId($id): void;
 	
 	/**
 	 * @param AggregateChanged $event

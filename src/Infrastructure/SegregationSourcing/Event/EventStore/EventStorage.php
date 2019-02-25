@@ -26,7 +26,7 @@ class EventStorage
 	/**
 	 * @param EventPublisher $eventPublisher
 	 */
-	public function setEventPublisher(EventPublisher $eventPublisher): void
+	public function setEventPublisher(EventPublisher $eventPublisher)
 	{
 		$this->eventPublisher = $eventPublisher;
 	}
@@ -35,7 +35,7 @@ class EventStorage
 	 * @param EventInterface $event
 	 * @return EventStorage
 	 */
-	public function release(EventInterface $event): EventStorage
+	public function release(EventInterface $event)
 	{
 		$this->eventPublisher->release($event);
 		
@@ -44,7 +44,7 @@ class EventStorage
 		return $this;
 	}
 	
-	public function record(): void
+	public function record()
 	{
 		if (null !== $this->tmpLastReleasedEvent)
 		{
@@ -57,7 +57,7 @@ class EventStorage
 	 * @param int $lastVersion
 	 * @return \ArrayIterator
 	 */
-	public function load(string $aggregateId, int $lastVersion): \ArrayIterator
+	public function load($aggregateId, $lastVersion)
 	{
 		$iterator = new \ArrayIterator();
 		
