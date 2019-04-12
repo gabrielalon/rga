@@ -11,6 +11,17 @@ use RGA\Infrastructure\Source\RgaObject;
 class StandardService
 	implements ServiceInterface
 {
+	/** @var BaserInterface */
+	private $baser;
+	
+	/**
+	 * @param BaserInterface $baser
+	 */
+	public function __construct(BaserInterface $baser)
+	{
+		$this->baser = $baser;
+	}
+	
 	/**
 	 * @return string
 	 */
@@ -20,12 +31,13 @@ class StandardService
 	}
 	
 	/**
-	 * @param string $id
+	 * @param string $encodeId
 	 * @return RgaObject\RgaObjectInterface
 	 * @throws \InvalidArgumentException
 	 */
-	public function buildObject($id): RgaObject\RgaObjectInterface
+	public function buildObject($encodeId): RgaObject\RgaObjectInterface
 	{
+		$id = $this->baser->decode($encodeId);
 		$builder = new RgaObjectBuilder(
 			$id,
 			$this->sourceType(),
