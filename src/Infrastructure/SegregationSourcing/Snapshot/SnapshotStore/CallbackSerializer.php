@@ -15,7 +15,7 @@ final class CallbackSerializer
 	 * @param callable|null $serializeCallback
 	 * @param callable|null $unserializeCallback
 	 */
-	public function __construct($serializeCallback, $unserializeCallback)
+	public function __construct($serializeCallback = null, $unserializeCallback = null)
 	{
 		if (null !== $serializeCallback && null !== $unserializeCallback)
 		{

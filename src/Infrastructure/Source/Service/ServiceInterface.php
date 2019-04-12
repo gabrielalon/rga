@@ -12,11 +12,11 @@ interface ServiceInterface
 	public function sourceType(): string;
 	
 	/**
-	 * @param string $id
+	 * @param string $encodeId
 	 * @return RgaObject\RgaObjectInterface
 	 * @throws \InvalidArgumentException
 	 */
-	public function buildObject($id): RgaObject\RgaObjectInterface;
+	public function buildObject($encodeId): RgaObject\RgaObjectInterface;
 	
 	/**
 	 * @param string $itemId
