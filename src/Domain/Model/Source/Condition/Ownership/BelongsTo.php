@@ -27,7 +27,7 @@ class BelongsTo
 			)
 			||
 			(
-				0 === $applicant->getId() // some kind of guest
+				0 === $applicant->getId() || 0 === $source->getApplicant()->getId() // some kind of guest
 			)
 			||
 			(
