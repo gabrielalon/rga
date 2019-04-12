@@ -62,10 +62,12 @@ return [
 	
 	aSource\Query\RgaObjectQueryInterface::class => function (ContainerInterface $container)
 	{
+		/** @var Source\Service\BaserInterface $baser */
+		$baser = $container->get(Source\Service\BaserInterface::class);
 		/** @var Source\RgaObjectQuery\ObjectQueryInterface $objectQuery */
 		$objectQuery = $container->get(Source\RgaObjectQuery\ObjectQueryInterface::class);
 		
-		return new Query\Source\RgaObjectQuery($objectQuery);
+		return new Query\Source\RgaObjectQuery($baser, $objectQuery);
 	},
 	
 	aSource\Service\RgaObjectQueryManager::class => function (ContainerInterface $container)
