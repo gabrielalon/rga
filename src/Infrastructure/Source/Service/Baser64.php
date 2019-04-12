@@ -8,7 +8,7 @@ final class Baser64 implements BaserInterface
 	 * @param string $data
 	 * @return string
 	 */
-	public function decode(string $data): string
+	public function decode(?string $data = null): string
 	{
 		if (true === $this->validBase64($data))
 		{
@@ -17,28 +17,28 @@ final class Baser64 implements BaserInterface
 			return $decoded;
 		}
 		
-		return $data;
+		return (string) $data;
 	}
 	
 	/**
 	 * @param string $data
 	 * @return string
 	 */
-	public function encode(string $data): string
+	public function encode(?string $data = null): string
 	{
 		if (false === $this->validBase64($data))
 		{
-			return base64_encode($data);
+			return base64_encode((string)$data);
 		}
 		
-		return $data;
+		return (string) $data;
 	}
 	
 	/**
 	 * @param string $text
 	 * @return bool|string
 	 */
-	private function base64Decode($text)
+	private function base64Decode(string $text)
 	{
 		$decoded = base64_decode($text, true);
 		
@@ -46,11 +46,16 @@ final class Baser64 implements BaserInterface
 	}
 	
 	/**
-	 * @param string $text
+	 * @param string|null $text
 	 * @return bool
 	 */
-	private function validBase64($text): bool
+	private function validBase64(?string $text = null): bool
 	{
+		if (null === $text)
+		{
+			return false;
+		}
+		
 		if (true === is_numeric($text))
 		{
 			return false;
