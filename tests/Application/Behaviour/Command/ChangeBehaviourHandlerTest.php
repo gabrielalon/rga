@@ -1,6 +1,6 @@
 <?php
 
-namespace RGA\Test\Application\Dictionary\Command;
+namespace RGA\Test\Application\Behaviour\Command;
 
 use RGA\Domain\Model\Behaviour\Behaviour;
 use RGA\Application\Behaviour\Command\ChangeBehaviour;

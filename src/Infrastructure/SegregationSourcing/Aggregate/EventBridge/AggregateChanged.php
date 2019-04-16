@@ -7,127 +7,125 @@ use RGA\Infrastructure\SegregationSourcing\Event\Event\EventInterface;
 use RGA\Infrastructure\SegregationSourcing\Event\EventStore\Stream\EventStream;
 use RGA\Infrastructure\SegregationSourcing\Message\Domain\DomainMessage;
 
-abstract class AggregateChanged
-	extends DomainMessage
-		implements EventInterface
+abstract class AggregateChanged extends DomainMessage implements EventInterface
 {
-	/** @var array */
-	protected $payload = [];
-	
-	/**
-	 * @param string $aggregateId
-	 * @param array $payload
-	 * @return AggregateChanged
-	 */
-	public static function occur(string $aggregateId, array $payload = []): self
-	{
-		return new static($aggregateId, $payload);
-	}
-	
-	/**
-	 * @param EventStream $stream
-	 * @return AggregateChanged
-	 */
-	public static function fromEventStream(EventStream $stream): self
-	{
-		return new static($stream->getAggregateId(), $stream->getPayload(), $stream->getMetadata());
-	}
-	
-	/**
-	 * @param string $aggregateId
-	 * @param array $payload
-	 * @param array $metadata
-	 * @return AggregateChanged
-	 */
-	public static function fromEventStreamData(string $aggregateId, array $payload, array $metadata = []): self
-	{
-		return new static($aggregateId, $payload, $metadata);
-	}
-	
-	/**
-	 * @param string $aggregateId
-	 * @param array $payload
-	 * @param array $metadata
-	 */
-	protected function __construct(string $aggregateId, array $payload, array $metadata = [])
-	{
-		$this->metadata = $metadata;
-		$this->setAggregateId($aggregateId);
-		$this->setVersion(isset($metadata['_aggregate_version']) ? $metadata['_aggregate_version'] : 1);
-		$this->setPayload($payload);
-		$this->init();
-	}
-	
-	/**
-	 * @return integer|string
-	 */
-	public function aggregateId()
-	{
-		return $this->metadata['_aggregate_id'];
-	}
-	
-	/**
-	 * @return array
-	 */
-	public function payload(): array
-	{
-		return $this->payload;
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function payloadJSON(): string
-	{
-		return \json_encode($this->payload());
-	}
-	
-	/**
-	 * @return int
-	 */
-	public function version(): int
-	{
-		return $this->metadata['_aggregate_version'];
-	}
-	
-	/**
-	 * @param int $version
-	 * @return AggregateChanged
-	 */
-	public function withVersion(int $version): AggregateChanged
-	{
-		$self = clone $this;
-		$self->setVersion($version);
-		
-		return $self;
-	}
-	
-	/**
-	 * @param string $aggregateId
-	 */
-	protected function setAggregateId(string $aggregateId): void
-	{
-		$this->metadata['_aggregate_id'] = $aggregateId;
-	}
-	
-	/**
-	 * @param int $version
-	 */
-	protected function setVersion(int $version): void
-	{
-		$this->metadata['_aggregate_version'] = $version;
-	}
-	
-	/**
-	 * @param array $payload
-	 */
-	protected function setPayload(array $payload): void
-	{
-		$this->payload = $payload;
-	}
-	
-	/**
-	 * @param AggregateRoot $aggregateRoot
-	 */
-	abstract public function populate(AggregateRoot $aggregateRoot): void;
+    /** @var array */
+    protected $payload = [];
+    
+    /**
+     * @param string $aggregateId
+     * @param array $payload
+     * @return AggregateChanged
+     */
+    public static function occur(string $aggregateId, array $payload = []): self
+    {
+        return new static($aggregateId, $payload);
+    }
+    
+    /**
+     * @param EventStream $stream
+     * @return AggregateChanged
+     */
+    public static function fromEventStream(EventStream $stream): self
+    {
+        return new static($stream->getAggregateId(), $stream->getPayload(), $stream->getMetadata());
+    }
+    
+    /**
+     * @param string $aggregateId
+     * @param array $payload
+     * @param array $metadata
+     * @return AggregateChanged
+     */
+    public static function fromEventStreamData(string $aggregateId, array $payload, array $metadata = []): self
+    {
+        return new static($aggregateId, $payload, $metadata);
+    }
+    
+    /**
+     * @param string $aggregateId
+     * @param array $payload
+     * @param array $metadata
+     */
+    protected function __construct(string $aggregateId, array $payload, array $metadata = [])
+    {
+        $this->metadata = $metadata;
+        $this->setAggregateId($aggregateId);
+        $this->setVersion(isset($metadata['_aggregate_version']) ? $metadata['_aggregate_version'] : 1);
+        $this->setPayload($payload);
+        $this->init();
+    }
+    
+    /**
+     * @return integer|string
+     */
+    public function aggregateId()
+    {
+        return $this->metadata['_aggregate_id'];
+    }
+    
+    /**
+     * @return array
+     */
+    public function payload(): array
+    {
+        return $this->payload;
+    }
+    
+    /**
+     * @return string
+     */
+    public function payloadJSON(): string
+    {
+        return \json_encode($this->payload());
+    }
+    
+    /**
+     * @return int
+     */
+    public function version(): int
+    {
+        return $this->metadata['_aggregate_version'];
+    }
+    
+    /**
+     * @param int $version
+     * @return AggregateChanged
+     */
+    public function withVersion(int $version): AggregateChanged
+    {
+        $self = clone $this;
+        $self->setVersion($version);
+        
+        return $self;
+    }
+    
+    /**
+     * @param string $aggregateId
+     */
+    protected function setAggregateId(string $aggregateId): void
+    {
+        $this->metadata['_aggregate_id'] = $aggregateId;
+    }
+    
+    /**
+     * @param int $version
+     */
+    protected function setVersion(int $version): void
+    {
+        $this->metadata['_aggregate_version'] = $version;
+    }
+    
+    /**
+     * @param array $payload
+     */
+    protected function setPayload(array $payload): void
+    {
+        $this->payload = $payload;
+    }
+    
+    /**
+     * @param AggregateRoot $aggregateRoot
+     */
+    abstract public function populate(AggregateRoot $aggregateRoot): void;
 }

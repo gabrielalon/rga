@@ -2,5 +2,6 @@
 
 namespace RGA\Application\Behaviour\Query\V1;
 
-class FindAllActive
-	extends FindAll {};
+class FindAllActive extends FindAll
+{
+};

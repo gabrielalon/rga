@@ -4,8 +4,8 @@ namespace RGA\Infrastructure\SegregationSourcing\Message\Domain;
 
 interface MessageInterface
 {
-	/**
-	 * @return string
-	 */
-	public function messageName();
+    /**
+     * @return string
+     */
+    public function messageName();
 }

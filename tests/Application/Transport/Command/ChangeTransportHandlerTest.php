@@ -1,6 +1,6 @@
 <?php
 
-namespace RGA\Test\Application\Dictionary\Command;
+namespace RGA\Test\Application\Transport\Command;
 
 use RGA\Application\Transport\Command\ChangeTransport;
 use RGA\Application\Transport\Command\CreateTransport;

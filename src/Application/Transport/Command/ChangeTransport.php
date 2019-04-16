@@ -2,6 +2,6 @@
 
 namespace RGA\Application\Transport\Command;
 
-class ChangeTransport
-	extends CreateTransport
-{}
+class ChangeTransport extends CreateTransport
+{
+}

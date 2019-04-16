@@ -7,15 +7,15 @@ use RGA\Infrastructure\SegregationSourcing\Event\EventStore\Stream\EventStreamCo
 
 interface EventStreamRepositoryInterface
 {
-	/**
-	 * @param EventInterface $event
-	 */
-	public function save(EventInterface $event): void;
-	
-	/**
-	 * @param string $aggregateId
-	 * @param int $lastVersion
-	 * @return EventStreamCollection
-	 */
-	public function load($aggregateId, $lastVersion): EventStreamCollection;
+    /**
+     * @param EventInterface $event
+     */
+    public function save(EventInterface $event): void;
+    
+    /**
+     * @param string $aggregateId
+     * @param int $lastVersion
+     * @return EventStreamCollection
+     */
+    public function load($aggregateId, $lastVersion): EventStreamCollection;
 }

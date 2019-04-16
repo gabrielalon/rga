@@ -2,6 +2,6 @@
 
 namespace RGA\Infrastructure\Model\Translate\Exception;
 
-class InvalidLocaleStringException
-	extends \InvalidArgumentException
-{}
+class InvalidLocaleStringException extends \InvalidArgumentException
+{
+}

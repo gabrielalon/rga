@@ -2,6 +2,6 @@
 
 namespace RGA\Application\Assert\Exception;
 
-interface AssertionFailedExceptionInterface
-	extends \Throwable
-{}
+interface AssertionFailedExceptionInterface extends \Throwable
+{
+}

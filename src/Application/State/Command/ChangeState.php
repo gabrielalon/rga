@@ -2,6 +2,6 @@
 
 namespace RGA\Application\State\Command;
 
-class ChangeState
-	extends CreateState
-{}
+class ChangeState extends CreateState
+{
+}

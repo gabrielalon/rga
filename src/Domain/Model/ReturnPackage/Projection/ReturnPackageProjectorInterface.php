@@ -6,13 +6,13 @@ use RGA\Application\ReturnPackage\Event;
 
 interface ReturnPackageProjectorInterface
 {
-	/**
-	 * @param Event\NewReturnPackageCreated $event
-	 */
-	public function onNewReturnPackageCreated(Event\NewReturnPackageCreated $event): void;
-	
-	/**
-	 * @param Event\ReturnPackageSet $event
-	 */
-	public function onReturnPackageSet(Event\ReturnPackageSet $event): void;
+    /**
+     * @param Event\NewReturnPackageCreated $event
+     */
+    public function onNewReturnPackageCreated(Event\NewReturnPackageCreated $event): void;
+    
+    /**
+     * @param Event\ReturnPackageSet $event
+     */
+    public function onReturnPackageSet(Event\ReturnPackageSet $event): void;
 }

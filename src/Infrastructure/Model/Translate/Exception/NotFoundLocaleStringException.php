@@ -2,6 +2,6 @@
 
 namespace RGA\Infrastructure\Model\Translate\Exception;
 
-class NotFoundLocaleStringException
-	extends \RuntimeException
-{}
+class NotFoundLocaleStringException extends \RuntimeException
+{
+}

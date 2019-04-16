@@ -1,6 +1,6 @@
 <?php
 
-namespace RGA\Test\Application\Dictionary\Command;
+namespace RGA\Test\Application\State\Command;
 
 use RGA\Application\State\Command\ChangeState;
 use RGA\Application\State\Command\CreateState;
