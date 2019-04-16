@@ -17,8 +17,8 @@ class FindAllActiveTest
 	public function it_finds_active_transport()
 	{
 		// given
-		$view1 = $this->createTransportView(\Ramsey\Uuid\Uuid::uuid4()->toString(), 'test', false);
-		$view2 = $this->createTransportView(\Ramsey\Uuid\Uuid::uuid4()->toString(), 'test2', false);
+		$view1 = $this->createTransportView(\Ramsey\Uuid\Uuid::uuid4()->toString(), 'test');
+		$view2 = $this->createTransportView(\Ramsey\Uuid\Uuid::uuid4()->toString(), 'test2');
 		
 		// when
 		/** @var InMemoryTransportQuery $queryRepository */
