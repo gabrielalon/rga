@@ -21,11 +21,11 @@ class StandardQuery
 	
 	/**
 	 * @param string $objectType
-	 * @param string $encodedObjectId
+	 * @param integer $objectId
 	 * @return RgaObject\RgaObjectInterface
 	 * @throws \Exception
 	 */
-	public function getByObjectInfo($objectType, $encodedObjectId): RgaObject\RgaObjectInterface
+	public function getByObjectInfo($objectType, $objectId): RgaObject\RgaObjectInterface
 	{
 		$typeService = $this->registry->get($objectType);
 		
@@ -34,7 +34,7 @@ class StandardQuery
 			throw new \Exception('Service for object type "' . $objectType . '" not found');
 		}
 		
-		return $typeService->buildObject($encodedObjectId);
+		return $typeService->buildObject($objectId);
 	}
 	
 	/**

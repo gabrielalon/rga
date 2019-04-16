@@ -8,11 +8,11 @@ interface ObjectQueryInterface
 {
 	/**
 	 * @param string $type
-	 * @param integer $encodedId
+	 * @param integer $id
 	 * @return RgaObject\RgaObjectInterface
 	 * @throws \RuntimeException
 	 */
-	public function getByObjectInfo($type, $encodedId): RgaObject\RgaObjectInterface;
+	public function getByObjectInfo($type, $id): RgaObject\RgaObjectInterface;
 	
 	/**
 	 * @param string $type
