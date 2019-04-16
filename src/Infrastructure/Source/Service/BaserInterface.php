@@ -5,14 +5,14 @@ namespace RGA\Infrastructure\Source\Service;
 interface BaserInterface
 {
 	/**
-	 * @param string|null $data
+	 * @param string $data
 	 * @return string
 	 */
-	public function decode(?string $data = null): string;
+	public function decode(string $data): string;
 	
 	/**
-	 * @param string|null $data
+	 * @param string $data
 	 * @return string
 	 */
-	public function encode(?string $data = null): string;
+	public function encode(string $data): string;
 }
