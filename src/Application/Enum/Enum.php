@@ -8,7 +8,7 @@ namespace RGA\Application\Enum;
  */
 abstract class Enum extends EnumWrapper
 {
-    private static $__default;
+    protected static $__default;
     
     /**
      * @param $name
