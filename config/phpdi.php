@@ -20,14 +20,7 @@ use RGA\Infrastructure\Query;
 
 return [
 	
-	Source\Service\BaserInterface::class => Source\Service\Baser64::class,
-	Source\Service\StandardService::class => function (ContainerInterface $container) {
-		$service = new Source\Service\StandardService(
-			$container->get(Source\Service\BaserInterface::class)
-		);
-		
-		return $service;
-	},
+	Source\Service\StandardService::class  => Source\Service\StandardService::class,
 	
 	Source\Warranty\ConfigInterface::class => function (ContainerInterface $container) {
 		$config = new Rga\Integration\Warranty\Config(

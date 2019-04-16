@@ -6,7 +6,6 @@ use RGA\Application\Source\Query\GetOne;
 use RGA\Application\Source\Query\RgaObjectQueryInterface;
 use RGA\Domain\Model\Source\RgaObject;
 use RGA\Infrastructure\Source\RgaObjectQuery\ObjectQueryInterface;
-use RGA\Infrastructure\Source\Service\Baser64;
 use RGA\Infrastructure\Source\Service\StandardService;
 
 class RgaObjectQuery
@@ -35,7 +34,7 @@ class RgaObjectQuery
 		}
 		catch (\Exception $e)
 		{
-			$sourceService = new StandardService(new Baser64());
+			$sourceService = new StandardService();
 			/** @var RgaObject $object */
 			$object = $sourceService->buildObject($query->getGivenId());
 		}

@@ -5,7 +5,6 @@ namespace RGA\Domain\Model\Source\Condition\Ownership;
 use RGA\Application\Assert;
 use RGA\Domain\Model\Rga\Rga\Applicant\Applicant;
 use RGA\Domain\Model\Source\RgaObject;
-use RGA\Infrastructure\Source\Service\Baser64;
 use RGA\Infrastructure\Source\Service\StandardService;
 
 class BelongsTo
@@ -31,7 +30,7 @@ class BelongsTo
 			)
 			||
 			(
-				$source->getType() === (new StandardService(new Baser64()))->sourceType()
+				$source->getType() === (new StandardService())->sourceType()
 			)
 		);
 		
