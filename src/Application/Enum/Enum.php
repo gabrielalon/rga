@@ -8,7 +8,7 @@ namespace RGA\Application\Enum;
  */
 abstract class Enum extends EnumWrapper
 {
-    protected static $__default;
+	public const __default = '';
     
     /**
      * @param $name
@@ -65,7 +65,7 @@ abstract class Enum extends EnumWrapper
      */
     public function getDefault()
     {
-        return static::$__default;
+        return static::__default;
     }
     
     /**
