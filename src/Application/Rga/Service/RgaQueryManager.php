@@ -72,16 +72,16 @@ class RgaQueryManager extends AbstractQueryManager
         return $rga;
     }
 
-	public function findAllByApplicantObjectId(int $applicantObjectId): Query\ReadModel\Rga
+	public function findAllByApplicantObjectId(int $applicantObjectId): Query\ReadModel\RgaCollection
 	{
 		$query = new Query\V1\FindAllByApplicantObjectId($applicantObjectId);
 
 		$this->handle($query);
 
-		/** @var Query\ReadModel\Rga $rga */
-		$rga = $query->getView();
+		/** @var Query\ReadModel\RgaCollection $collection */
+		$collection = $query->getViewCollection();
 
-		return $rga;
+		return $collection;
 	}
     
     /**
