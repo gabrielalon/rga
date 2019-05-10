@@ -29,5 +29,5 @@ interface RgaQueryInterface
      */
     public function findAll(FindAll $query): void;
 
-	public function findOneByApplicantObjectId(FindOneByApplicantObjectId $query): void;
+	public function findAllByApplicantObjectId(FindAllByApplicantObjectId $query): void;
 }

@@ -43,8 +43,8 @@ class QueryBusFactory extends AbstractQueryBusFactory
         ;
 
 		$this->queryRouter
-			->route(Query\V1\FindOneByApplicantObjectId::class)
-			->to(new Query\V1\FindOneByApplicantObjectIdHandler($rgaRepository))
+			->route(Query\V1\FindAllByApplicantObjectId::class)
+			->to(new Query\V1\FindAllByApplicantObjectIdHandler($rgaRepository))
 		;
         
         $this->attachRoutesToQueryBus($queryBus);

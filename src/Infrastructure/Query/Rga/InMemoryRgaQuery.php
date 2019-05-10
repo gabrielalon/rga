@@ -3,7 +3,7 @@
 namespace RGA\Infrastructure\Query\Rga;
 
 use RGA\Application\Rga\Query;
-use RGA\Application\Rga\Query\V1\FindOneByApplicantObjectId;
+use RGA\Application\Rga\Query\V1\FindAllByApplicantObjectId;
 use RGA\Infrastructure\Query\Filter;
 use RGA\Infrastructure\SegregationSourcing\Query\Exception;
 
@@ -120,21 +120,22 @@ class InMemoryRgaQuery implements Query\V1\RgaQueryInterface
         ));
     }
 
-	public function findOneByApplicantObjectId(FindOneByApplicantObjectId $query): void
+	public function findAllByApplicantObjectId(FindAllByApplicantObjectId $query): void
 	{
+		$collection = new Query\ReadModel\RgaCollection();
+
 		$filter = new Filter\ByApplicantObjectIdFilter($this->entities);
 		$filter->setApplicantObjectId($query->getApplicantObjectId());
 		$filter->rewind();
 
-		/** @var Query\ReadModel\Rga $view */
-		if ($view = $filter->current()) {
-			$query->setView($view);
-			return;
+		while ($filter->valid()) {
+			/** @var Query\ReadModel\Rga $view */
+			$view = $filter->current();
+
+			$collection->add($view);
+			$filter->next();
 		}
 
-		throw new Exception\ResourceNotFoundException(
-			'Rga not found by applicant object id: ' . $query->getApplicantObjectId(),
-			404
-		);
+		$query->setViewCollection($collection);
 	}
 }

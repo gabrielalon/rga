@@ -4,7 +4,7 @@ namespace RGA\Application\Rga\Query\V1;
 
 use RGA\Infrastructure\SegregationSourcing\Query\Query\QueryMessage;
 
-class FindOneByApplicantObjectId extends QueryMessage
+class FindAllByApplicantObjectId extends QueryMessage
 {
     /** @var integer */
     private $applicantObjectId;
