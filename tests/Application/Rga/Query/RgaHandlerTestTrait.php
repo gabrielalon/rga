@@ -18,6 +18,6 @@ trait RgaHandlerTestTrait
 			->setHash(VO\Hash::fromString(\sha1($uuid)))
 			->setPackageNo(VO\PackageNo::fromString($uuid))
 			->setPackageSent(VO\PackageSent::fromBoolean(true))
-		;
+			->setApplicantObjectId(VO\ApplicantObjectId::fromInteger((int)$uuid));
 	}
 }
