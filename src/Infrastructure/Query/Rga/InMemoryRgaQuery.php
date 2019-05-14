@@ -3,6 +3,7 @@
 namespace RGA\Infrastructure\Query\Rga;
 
 use RGA\Application\Rga\Query;
+use RGA\Application\Rga\Query\V1\FindAllByApplicantObjectId;
 use RGA\Infrastructure\Query\Filter;
 use RGA\Infrastructure\SegregationSourcing\Query\Exception;
 
@@ -118,4 +119,23 @@ class InMemoryRgaQuery implements Query\V1\RgaQueryInterface
             \array_slice($this->entities->all(), $offset, $query->getLimit())
         ));
     }
+
+	public function findAllByApplicantObjectId(FindAllByApplicantObjectId $query): void
+	{
+		$collection = new Query\ReadModel\RgaCollection();
+
+		$filter = new Filter\ByApplicantObjectIdFilter($this->entities);
+		$filter->setApplicantObjectId($query->getApplicantObjectId());
+		$filter->rewind();
+
+		while ($filter->valid()) {
+			/** @var Query\ReadModel\Rga $view */
+			$view = $filter->current();
+
+			$collection->add($view);
+			$filter->next();
+		}
+
+		$query->setViewCollection($collection);
+	}
 }
