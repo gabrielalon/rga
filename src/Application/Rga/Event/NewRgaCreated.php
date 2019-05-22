@@ -72,6 +72,11 @@ class NewRgaCreated extends Aggregate\EventBridge\AggregateChanged
     {
         return Rga\SourceObjectItemId::fromInteger((integer)($this->payload['source_object_item_id'] ?? ''));
     }
+
+    public function rgaSourceObjectItemQuantity(): Rga\SourceObjectItemQuantity
+    {
+        return Rga\SourceObjectItemQuantity::fromFloat((float)($this->payload['source_object_item_quantity'] ?? ''));
+    }
     
     /**
      * @return Rga\SourceDateOfCreation
@@ -281,6 +286,7 @@ class NewRgaCreated extends Aggregate\EventBridge\AggregateChanged
         $rga->setSourceObjectType($this->rgaSourceObjectType());
         $rga->setSourceObjectId($this->rgaSourceObjectId());
         $rga->setSourceObjectItemId($this->rgaSourceObjectItemId());
+        $rga->setSourceObjectItemQuantity($this->rgaSourceObjectItemQuantity());
         $rga->setSourceDateOfCreation($this->rgaSourceDateOfCreation());
         
         $rga->setProductName($this->rgaProductName());

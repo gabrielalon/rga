@@ -33,6 +33,9 @@ class Rga extends Aggregate\AggregateRoot
     
     /** @var VO\SourceObjectItemId */
     protected $sourceObjectItemId;
+
+    /** @var VO\SourceObjectItemQuantity */
+    protected $sourceObjectItemQuantity;
     
     /** @var VO\SourceDateOfCreation */
     protected $sourceDateOfCreation;
@@ -215,6 +218,13 @@ class Rga extends Aggregate\AggregateRoot
     {
         $this->sourceObjectItemId = $sourceObjectItemId;
         
+        return $this;
+    }
+
+    public function setSourceObjectItemQuantity(VO\SourceObjectItemQuantity $sourceObjectItemQuantity): Rga
+    {
+        $this->sourceObjectItemQuantity = $sourceObjectItemQuantity;
+
         return $this;
     }
     
@@ -633,6 +643,7 @@ class Rga extends Aggregate\AggregateRoot
             'source_object_type' => $source->getType(),
             'source_object_id' => $source->getId(),
             'source_object_item_id' => $sourceItem->getId(),
+            'source_object_item_quantity' => $sourceItem->getQuantity(),
             'source_date_of_creation' => \date('Y-m-d H:i:s', $source->getCreatedAt()),
             
             'product_name' => $sourceItem->getName(),

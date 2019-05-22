@@ -26,24 +26,19 @@ class RgaObjectItem implements RgaObjectItemInterface
     
     /** @var integer|null */
     private $warranty;
-    
-    /**
-     * @param int $id
-     * @param int $variantId
-     * @param string $name
-     * @param boolean $isRgaAble
-     * @param int|null $finalDateOfComplaint
-     * @param int|null $finalDateOfReturn
-     * @param int|null $warranty
-     */
+
+    /** @var float */
+    private $quantity;
+
     public function __construct(
-        $id,
-        $variantId,
-        $name,
-        $isRgaAble = true,
-        $finalDateOfComplaint = null,
-        $finalDateOfReturn = null,
-        $warranty = null
+        int $id,
+        int $variantId,
+        string $name,
+        bool $isRgaAble,
+        ?int $finalDateOfComplaint,
+        ?int $finalDateOfReturn,
+        ?int $warranty,
+        float $quantity
     ) {
         $this->id = $id;
         $this->variantId = $variantId;
@@ -52,9 +47,9 @@ class RgaObjectItem implements RgaObjectItemInterface
         $this->finalDateOfComplaint = $finalDateOfComplaint;
         $this->finalDateOfReturn = $finalDateOfReturn;
         $this->warranty = $warranty;
+        $this->quantity = $quantity;
     }
-    
-    
+
     /**
      * @return string
      */
@@ -109,5 +104,10 @@ class RgaObjectItem implements RgaObjectItemInterface
     public function getWarranty(): ?int
     {
         return $this->warranty;
+    }
+
+    public function getQuantity(): float
+    {
+        return $this->quantity;
     }
 }
