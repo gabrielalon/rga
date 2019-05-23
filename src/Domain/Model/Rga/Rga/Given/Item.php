@@ -9,7 +9,7 @@ class Item implements RgaObjectItemInterface
     /** @var integer */
     private $sourceItemID;
 
-    /** @var float */
+    /** @var float|null */
     private $sourceItemQuantity;
     
     /** @var string */
@@ -68,7 +68,7 @@ class Item implements RgaObjectItemInterface
         return $this->sourceItemID;
     }
 
-    public function getSourceItemQuantity(): float
+    public function getSourceItemQuantity(): ?float
     {
         return $this->sourceItemQuantity;
     }
