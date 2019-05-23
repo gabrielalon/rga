@@ -28,7 +28,7 @@ class RgaObjectItem implements RgaObjectItemInterface
     private $warranty;
 
     /** @var null|float */
-    private $quantity;
+    private $sourceItemQuantity;
 
     public function __construct(
         int $id,
@@ -38,7 +38,7 @@ class RgaObjectItem implements RgaObjectItemInterface
         ?int $finalDateOfComplaint,
         ?int $finalDateOfReturn,
         ?int $warranty,
-        ?float $quantity
+        ?float $sourceItemQuantity
     ) {
         $this->id = $id;
         $this->variantId = $variantId;
@@ -47,67 +47,46 @@ class RgaObjectItem implements RgaObjectItemInterface
         $this->finalDateOfComplaint = $finalDateOfComplaint;
         $this->finalDateOfReturn = $finalDateOfReturn;
         $this->warranty = $warranty;
-        $this->quantity = $quantity;
+        $this->sourceItemQuantity = $sourceItemQuantity;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
-    
-    /**
-     * @return integer
-     */
+
     public function getId(): int
     {
         return $this->id;
     }
-    
-    /**
-     * @return integer
-     */
+
     public function getVariantId(): int
     {
         return $this->variantId;
     }
-    
-    /**
-     * @return boolean
-     */
+
     public function isRgaAble(): bool
     {
         return $this->isRgaAble;
     }
-    
-    /**
-     * @return int
-     */
+
     public function getFinalDateOfComplaint(): ?int
     {
         return $this->finalDateOfComplaint;
     }
-    
-    /**
-     * @return int
-     */
+
     public function getFinalDateOfReturn(): ?int
     {
         return $this->finalDateOfReturn;
     }
-    
-    /**
-     * @return int|null
-     */
+
     public function getWarranty(): ?int
     {
         return $this->warranty;
     }
 
-    public function getQuantity(): ?float
+    public function getSourceItemQuantity(): ?float
     {
-        return $this->quantity;
+        return $this->sourceItemQuantity;
     }
 }

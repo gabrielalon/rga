@@ -643,7 +643,7 @@ class Rga extends Aggregate\AggregateRoot
             'source_object_type' => $source->getType(),
             'source_object_id' => $source->getId(),
             'source_object_item_id' => $sourceItem->getId(),
-            'source_object_item_quantity' => $sourceItem->getQuantity(),
+            'source_object_item_quantity' => $sourceItem->getSourceItemQuantity(),
             'source_date_of_creation' => \date('Y-m-d H:i:s', $source->getCreatedAt()),
             
             'product_name' => $sourceItem->getName(),
