@@ -8,6 +8,9 @@ class Item implements RgaObjectItemInterface
 {
     /** @var integer */
     private $sourceItemID;
+
+    /** @var float|null */
+    private $sourceItemQuantity;
     
     /** @var string */
     private $givenSourceID;
@@ -32,20 +35,10 @@ class Item implements RgaObjectItemInterface
     
     /** @var string */
     private $rgaUuid;
-    
-    /**
-     * @param int $sourceItemID
-     * @param string $givenSourceID
-     * @param string $givenName
-     * @param string $reason
-     * @param string $expectation
-     * @param string $incident
-     * @param Attachment[] $attachments
-     * @param Additional[] $additionals
-     * @param string $rgaUuid
-     */
+
     public function __construct(
         int $sourceItemID,
+        ?float $sourceItemQuantity,
         string $givenSourceID,
         string $givenName,
         string $reason,
@@ -56,6 +49,7 @@ class Item implements RgaObjectItemInterface
         string $rgaUuid = null
     ) {
         $this->sourceItemID = $sourceItemID;
+        $this->sourceItemQuantity = $sourceItemQuantity;
         $this->givenSourceID = $givenSourceID;
         $this->givenName = $givenName;
         $this->reason = $reason;
@@ -72,6 +66,11 @@ class Item implements RgaObjectItemInterface
     public function getSourceItemID(): int
     {
         return $this->sourceItemID;
+    }
+
+    public function getSourceItemQuantity(): ?float
+    {
+        return $this->sourceItemQuantity;
     }
     
     /**

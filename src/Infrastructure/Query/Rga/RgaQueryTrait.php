@@ -33,6 +33,7 @@ trait RgaQueryTrait
                 ->setSourceObjectType(VO\SourceObjectType::fromString((string)$row->source_object_type))
                 ->setSourceObjectId(VO\SourceObjectId::fromInteger((integer)$row->source_object_id))
                 ->setSourceObjectItemId(VO\SourceObjectItemId::fromInteger((integer)$row->source_object_item_id))
+                ->setSourceObjectItemQuantity(VO\SourceObjectItemQuantity::fromFloat((float)$row->source_object_item_quantity))
                 ->setSourceDateOfCreation(VO\SourceDateOfCreation::fromString((string)$row->source_date_of_creation))
                 ->setProductName(VO\ProductName::fromString((string)$row->product_name))
                 ->setProductVariantId(VO\ProductVariantId::fromInteger((integer)$row->product_variant_id))

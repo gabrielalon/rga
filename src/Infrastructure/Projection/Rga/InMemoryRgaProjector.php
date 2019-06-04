@@ -80,6 +80,7 @@ class InMemoryRgaProjector implements RgaProjectorInterface
             ->setSourceObjectType($event->rgaSourceObjectType())
             ->setSourceObjectId($event->rgaSourceObjectId())
             ->setSourceObjectItemId($event->rgaSourceObjectItemId())
+            ->setSourceObjectItemQuantity($event->rgaSourceObjectItemQuantity())
             ->setSourceDateOfCreation($event->rgaSourceDateOfCreation())
             
             ->setProductName($event->rgaProductName())

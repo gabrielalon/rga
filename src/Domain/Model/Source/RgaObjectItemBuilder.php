@@ -24,7 +24,10 @@ class RgaObjectItemBuilder
     
     /** @var integer|null */
     private $warranty = null;
-    
+
+    /** @var null|float  */
+    private $quantity = null;
+
     /**
      * @param int $id
      * @param int $variantId
@@ -38,7 +41,7 @@ class RgaObjectItemBuilder
         $this->objectName = $objectName;
         $this->isRgaAble = $isRgaAble;
     }
-    
+
     /**
      * @param int|null $finalDateOfComplaint
      * @return RgaObjectItemBuilder
@@ -71,7 +74,13 @@ class RgaObjectItemBuilder
         
         return $this;
     }
-    
+
+    public function setQuantity(?float $quantity): RgaObjectItemBuilder
+    {
+        $this->quantity = $quantity;
+        return $this;
+    }
+
     /**
      * @return RgaObjectItem
      */
@@ -84,7 +93,8 @@ class RgaObjectItemBuilder
             $this->isRgaAble,
             $this->finalDateOfComplaint,
             $this->finalDateOfReturn,
-            $this->warranty
+            $this->warranty,
+            $this->quantity
         );
     }
 }

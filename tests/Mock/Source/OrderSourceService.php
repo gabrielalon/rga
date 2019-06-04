@@ -84,7 +84,8 @@ class OrderSourceService
 		$itemBuilder
 			->setFinalDateOfComplaint(1567116000) //30.08.2019
 			->setFinalDateOfReturn(1567116000) //30.08.2019
-			->setWarranty(12);
+			->setWarranty(12)
+            ->setQuantity(10.00);
 		
 		return $itemBuilder->build();
 	}

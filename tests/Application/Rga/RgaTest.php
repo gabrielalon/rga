@@ -60,11 +60,19 @@ class RgaTest
 		$sourceObject = $this->sourceService->buildObject($this->sourceService->orderID);
 		/** @var RgaObjectItem $sourceObjectItem */
 		$sourceObjectItem = $sourceObject->getItems()->current();
-		
+
 		$rga = Rga::createNewRga(
 			$this->uuid,
 			new Rga\Reference\References($this->stateUuid->toString(), $this->behaviourUuid->toString(), 'return', $this->transportUuid->toString()),
-			new Rga\Given\Item($sourceObjectItem->getId(), $sourceObject->getId(), $sourceObjectItem->getName(), 'reason', 'expectation', 'incident'),
+			new Rga\Given\Item(
+			    $sourceObjectItem->getId(),
+                $sourceObjectItem->getQuantity(),
+                $sourceObject->getId(),
+                $sourceObjectItem->getName(),
+                'reason',
+                'expectation',
+                'incident'
+            ),
 			$sourceObject->getApplicant(),
 			$sourceObject->getAddress(),
 			$sourceObject->getContact(),
@@ -72,6 +80,8 @@ class RgaTest
 			$sourceObject,
 			$this->warrantyCalculator
 		);
+
+
 		
 		/** @var AggregateChanged[] $events */
 		$events = $this->popRecordedEvents($rga);
@@ -109,6 +119,7 @@ class RgaTest
 		
 		$this->assertEquals($event->rgaSourceObjectType()->toString(), $sourceObject->getType());
 		$this->assertEquals($event->rgaSourceObjectItemId()->toString(), $sourceObjectItem->getId());
+		$this->assertEquals($event->rgaSourceObjectItemQuantity()->toString(), $sourceObjectItem->getQuantity());
 		$this->assertEquals($event->rgaSourceDateOfCreation()->toString(), date('Y-m-d H:i:s', $sourceObject->getCreatedAt()));
 		
 		$this->assertEquals($event->rgaProductName()->toString(), $sourceObjectItem->getName());
@@ -319,6 +330,7 @@ class RgaTest
 			'source_object_type'      => $sourceObject->getType(),
 			'source_object_id'        => $sourceObject->getId(),
 			'source_object_item_id'   => $sourceObjectItem->getId(),
+            'source_object_item_quantity'   => $sourceObjectItem->getQuantity(),
 			'source_date_of_creation' => \date('Y-m-d H:i:s', $sourceObject->getCreatedAt()),
 			
 			'product_name'       => $sourceObjectItem->getName(),

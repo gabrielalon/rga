@@ -48,6 +48,9 @@ class Rga implements SegregationSourcing\Query\Query\Viewable
     
     /** @var VO\SourceObjectItemId */
     private $sourceObjectItemId;
+
+    /** @var VO\SourceObjectItemQuantity */
+    private $sourceObjectItemQuantity;
     
     /** @var VO\SourceDateOfCreation */
     private $sourceDateOfCreation;
@@ -585,6 +588,11 @@ class Rga implements SegregationSourcing\Query\Query\Viewable
     {
         return $this->sourceObjectItemId->toString();
     }
+
+    public function sourceObjectItemQuantity(): string
+    {
+        return $this->sourceObjectItemQuantity->toString();
+    }
     
     /**
      * @return VO\SourceObjectItemId
@@ -592,6 +600,11 @@ class Rga implements SegregationSourcing\Query\Query\Viewable
     public function getSourceObjectItemId(): VO\SourceObjectItemId
     {
         return $this->sourceObjectItemId;
+    }
+
+    public function getSourceObjectItemQuantity(): VO\SourceObjectItemQuantity
+    {
+        return $this->sourceObjectItemQuantity;
     }
     
     /**
@@ -602,6 +615,13 @@ class Rga implements SegregationSourcing\Query\Query\Viewable
     {
         $this->sourceObjectItemId = $sourceObjectItemId;
         
+        return $this;
+    }
+
+    public function setSourceObjectItemQuantity(VO\SourceObjectItemQuantity $sourceObjectItemQuantity): Rga
+    {
+        $this->sourceObjectItemQuantity = $sourceObjectItemQuantity;
+
         return $this;
     }
     
