@@ -23,10 +23,7 @@ class RgaObject implements RgaObjectInterface
     private $contact;
     
     /** @var boolean */
-    private $hasCompletedState;
-    
-    /** @var boolean */
-    private $isPaid;
+    private $isReady;
     
     /** @var integer */
     private $createdAt;
@@ -40,8 +37,7 @@ class RgaObject implements RgaObjectInterface
      * @param Applicant\Applicant $applicant
      * @param Applicant\Address $address
      * @param Applicant\Contact $contact
-     * @param bool $hasCompletedState
-     * @param bool $isPaid
+     * @param bool $isReady
      * @param int $createdAt
      * @param RgaObjectItemCollector $items
      */
@@ -51,8 +47,7 @@ class RgaObject implements RgaObjectInterface
         Applicant\Applicant $applicant = null,
         Applicant\Address $address = null,
         Applicant\Contact $contact = null,
-        $hasCompletedState = null,
-        $isPaid = null,
+        $isReady = null,
         $createdAt = null,
         RgaObjectItemCollector $items
     ) {
@@ -61,8 +56,7 @@ class RgaObject implements RgaObjectInterface
         $this->applicant = $applicant;
         $this->address = $address;
         $this->contact = $contact;
-        $this->hasCompletedState = $hasCompletedState;
-        $this->isPaid = $isPaid;
+        $this->isReady = $isReady;
         $this->createdAt = $createdAt;
         $this->items = $items;
     }
@@ -110,17 +104,9 @@ class RgaObject implements RgaObjectInterface
     /**
      * @return bool
      */
-    public function hasCompletedState(): bool
+    public function isReady(): bool
     {
-        return $this->hasCompletedState;
-    }
-    
-    /**
-     * @return bool
-     */
-    public function isPaid(): bool
-    {
-        return $this->isPaid;
+        return $this->isReady;
     }
     
     /**

@@ -26,10 +26,7 @@ class IsObjectReady extends Assert\Assertion
      */
     public function isMet(): bool
     {
-        $isCompleted = $this->sourceObject->hasCompletedState();
-        $isPaid = $this->sourceObject->isPaid();
-        
-        return $isPaid && $isCompleted;
+        return $this->sourceObject->isReady();
     }
     
     /**

@@ -54,7 +54,7 @@ trait CreateRgaHandlerTestTrait
 			new ValueObject\Reference\References($this->stateUuid->toString(), $this->behaviourUuid->toString(), 'return', $this->transportUuid->toString()),
 			[new ValueObject\Given\Item(
 			    $sourceObjectItem->getId(),
-                $sourceObjectItem->getQuantity(),
+                $sourceObjectItem->getSourceItemQuantity(),
                 $sourceObject->getId(),
                 $sourceObjectItem->getName(),
                 'reason',

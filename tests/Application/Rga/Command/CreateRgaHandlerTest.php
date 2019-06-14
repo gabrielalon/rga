@@ -68,7 +68,7 @@ class CreateRgaHandlerTest
 		
 		$this->assertEquals($entity->getSourceObjectType()->toString(), $sourceObject->getType());
 		$this->assertEquals($entity->getSourceObjectItemId()->toString(), $sourceObjectItem->getId());
-        $this->assertEquals($entity->getSourceObjectItemQuantity()->toString(), $sourceObjectItem->getQuantity());
+        $this->assertEquals($entity->getSourceObjectItemQuantity()->toString(), $sourceObjectItem->getSourceItemQuantity());
 		$this->assertEquals($entity->getSourceDateOfCreation()->toString(), date('Y-m-d H:i:s', $sourceObject->getCreatedAt()));
 		
 		$this->assertEquals($entity->getProductName()->toString(), $sourceObjectItem->getName());
@@ -120,7 +120,7 @@ class CreateRgaHandlerTest
 			
 			$this->assertEquals($event->rgaSourceObjectType()->toString(), $sourceObject->getType());
 			$this->assertEquals($event->rgaSourceObjectItemId()->toString(), $sourceObjectItem->getId());
-            $this->assertEquals($event->rgaSourceObjectItemQuantity()->toString(), $sourceObjectItem->getQuantity());
+            $this->assertEquals($event->rgaSourceObjectItemQuantity()->toString(), $sourceObjectItem->getSourceItemQuantity());
 			$this->assertEquals($event->rgaSourceDateOfCreation()->toString(), date('Y-m-d H:i:s', $sourceObject->getCreatedAt()));
 			
 			$this->assertEquals($event->rgaProductName()->toString(), $sourceObjectItem->getName());

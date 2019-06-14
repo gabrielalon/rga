@@ -34,12 +34,7 @@ interface RgaObjectInterface
     /**
      * @return bool
      */
-    public function hasCompletedState(): bool;
-    
-    /**
-     * @return bool
-     */
-    public function isPaid(): bool;
+    public function isReady(): bool;
     
     /**
      * @return int

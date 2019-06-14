@@ -13,10 +13,7 @@ class RgaObjectBuilder
     private $objectType;
 
     /** @var bool */
-    private $objectIsPaid;
-
-    /** @var bool */
-    private $objectHasCompletedState;
+    private $objectIsReady;
 
     /** @var string */
     private $firstName;
@@ -67,24 +64,21 @@ class RgaObjectBuilder
      * @param integer $objectId
      * @param string $objectType
      * @param Applicant\Applicant $applicant
-     * @param bool $objectIsPaid
+     * @param bool $objectIsReady
      * @param int $objectCreatedAt
-     * @param bool $objectHasCompletedState
      */
     public function __construct(
         $objectId,
         $objectType,
         Applicant\Applicant $applicant,
-        $objectIsPaid,
-        $objectCreatedAt,
-        $objectHasCompletedState
+        $objectIsReady,
+        $objectCreatedAt
     ) {
         $this->objectId = $objectId;
         $this->objectType = $objectType;
         $this->applicant = $applicant;
-        $this->objectIsPaid = $objectIsPaid;
+        $this->objectIsReady = $objectIsReady;
         $this->objectCreatedAt = $objectCreatedAt;
-        $this->objectHasCompletedState = $objectHasCompletedState;
     }
 
     /**
@@ -230,8 +224,7 @@ class RgaObjectBuilder
             $this->applicant,
             $address,
             $contact,
-            $this->objectHasCompletedState,
-            $this->objectIsPaid,
+            $this->objectIsReady,
             $this->objectCreatedAt,
             $this->items
         );

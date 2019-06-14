@@ -66,7 +66,7 @@ class RgaTest
 			new Rga\Reference\References($this->stateUuid->toString(), $this->behaviourUuid->toString(), 'return', $this->transportUuid->toString()),
 			new Rga\Given\Item(
 			    $sourceObjectItem->getId(),
-                $sourceObjectItem->getQuantity(),
+                $sourceObjectItem->getSourceItemQuantity(),
                 $sourceObject->getId(),
                 $sourceObjectItem->getName(),
                 'reason',
@@ -119,7 +119,7 @@ class RgaTest
 		
 		$this->assertEquals($event->rgaSourceObjectType()->toString(), $sourceObject->getType());
 		$this->assertEquals($event->rgaSourceObjectItemId()->toString(), $sourceObjectItem->getId());
-		$this->assertEquals($event->rgaSourceObjectItemQuantity()->toString(), $sourceObjectItem->getQuantity());
+		$this->assertEquals($event->rgaSourceObjectItemQuantity()->toString(), $sourceObjectItem->getSourceItemQuantity());
 		$this->assertEquals($event->rgaSourceDateOfCreation()->toString(), date('Y-m-d H:i:s', $sourceObject->getCreatedAt()));
 		
 		$this->assertEquals($event->rgaProductName()->toString(), $sourceObjectItem->getName());
@@ -330,7 +330,7 @@ class RgaTest
 			'source_object_type'      => $sourceObject->getType(),
 			'source_object_id'        => $sourceObject->getId(),
 			'source_object_item_id'   => $sourceObjectItem->getId(),
-            'source_object_item_quantity'   => $sourceObjectItem->getQuantity(),
+            'source_object_item_quantity'   => $sourceObjectItem->getSourceItemQuantity(),
 			'source_date_of_creation' => \date('Y-m-d H:i:s', $sourceObject->getCreatedAt()),
 			
 			'product_name'       => $sourceObjectItem->getName(),
