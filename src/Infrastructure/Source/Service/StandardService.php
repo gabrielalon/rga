@@ -30,8 +30,7 @@ class StandardService implements ServiceInterface
             $this->sourceType(),
             new Applicant(0, 'guest'),
             true,
-            time(),
-            true
+            time()
         );
         
         $items = new RgaObjectItemCollector();

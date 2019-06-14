@@ -38,8 +38,7 @@ class OrderSourceService
 			$this->sourceType(),
 			new Applicant($this->customerID, 'customer'),
 			true,
-			1535580000, //30.08.2018
-			true
+			1535580000 //30.08.2018
 		);
 		
 		// Base address data
